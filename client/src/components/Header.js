@@ -1,6 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+export default function Header(props) {
+  const searchHandler = event => {
+    event.preventDefault();
+    if (event.target.stockSearch.value !== "") {
+      console.log(event.target.stockSearch.value);
+      //props.getStock(event.target.stockSearch.value);
+    } else {
+      window.alert("please type stock symbol");
+    }
+  };
 
-export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#">
@@ -25,11 +35,7 @@ export default function Header() {
               Home <span className="sr-only">(current)</span>
             </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Holdings
-            </a>
-          </li>
+
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"
@@ -43,26 +49,27 @@ export default function Header() {
               Menu
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">
-                Something else here
-              </a>
+              <Link className="dropdown-item" to="/holdings">
+                Holdings
+              </Link>
+              <Link className="dropdown-item" to="/holdings">
+                What
+              </Link>
+              <Link className="dropdown-item" to="/holdings">
+                Else
+              </Link>
             </div>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
+
+        <form className="form-inline my-2 my-lg-0" onSubmit={searchHandler}>
           <input
             className="form-control mr-sm-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
             id="nav-searchInput"
+            name="stockSearch"
           />
           <button
             className="btn btn-outline-success my-2 my-sm-0"

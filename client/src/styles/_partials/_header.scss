@@ -1,19 +1,27 @@
 .navbar {
   min-height: 6rem;
-  font-size: 2rem;
-}
-.nav-item {
-  padding: 1rem;
+  font-size: 1.5rem;
 }
 .navbar-brand {
   font-size: 2rem;
 }
 #nav-searchInput {
+  margin-right: 0rem;
   height: 4rem;
-  width: 18vw;
+  width: 12rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 #nav-searchButton {
   font-size: 1.3rem;
-  width: 8vw;
+  width: 6rem;
   height: 4rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.dropdown-menu {
+  font-size: 1.5rem;
+  *:hover {
+    width: 99%;
+  }
 }

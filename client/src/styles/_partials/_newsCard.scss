@@ -1,0 +1,10 @@
+.card {
+  margin: 1rem auto;
+  box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+}
+.card-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+}

@@ -1,0 +1,13 @@
+/* media query for tablet */
+@mixin tablet {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+/* media query for high pixel density desktops */
+@mixin desk {
+  @media only screen and (min-width: 1440px) {
+    @content;
+  }
+}

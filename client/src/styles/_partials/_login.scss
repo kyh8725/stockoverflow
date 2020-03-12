@@ -1,0 +1,10 @@
+.login {
+  padding: 1rem;
+  &__username {
+    border: 1px solid silver;
+    margin-bottom: 0.2rem;
+  }
+  &__password {
+    border: 1px solid silver;
+  }
+}
