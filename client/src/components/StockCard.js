@@ -13,20 +13,21 @@ export default function StockCard({ stock }) {
   };
 
   const wkColor = () => {
-    const diff = Number(stock.week52High) - Number(stock.week52Low) / 2;
+    const diff = (Number(stock.week52High) - Number(stock.week52Low)) / 2;
     const half = Number(stock.week52Low) + diff;
-    if (Number(stock.latestPrice) <= half) {
+    if (Number(stock.latestPrice) >= half) {
       return "green";
     } else {
       return "red";
     }
   };
+
   const wkRange = () => {
     const diff = Number(stock.week52High) - Number(stock.week52Low);
     const ratio = (Number(stock.latestPrice) - Number(stock.week52Low)) / diff;
-    console.log(ratio);
     return ratio;
   };
+
   const isMarketOpen = () => {
     if (stock.isUSMarketOpen) {
       return "Market is open";

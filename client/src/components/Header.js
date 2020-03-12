@@ -4,7 +4,6 @@ export default function Header(props) {
   const searchHandler = event => {
     event.preventDefault();
     if (event.target.stockSearch.value !== "") {
-      console.log(event.target.stockSearch.value);
       //props.getStock(event.target.stockSearch.value);
     } else {
       window.alert("please type stock symbol");
@@ -13,9 +12,9 @@ export default function Header(props) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="#">
+      <Link to="/" className="navbar-brand">
         Stock Overflow
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -31,15 +30,14 @@ export default function Header(props) {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="#">
+            <Link className="nav-link" to="/">
               Home <span className="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
 
           <li className="nav-item dropdown">
-            <a
+            <Link
               className="nav-link dropdown-toggle"
-              href="#"
               id="navbarDropdown"
               role="button"
               data-toggle="dropdown"
@@ -47,7 +45,7 @@ export default function Header(props) {
               aria-expanded="false"
             >
               Menu
-            </a>
+            </Link>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link className="dropdown-item" to="/holdings">
                 Holdings

@@ -1,13 +1,22 @@
 import React from "react";
+import axios from "axios";
 
-export default function LogIn() {
+export default function LogIn(props) {
   const loginHandler = event => {
     event.preventDefault();
     if (
       event.target.username.value !== "" &&
       event.target.password.value !== ""
     ) {
-      console.log(event.target.username.value, event.target.password.value);
+      axios
+        .post("/login", {
+          username: event.target.username.value,
+          password: event.target.password.value
+        })
+        .then(response => {
+          sessionStorage.authToken = response.data.token;
+          props.logIn();
+        });
     } else {
       window.alert("please fill both username and password");
     }
@@ -29,7 +38,7 @@ export default function LogIn() {
           name="password"
         />
         <div>
-          <button type="button" class="btn btn-outline-success">
+          <button type="button" className="btn btn-outline-success">
             Log in
           </button>
         </div>

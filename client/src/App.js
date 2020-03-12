@@ -8,6 +8,8 @@ import axios from "axios";
 
 export default class App extends Component {
   state = {
+    loggedIn: false,
+    users: [],
     news: [
       {
         datetime: 1583952974000,
@@ -103,12 +105,19 @@ export default class App extends Component {
     }
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    axios.get("/users").then(response => {
+      this.setState({ users: response.data });
+    });
+  }
+
+  logIn = () => {
+    this.setState({ loggedIn: true });
+  };
 
   getNews = symbol => {
     const { iex_url, iex_token } = process.env;
     axios.get(`${iex_url}${symbol}/news/last/3${iex_token}`).then(response => {
-      console.log(response.data);
       this.setState({ news: response.data });
     });
   };
@@ -132,7 +141,7 @@ export default class App extends Component {
               render={() => {
                 return (
                   <>
-                    <LogIn />
+                    <LogIn logIn={this.logIn} />
                   </>
                 );
               }}
