@@ -1,9 +1,9 @@
 import React from "react";
 import refresh from "../assets/refresh.svg";
 import favc from "../assets/favc.svg";
-import favu from "../assets/favu.svg";
+//import favu from "../assets/favu.svg";
 
-export default function StockCard({ stock }) {
+export default function StockCard({ stock, getStock }) {
   const colorChange = () => {
     if (Number(stock.change) > 0) {
       return "green";
@@ -35,6 +35,7 @@ export default function StockCard({ stock }) {
       return "Market is closed";
     }
   };
+
   return (
     <section className="scard">
       <div className="scard__top">
@@ -56,16 +57,31 @@ export default function StockCard({ stock }) {
       <div className="scard__main">
         <div className="scard__graph"> CHART</div>
         <div className="scard__prices">
-          <p className="scard__priceCurrent" style={{ color: colorChange() }}>
-            <span style={{ color: "black" }}>Price: </span>
-            {stock.latestPrice.toFixed(2)}&nbsp;&nbsp;&nbsp;
-            <span style={{ color: "black" }}>Change: </span>
-            {stock.change.toFixed(2)}&nbsp;&nbsp;&nbsp;
-            {stock.changePercent.toFixed(2)} %
-          </p>
+          <div className="scard__pricewrap">
+            <p>Price: &nbsp;&nbsp;</p>
+            <p className="scard__priceCurrent" style={{ color: colorChange() }}>
+              {stock.latestPrice.toFixed(2)}
+            </p>
+          </div>
+          <div className="scard__pricewrap">
+            <p>Change: </p>
+            <p className="scard__priceCurrent" style={{ color: colorChange() }}>
+              <span> {stock.changePercent.toFixed(2)} %</span>
+              <span> {stock.change.toFixed(2)}</span>
+            </p>
+          </div>
         </div>
-        <div className="scard_prices">
-          <p className="scard__priceDay">Open DayHigh DayLow</p>
+        <div className="scard__highlow">
+          <div className="scard__highlow-title">
+            <p>Open</p>
+            <p>Day High</p>
+            <p>Day Low</p>
+          </div>
+          <div className="scard__highlow-value">
+            <p>{stock.open}</p>
+            <p>{stock.high}</p>
+            <p>{stock.low}</p>
+          </div>
         </div>
         <div className="scard__52Wk">
           <p>52 wk.Low {stock.week52Low.toFixed(2)}</p>

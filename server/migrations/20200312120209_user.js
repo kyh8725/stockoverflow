@@ -9,7 +9,7 @@ exports.up = knex => {
     table
       .integer("balance")
       .unsigned()
-      .defaultTo(10000);
+      .defaultTo(100000);
   });
 };
 

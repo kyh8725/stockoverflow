@@ -1,40 +1,53 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
+const Stock = require("../../models/stock");
+const jwt = require("jsonwebtoken");
 
-// router.post("/signup", (req, res) => {
-//   const username = req.body.username;
-//   const password = req.body.password;
-// });
-
-router.get("/users/", (req, res) => {
+router.post("/login", (req, res) => {
+  JWT_SECRET_KEY = "StockOverflow";
+  const username = req.body.username;
+  const password = req.body.password;
   User.fetchAll().then(user => {
     const userObj = JSON.parse(JSON.stringify(user));
-    const userNames = userObj.map(user => {
-      return user.username;
-    });
-    console.log(userNames);
-    res.status(200).json(userNames);
+    const userFound = userObj.filter(user => user.username === username);
+    if (userFound[0].password === password) {
+      jwt.sign(
+        {
+          name: userFound[0].username
+        },
+        JWT_SECRET_KEY,
+        (err, token) => {
+          res.json({ token: token });
+        }
+      );
+    } else {
+      res.status(401).json("incorrect password");
+    }
+    res.status(200).json(token);
   });
 });
 
-router.get("/", (req, res) => {
+router.get("/users/", (req, res) => {
   User.fetchAll().then(user => {
     res.status(200).json(user);
   });
 });
 
-// const JWT_SECRET_KEY = "BrainStation";
+router.get("/stocks/", (req, res) => {
+  Stock.where(req.query)
+    .fetchAll()
+    .then(stock => {
+      res.status(200).json(stock);
+    });
+});
 
-// router.get("/private", (req, res) => {
-//   const token = req.headers.authorization.split(" ")[1];
-//   jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
-//     if (err) {
-//       res.status(403).send("Invalid Token");
-//     } else {
-//       res.send(decoded);
-//     }
-//   });
-// });
+router.get("/stocks/:username", (req, res) => {
+  Stock.where(req.params.username)
+    .fetch()
+    .then(stock => {
+      res.status(200).json(stock);
+    });
+});
 
 module.exports = router;
