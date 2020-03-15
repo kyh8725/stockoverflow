@@ -1,6 +1,6 @@
 @mixin button {
   width: 100%;
-  height: 1.5rem;
+  height: 3rem;
   border-style: none;
   color: white;
 }
@@ -11,8 +11,10 @@
   border: 1px solid #cccbcb;
   border-radius: 0.2rem;
   box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+
   &__top {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     &-stock {
       flex: 0.7;
@@ -31,6 +33,7 @@
     &-img {
       display: flex;
       flex: 0.3;
+      justify-content: flex-end;
       align-items: flex-start;
       img {
         width: 3rem;
@@ -38,12 +41,24 @@
       }
     }
   }
+  &__pricewrap {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.3rem;
+  }
   &__priceCurrent {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    span {
+      margin-left: 1rem;
+    }
+  }
+  &__highlow-title,
+  &__highlow-value {
+    display: flex;
+    justify-content: space-between;
   }
   &__52Wk {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     font-size: 0.8rem;
     p {
@@ -88,5 +103,12 @@
     @include button;
     background-color: red;
     flex: 0.5;
+  }
+}
+
+@include tablet {
+  .scard {
+    padding: 5rem;
+    margin: 5rem;
   }
 }

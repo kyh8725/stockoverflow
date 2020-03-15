@@ -15,5 +15,5 @@ export default function NewsCard(props) {
       </a>
     );
   });
-  return <>{renderNews}</>;
+  return <div className="news">{renderNews}</div>;
 }

@@ -3,11 +3,15 @@ import Header from "./components/Header";
 import StockCard from "./components/StockCard";
 import NewsCard from "./components/NewsCard";
 import LogIn from "./components/LogIn";
+import Account from "./components/Account";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
-
+import dotenv from "dotenv";
 export default class App extends Component {
   state = {
+    loggedIn: false,
+    users: [],
+    stocks: [],
     news: [
       {
         datetime: 1583952974000,
@@ -59,12 +63,12 @@ export default class App extends Component {
       companyName: "Apple, Inc.",
       primaryExchange: "NASDAQ",
       calculationPrice: "tops",
-      open: null,
+      open: 275.64,
       openTime: null,
       close: null,
       closeTime: null,
-      high: null,
-      low: null,
+      high: 275.64,
+      low: 275.64,
       latestPrice: 275.64,
       latestSource: "IEX real time price",
       latestTime: "3:50:18 PM",
@@ -100,21 +104,47 @@ export default class App extends Component {
       ytdChange: -0.083965,
       lastTradeTime: 1583956218070,
       isUSMarketOpen: true
-    }
+    },
+    stockDay: []
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    dotenv.config();
+    axios.get("/users").then(response => {
+      this.setState({ users: response.data.map(user => user.username) });
+    });
+    sessionStorage.getItem("authToken")
+      ? this.setState({
+          loggedIn: true
+        })
+      : this.setState({
+          loggedIn: false
+        });
+  }
+
+  logIn = () => {
+    this.setState({ loggedIn: true });
+  };
+  logOut = () => {
+    this.setState({ loggedIn: false });
+    sessionStorage.removeItem("authToken");
+  };
 
   getNews = symbol => {
-    const { iex_url, iex_token } = process.env;
-    axios.get(`${iex_url}${symbol}/news/last/3${iex_token}`).then(response => {
-      console.log(response.data);
+    const iex_token = process.env.iex_token;
+    const iex_url = process.env.iex_rul;
+    //const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+    // const iex_url = "https://cloud.iexapis.com/stable/stock/";
+    axios.get(`${iex_url}${symbol}/news/last/1${iex_token}`).then(response => {
       this.setState({ news: response.data });
     });
   };
 
   getStock = symbol => {
-    const { iex_url, iex_token } = process.env;
+    const iex_token = process.env.iex_token;
+    const iex_url = process.env.iex_rul;
+    // const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+    //const iex_url = "https://cloud.iexapis.com/stable/stock/";
     axios.get(`${iex_url}${symbol}/quote${iex_token}`).then(response => {
       this.setState({ stock: response.data });
     });
@@ -124,7 +154,12 @@ export default class App extends Component {
     return (
       <>
         <Router>
-          <Header />
+          <Header
+            getStock={this.getStock}
+            getNews={this.getNews}
+            loggedIn={this.state.loggedIn}
+            logOut={this.logOut}
+          />
           <Switch>
             <Route
               path="/"
@@ -132,18 +167,32 @@ export default class App extends Component {
               render={() => {
                 return (
                   <>
-                    <LogIn />
+                    {!this.state.loggedIn && (
+                      <LogIn
+                        logIn={this.logIn}
+                        users={this.state.users}
+                        loggedIn={this.state.loggedIn}
+                      />
+                    )}
+                    {this.state.loggedIn && (
+                      <>
+                        <Account stocks={this.state.stocks} />
+                      </>
+                    )}
                   </>
                 );
               }}
             />
             <Route
-              path="/holdings"
+              path="/search"
               exact
               render={() => {
                 return (
                   <>
-                    <StockCard stock={this.state.stock} />
+                    <StockCard
+                      stock={this.state.stock}
+                      getStock={this.getStock}
+                    />
                     <NewsCard news={this.state.news} />
                   </>
                 );
@@ -166,18 +215,3 @@ export default class App extends Component {
 //     this.setState({ price: latestPrice });
 //     console.log(response.data);
 //   });
-// axios
-//   .get(
-//     `${this.state.url_globalquote}${this.state.symbol}${this.state.api_key}`
-//   )
-//   .then(response => {
-//     console.log(response.data);
-//   });
-// axios
-//   .get(
-//     `https://cloud.iexapis.com/stable/stock/${this.state.symbol}/quote?token=pk_64c9963c8e65443b9d72928be93b8178`
-//   )
-//   .then(response => {
-//     console.log(response.data);
-//   });
-//https://cloud.iexapis.com/stable/stock/XOM/quote?token=YOUR_TOKEN_HERE

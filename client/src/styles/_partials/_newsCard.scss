@@ -1,6 +1,20 @@
+.news {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .card {
-  margin: 1rem auto;
+  margin: 1rem 0;
   box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+}
+.card-img-top {
+  height: 10rem;
+}
+.card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 .card-text {
   display: -webkit-box;

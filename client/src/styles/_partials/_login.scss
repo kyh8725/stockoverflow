@@ -1,10 +1,38 @@
 .login {
-  padding: 1rem;
+  padding: 2rem;
+  margin: 2rem;
+  background-color: rgb(243, 243, 243);
+  border-radius: 1rem;
+
+  &__inputWrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
   &__username {
+    width: 83%;
+    padding: 1rem;
+    height: 3rem;
     border: 1px solid silver;
-    margin-bottom: 0.2rem;
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
   }
   &__password {
+    width: 83%;
+    padding: 1rem;
+    height: 3rem;
+    border-radius: 0.3rem;
     border: 1px solid silver;
+    margin-bottom: 1rem;
+  }
+  &__btnWrap {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+@include tablet {
+  .login {
+    padding: 5rem;
   }
 }
