@@ -3,7 +3,7 @@ module.exports = {
   connection: {
     host: "127.0.0.1",
     user: "root",
-    password: "admin1234",
+    password: "1234",
     database: "stockoverflow",
     charset: "utf8"
   }
