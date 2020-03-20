@@ -7,8 +7,8 @@ module.exports = [
   },
   {
     symbol: "tsla",
-    quantity: 1,
-    price: 600,
-    holder: "Admin"
+    quantity: 10,
+    price: 500,
+    holder: "Sophie"
   }
 ];

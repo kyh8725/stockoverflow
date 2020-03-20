@@ -1,10 +1,11 @@
 .news {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .card {
-  margin: 1rem 0;
+  max-width: 20rem;
+  margin: 1rem 1.5rem;
   box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
 }
 .card-img-top {
@@ -21,4 +22,16 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   overflow: hidden;
+}
+
+@include tablet {
+  .news {
+    margin: 0 8rem;
+  }
+}
+
+@include desk {
+  .news {
+    margin: 0 12rem;
+  }
 }

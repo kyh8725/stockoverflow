@@ -1,0 +1,112 @@
+.account {
+  margin: 2rem 1rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid silver;
+  box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+
+  &__holder {
+    margin-bottom: 2rem;
+  }
+  &__balance {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  &__title {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    background-color: rgba(233, 233, 233, 0.911);
+    border-bottom: 1px solid silver;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    * {
+      margin: 0;
+    }
+  }
+  &__stock,
+  &__price,
+  &__quantity {
+    font-size: 1rem;
+    flex: 0.25;
+  }
+  &__net {
+    text-align: right;
+    font-size: 1rem;
+    flex: 0.25;
+  }
+  &__date,
+  &__cost,
+  &__gainLose {
+    display: none;
+  }
+  &__single {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+
+    &-stock,
+    &-price,
+    &-quantity {
+      flex: 0.25;
+    }
+    &-net {
+      text-align: right;
+      flex: 0.25;
+    }
+    &-date,
+    &-cost,
+    &-gainLose {
+      display: none;
+    }
+    * {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@include tablet {
+  .account {
+    margin: 2rem 8rem;
+    &__date,
+    &__cost,
+    &__gainLose {
+      flex: 0.2;
+      font-size: 1rem;
+      display: initial;
+    }
+    &__stock,
+    &__price,
+    &__quantity {
+      flex: 0.2;
+    }
+    &__net {
+      text-align: left;
+    }
+    &__single {
+      &-date,
+      &-cost,
+      &-gainLose {
+        font-size: 0.8rem;
+        display: initial;
+        flex: 0.2;
+      }
+      &-stock,
+      &-price,
+      &-quantity {
+        flex: 0.2;
+      }
+      &-net {
+        text-align: left;
+      }
+    }
+    &__financialInfo {
+      padding: 1rem;
+    }
+  }
+}
+@include desk {
+  .account {
+    margin: 2rem 11rem;
+  }
+}

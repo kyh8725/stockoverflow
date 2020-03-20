@@ -3,7 +3,7 @@ import refresh from "../assets/refresh.svg";
 import favc from "../assets/favc.svg";
 //import favu from "../assets/favu.svg";
 
-export default function StockCard({ stock, getStock }) {
+export default function StockCard({ stock }) {
   const colorChange = () => {
     if (Number(stock.change) > 0) {
       return "green";
@@ -41,9 +41,6 @@ export default function StockCard({ stock, getStock }) {
       <div className="scard__top">
         <div className="scard__top-stock">
           <h3 className="scard__top-name">{stock.companyName}</h3>
-          <h3 className="scard__top-symbol">
-            {stock.symbol}&nbsp;&nbsp;&nbsp;&nbsp;{stock.primaryExchange}
-          </h3>
         </div>
         <div className="scard__top-img">
           <div className="scard__top-imgwrapper">
@@ -54,6 +51,9 @@ export default function StockCard({ stock, getStock }) {
           </div>
         </div>
       </div>
+      <h3 className="scard__top-symbol">
+        {stock.symbol}&nbsp;&nbsp;&nbsp;&nbsp;{stock.primaryExchange}
+      </h3>
       <div className="scard__main">
         <div className="scard__graph"> CHART</div>
         <div className="scard__prices">

@@ -1,5 +1,5 @@
 .navbar {
-  min-height:  5rem;
+  min-height: 5rem;
   font-size: 1.5rem;
 }
 .navbar-brand {
@@ -23,5 +23,16 @@
   font-size: 1.5rem;
   *:hover {
     width: 99%;
+  }
+}
+
+@include tablet {
+  .navbar {
+    padding: 0 8rem;
+  }
+}
+@include desk {
+  .navbar {
+    padding: 0 12rem;
   }
 }

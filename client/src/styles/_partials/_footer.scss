@@ -1,0 +1,18 @@
+.footer {
+  height: 5rem;
+  background-color: #343a40;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+@include tablet {
+  .footer {
+    padding: 1rem 8rem;
+  }
+}
+@include desk {
+  .footer {
+    padding: 1rem 12rem;
+  }
+}
