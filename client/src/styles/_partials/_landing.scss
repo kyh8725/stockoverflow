@@ -1,0 +1,63 @@
+.landing {
+  height: 100%;
+  width: 100vw;
+  padding: 1rem;
+  background-image: url("/stockbg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  &__header {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 2rem;
+    color: white;
+  }
+  &__text {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1rem;
+    a {
+      &:hover {
+        color: orange;
+      }
+      font-size: 1.5rem;
+      color: white;
+    }
+  }
+  &__btnWrap {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  #signupbtn,
+  #loginbtn {
+    width: 40vw;
+  }
+}
+@include tablet {
+  .landing {
+    padding: 2rem 8rem;
+    &__header {
+      font-size: 4rem;
+    }
+    &__text {
+      font-size: 2rem;
+    }
+  }
+}
+@include desk {
+  .landing {
+    padding: 4rem 12rem;
+
+    &__content {
+      margin-right: 40%;
+    }
+  }
+}

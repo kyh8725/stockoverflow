@@ -5,7 +5,7 @@ export default function NewsCard(props) {
   const renderNews = props.news.map(news => {
     return (
       <a href={news.url} key={uuidv4()}>
-        <div className="card" style={{ width: "18rem" }}>
+        <div className="card">
           <img src={news.image} className="card-img-top" alt="newsImg" />
           <div className="card-body">
             <h5 className="card-title">{news.headline}</h5>

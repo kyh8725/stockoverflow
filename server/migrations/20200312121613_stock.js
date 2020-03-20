@@ -17,7 +17,7 @@ exports.up = function(knex) {
       .inTable("user")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
-    table.timestamp("bought_at").defaultTo(knex.fn.now());
+    table.timestamp("tradeDate").defaultTo(knex.fn.now());
   });
 };
 

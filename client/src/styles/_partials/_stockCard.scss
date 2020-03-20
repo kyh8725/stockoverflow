@@ -6,7 +6,7 @@
 }
 
 .scard {
-  margin: 1rem;
+  margin: 1.5rem;
   padding: 1rem;
   border: 1px solid #cccbcb;
   border-radius: 0.2rem;
@@ -23,8 +23,9 @@
       font-size: 1.5rem;
     }
     &-symbol {
+      display: block;
       color: silver;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
     &-imgwrapper {
       display: flex;
@@ -109,6 +110,12 @@
 @include tablet {
   .scard {
     padding: 5rem;
-    margin: 5rem;
+    margin: 2rem 8rem;
+  }
+}
+
+@include desk {
+  .scard {
+    margin: 2rem 12rem;
   }
 }

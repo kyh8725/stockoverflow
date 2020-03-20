@@ -1,6 +1,5 @@
 .login {
   padding: 2rem;
-  margin: 2rem;
   background-color: rgb(243, 243, 243);
   border-radius: 1rem;
 
@@ -33,6 +32,9 @@
 
 @include tablet {
   .login {
-    padding: 5rem;
+    padding: 2rem;
   }
+}
+.styles_modal__gNwvD {
+  border-radius: 1rem;
 }

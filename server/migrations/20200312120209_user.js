@@ -7,7 +7,7 @@ exports.up = knex => {
     table.string("password").notNullable();
     table.timestamp("signedUp").defaultTo(knex.fn.now());
     table
-      .integer("balance")
+      .integer("cash")
       .unsigned()
       .defaultTo(100000);
   });

@@ -1,7 +1,7 @@
 /* media query for tablet */
 /* media query for high pixel density desktops */
 .navbar {
-  min-height: 6rem;
+  min-height: 5rem;
   font-size: 1.5rem;
 }
 
@@ -33,8 +33,255 @@
   width: 99%;
 }
 
+@media only screen and (min-width: 993px) {
+  .navbar {
+    padding: 0 8rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .navbar {
+    padding: 0 12rem;
+  }
+}
+
+.footer {
+  height: 5rem;
+  background-color: #343a40;
+  color: white;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media only screen and (min-width: 993px) {
+  .footer {
+    padding: 1rem 8rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .footer {
+    padding: 1rem 12rem;
+  }
+}
+
+.landing {
+  height: 100%;
+  width: 100vw;
+  padding: 1rem;
+  background-image: url("/stockbg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.landing__header {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 2rem;
+  color: white;
+}
+
+.landing__text {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1rem;
+}
+
+.landing__text a {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.landing__text a:hover {
+  color: orange;
+}
+
+.landing__btnWrap {
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.landing #signupbtn,
+.landing #loginbtn {
+  width: 40vw;
+}
+
+@media only screen and (min-width: 993px) {
+  .landing {
+    padding: 2rem 8rem;
+  }
+  .landing__header {
+    font-size: 4rem;
+  }
+  .landing__text {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .landing {
+    padding: 4rem 12rem;
+  }
+  .landing__content {
+    margin-right: 40%;
+  }
+}
+
+.account {
+  margin: 2rem 1rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid silver;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+          box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+}
+
+.account__holder {
+  margin-bottom: 2rem;
+}
+
+.account__balance {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.account__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: rgba(233, 233, 233, 0.911);
+  border-bottom: 1px solid silver;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.account__title * {
+  margin: 0;
+}
+
+.account__stock, .account__price, .account__quantity {
+  font-size: 1rem;
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__net {
+  text-align: right;
+  font-size: 1rem;
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__date, .account__cost, .account__gainLose {
+  display: none;
+}
+
+.account__single {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.account__single-stock, .account__single-price, .account__single-quantity {
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__single-net {
+  text-align: right;
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__single-date, .account__single-cost, .account__single-gainLose {
+  display: none;
+}
+
+.account__single * {
+  font-size: 0.8rem;
+}
+
+@media only screen and (min-width: 993px) {
+  .account {
+    margin: 2rem 8rem;
+  }
+  .account__date, .account__cost, .account__gainLose {
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+    font-size: 1rem;
+    display: initial;
+  }
+  .account__stock, .account__price, .account__quantity {
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+  }
+  .account__net {
+    text-align: left;
+  }
+  .account__single-date, .account__single-cost, .account__single-gainLose {
+    font-size: 0.8rem;
+    display: initial;
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+  }
+  .account__single-stock, .account__single-price, .account__single-quantity {
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+  }
+  .account__single-net {
+    text-align: left;
+  }
+  .account__financialInfo {
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .account {
+    margin: 2rem 11rem;
+  }
+}
+
 .scard {
-  margin: 1rem;
+  margin: 1.5rem;
   padding: 1rem;
   border: 1px solid #cccbcb;
   border-radius: 0.2rem;
@@ -64,8 +311,9 @@
 }
 
 .scard__top-symbol {
+  display: block;
   color: silver;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .scard__top-imgwrapper {
@@ -207,10 +455,16 @@
           flex: 0.5;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 993px) {
   .scard {
     padding: 5rem;
-    margin: 5rem;
+    margin: 2rem 8rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .scard {
+    margin: 2rem 12rem;
   }
 }
 
@@ -220,13 +474,14 @@
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 .card {
-  margin: 1rem 0;
+  max-width: 20rem;
+  margin: 1rem 1.5rem;
   -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
           box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
 }
@@ -249,9 +504,20 @@
   overflow: hidden;
 }
 
+@media only screen and (min-width: 993px) {
+  .news {
+    margin: 0 8rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .news {
+    margin: 0 12rem;
+  }
+}
+
 .login {
   padding: 2rem;
-  margin: 2rem;
   background-color: #f3f3f3;
   border-radius: 1rem;
 }
@@ -296,9 +562,13 @@
           justify-content: space-evenly;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 993px) {
   .login {
-    padding: 5rem;
+    padding: 2rem;
   }
+}
+
+.styles_modal__gNwvD {
+  border-radius: 1rem;
 }
 /*# sourceMappingURL=index.css.map */
