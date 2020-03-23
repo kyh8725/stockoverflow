@@ -1,0 +1,21 @@
+.research {
+  &__form-wrap {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+}
+#nav-searchInput {
+  width: 50vw;
+  height: 3rem;
+  margin-right: 1rem;
+}
+#nav-searchButton {
+  flex: 0.3;
+  height: 3rem;
+  font-size: 1.3rem;
+}
+
+@include tablet {
+}

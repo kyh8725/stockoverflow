@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import StockCard from "./components/StockCard";
-import NewsCard from "./components/NewsCard";
+import Orders from "./components/Orders";
 import Landing from "./components/Landing";
 import Account from "./components/Account";
+import Research from "./components/Research";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -15,8 +15,8 @@ export default class App extends Component {
     loggedIn: false,
     users: [],
     stocks: [],
-    news: [],
-    stock: {}
+    orders: [],
+    symbols: []
   };
 
   componentDidMount() {
@@ -43,27 +43,13 @@ export default class App extends Component {
   logOut = () => {
     this.setState({ loggedIn: false });
     sessionStorage.removeItem("authToken");
+    localStorage.clear();
   };
 
-  getNews = symbol => {
-    //const iex_token = process.env.iex_token;
-    //const iex_url = process.env.iex_rul;
-    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    const iex_url = "https://cloud.iexapis.com/stable/stock/";
-    axios.get(`${iex_url}${symbol}/news/last/1${iex_token}`).then(response => {
-      this.setState({ news: response.data });
-      localStorage.setItem("news", JSON.stringify(response.data));
-    });
-  };
-
-  getStock = symbol => {
-    //const iex_token = process.env.iex_token;
-    //const iex_url = process.env.iex_rul;
-    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    const iex_url = "https://cloud.iexapis.com/stable/stock/";
-    axios.get(`${iex_url}${symbol}/quote${iex_token}`).then(response => {
-      this.setState({ stock: response.data });
-      localStorage.setItem("stock", JSON.stringify(response.data));
+  getOrders = username => {
+    axios.get(`/orders/${username}`).then(response => {
+      this.setState({ orders: response.data });
+      localStorage.setItem("orders", JSON.stringify(response.data));
     });
   };
 
@@ -96,6 +82,7 @@ export default class App extends Component {
   getAccountInfo = username => {
     this.getStockOwned(username);
     this.getBalance(username);
+    this.getOrders(username);
   };
 
   render() {
@@ -103,8 +90,7 @@ export default class App extends Component {
       <>
         <Router>
           <Header
-            getStock={this.getStock}
-            getNews={this.getNews}
+            searchStock={this.searchStock}
             loggedIn={this.state.loggedIn}
             logOut={this.logOut}
           />
@@ -138,20 +124,30 @@ export default class App extends Component {
                 );
               }}
             />
-            {/* <Route
-              path="/search"
+            <Route
+              path="/orders"
               render={() => {
                 return (
                   <>
-                    <StockCard
-                      stock={this.state.stock}
-                      getStock={this.getStock}
-                    />
-                    <NewsCard news={this.state.news} />
+                    <Orders user={this.state.user} orders={this.state.orders} />
                   </>
                 );
               }}
-            /> */}
+            />
+            <Route
+              path="/stocks"
+              render={() => {
+                return (
+                  <>
+                    <Research
+                      searchStock={this.searchStock}
+                      stock={JSON.parse(localStorage.getItem("stock"))}
+                      news={JSON.parse(localStorage.getItem("news"))}
+                    />
+                  </>
+                );
+              }}
+            />
           </Switch>
           <Footer />
         </Router>

@@ -18,7 +18,6 @@ export default function LogIn(props) {
           .then(response => {
             sessionStorage.authToken = response.data.token;
             props.logIn(username);
-            window.alert("you are logged in");
             props.closeModal();
           });
       }

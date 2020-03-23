@@ -1,0 +1,27 @@
+.trade {
+  &__title {
+    border-bottom: 1px solid silver;
+    margin-bottom: 1rem;
+  }
+  &__inputs {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    &-price,
+    &-quantity {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid silver;
+      height: 3rem;
+      width: 80%;
+    }
+  }
+  &__btns {
+    display: flex;
+    justify-content: center;
+  }
+  &__estimate {
+    display: flex;
+  }
+}

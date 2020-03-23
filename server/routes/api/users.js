@@ -51,6 +51,22 @@ router.post("/new", (req, res) => {
     });
 });
 
+router.put("/buysell/:username", (req, res) => {
+  User.where({
+    username: req.params.username
+  })
+    .fetch()
+    .then(user => {
+      user.save({
+        username: user.username,
+        password: user.quantity,
+        signedUp: user.signedUp,
+        cash: req.body.cash
+      });
+      res.status(200).json({ user });
+    });
+});
+
 router.delete("/delete/:username", (req, res) => {
   User.where({ username: req.params.username })
     .destroy()

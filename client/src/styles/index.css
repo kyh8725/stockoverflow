@@ -9,28 +9,17 @@
   font-size: 2rem;
 }
 
-#nav-searchInput {
-  margin-right: 0rem;
-  height: 4rem;
-  width: 12rem;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-#nav-searchButton {
-  font-size: 1.3rem;
-  width: 6rem;
-  height: 4rem;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
 .dropdown-menu {
   font-size: 1.5rem;
 }
 
 .dropdown-menu *:hover {
   width: 99%;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: rgba(255, 166, 0, 0.89) !important;
 }
 
 @media only screen and (min-width: 993px) {
@@ -176,7 +165,6 @@
   background-color: rgba(233, 233, 233, 0.911);
   border-bottom: 1px solid silver;
   padding: 1rem;
-  margin-bottom: 1rem;
 }
 
 .account__title * {
@@ -212,22 +200,27 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid silver;
 }
 
 .account__single-stock, .account__single-price, .account__single-quantity {
+  margin: 0;
   -webkit-box-flex: 0.25;
       -ms-flex: 0.25;
           flex: 0.25;
 }
 
 .account__single-net {
+  margin: 0;
   text-align: right;
   -webkit-box-flex: 0.25;
       -ms-flex: 0.25;
           flex: 0.25;
 }
 
-.account__single-date, .account__single-cost, .account__single-gainLose {
+.account__single-date, .account__single-cost, .account__single-gainLose, .account__single__buttonPlace {
+  margin: 0;
   display: none;
 }
 
@@ -235,9 +228,33 @@
   font-size: 0.8rem;
 }
 
+.account__total {
+  font-size: 1rem;
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.account__total-change {
+  text-align: right;
+}
+
+.account .btn-danger {
+  display: none;
+}
+
+.account__financialInfo {
+  padding: 1rem;
+}
+
 @media only screen and (min-width: 993px) {
   .account {
     margin: 2rem 8rem;
+  }
+  .account__holder {
+    font-size: 2.5rem;
+  }
+  .account__balance {
+    font-size: 2rem;
   }
   .account__date, .account__cost, .account__gainLose {
     -webkit-box-flex: 0.2;
@@ -245,6 +262,9 @@
             flex: 0.2;
     font-size: 1rem;
     display: initial;
+  }
+  .account__buttonPlace {
+    width: 4rem;
   }
   .account__stock, .account__price, .account__quantity {
     -webkit-box-flex: 0.2;
@@ -254,23 +274,28 @@
   .account__net {
     text-align: left;
   }
+  .account__single {
+    padding-bottom: 0.5rem;
+  }
   .account__single-date, .account__single-cost, .account__single-gainLose {
-    font-size: 0.8rem;
+    font-size: 1rem;
     display: initial;
     -webkit-box-flex: 0.2;
         -ms-flex: 0.2;
             flex: 0.2;
   }
   .account__single-stock, .account__single-price, .account__single-quantity {
+    font-size: 1rem;
     -webkit-box-flex: 0.2;
         -ms-flex: 0.2;
             flex: 0.2;
   }
   .account__single-net {
+    font-size: 1rem;
     text-align: left;
   }
-  .account__financialInfo {
-    padding: 1rem;
+  .account .btn-danger {
+    display: initial;
   }
 }
 
@@ -278,6 +303,33 @@
   .account {
     margin: 2rem 11rem;
   }
+}
+
+.research__form-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1rem 0;
+}
+
+#nav-searchInput {
+  width: 50vw;
+  height: 3rem;
+  margin-right: 1rem;
+}
+
+#nav-searchButton {
+  -webkit-box-flex: 0.3;
+      -ms-flex: 0.3;
+          flex: 0.3;
+  height: 3rem;
+  font-size: 1.3rem;
 }
 
 .scard {
@@ -355,6 +407,10 @@
   font-size: 1.3rem;
 }
 
+.scard__priceChange-value {
+  font-size: 1rem;
+}
+
 .scard__priceCurrent span {
   margin-left: 1rem;
 }
@@ -409,6 +465,7 @@
 }
 
 .scard__marketOpen {
+  font-size: 1.3rem;
   text-align: right;
 }
 
@@ -459,6 +516,9 @@
   .scard {
     padding: 5rem;
     margin: 2rem 8rem;
+  }
+  .scard__priceChange-value {
+    font-size: 1.3rem;
   }
 }
 
@@ -514,6 +574,46 @@
   .news {
     margin: 0 12rem;
   }
+}
+
+.trade__title {
+  border-bottom: 1px solid silver;
+  margin-bottom: 1rem;
+}
+
+.trade__inputs {
+  margin: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.trade__inputs-price, .trade__inputs-quantity {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid silver;
+  height: 3rem;
+  width: 80%;
+}
+
+.trade__btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.trade__estimate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .login {

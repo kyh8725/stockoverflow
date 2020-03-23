@@ -6,7 +6,6 @@ export default class Account extends Component {
     stocks: this.props.stocks,
     user: this.props.user,
     cash: Number(localStorage.getItem("cash")),
-    bookValue: 0,
     months: [
       "Jan",
       "Feb",
@@ -28,7 +27,6 @@ export default class Account extends Component {
       user: localStorage.getItem("userLogin"),
       stocks: JSON.parse(localStorage.getItem("stocks"))
     });
-    this.getBookValues();
   }
 
   getDate = time => {
@@ -36,21 +34,6 @@ export default class Account extends Component {
     return `${
       this.state.months[date.getMonth()]
     } ${date.getDate()} ${date.getFullYear()}`;
-  };
-
-  getBookValues = () => {
-    let book = 0;
-    const bookInvest = [];
-    JSON.parse(localStorage.getItem("stocks")).map(stock => {
-      const total = stock.price * stock.quantity;
-      bookInvest.push(total);
-      return bookInvest;
-    });
-    bookInvest.forEach(inv => {
-      book += inv;
-    });
-    localStorage.setItem("bookValue", book);
-    this.setState({ bookValue: book });
   };
 
   renderStocks = () => {
@@ -125,12 +108,12 @@ export default class Account extends Component {
             </div>
             <div className="account__financialInfo">{this.renderStocks()}</div>
             <div className="account__total">
-              {/* <h4
+              <h4
                 className="acccount__total-change"
                 style={changeTotal < 0 ? { color: "red" } : { color: "green" }}
               >
-                Change: $ {changeTotal}
-              </h4> */}
+                Change: $ {changeTotal.toFixed(2)}
+              </h4>
             </div>
           </section>
         )}
@@ -138,6 +121,3 @@ export default class Account extends Component {
     );
   }
 }
-// stocks: JSON.parse(localStorage.getItem("stocks")),
-// user: localStorage.getItem("userLogin"),
-// balance: localStorage.getItem("balance"),
