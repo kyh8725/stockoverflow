@@ -57,9 +57,10 @@ router.put("/buysell/:username", (req, res) => {
   })
     .fetch()
     .then(user => {
+      console.log(user);
       user.save({
         username: user.username,
-        password: user.quantity,
+        password: user.password,
         signedUp: user.signedUp,
         cash: req.body.cash
       });

@@ -6,10 +6,15 @@ import axios from "axios";
 export default class Research extends Component {
   state = {
     stock: {},
-    news: []
+    news: [],
+    orders: [],
+    cash: 0
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({ cash: this.props.cash });
+    // this.searchStock("googl");
+  }
 
   getNews = symbol => {
     //const iex_token = process.env.iex_token;
@@ -80,7 +85,11 @@ export default class Research extends Component {
         {Object.keys(this.state.stock).length !== 0 &&
           this.state.news.length !== 0 && (
             <>
-              <StockCard stock={this.state.stock} />
+              <StockCard
+                cash={this.state.cash}
+                getAccountInfo={this.props.getAccountInfo}
+                stock={this.state.stock}
+              />
               <NewsCard news={this.state.news} />
             </>
           )}

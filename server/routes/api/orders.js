@@ -24,7 +24,7 @@ router.post("/neworder", (req, res) => {
     });
 });
 
-router.put("/orderset/:id", (req, res) => {
+router.put("/settle/:id", (req, res) => {
   Order.where({
     id: req.params.id
   })

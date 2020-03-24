@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 
 export default class Account extends Component {
   state = {
-    stocks: this.props.stocks,
-    user: this.props.user,
-    cash: Number(localStorage.getItem("cash")),
+    stocks: [],
+    user: "",
+    cash: 0,
     months: [
       "Jan",
       "Feb",
@@ -24,8 +24,9 @@ export default class Account extends Component {
 
   componentDidMount() {
     this.setState({
-      user: localStorage.getItem("userLogin"),
-      stocks: JSON.parse(localStorage.getItem("stocks"))
+      user: this.props.user,
+      stocks: this.props.stocks,
+      cash: this.props.cash
     });
   }
 
@@ -87,36 +88,34 @@ export default class Account extends Component {
 
     return (
       <>
-        {true && (
-          <section className="account">
-            <h2 className="account__holder">Account: {this.state.user}</h2>
-            <h2 className="account__balance">Cash: $ {this.state.cash}</h2>
-            <h2 className="account__balance">
-              Investment: $ {(bookCost + changeTotal).toFixed(2)}
-            </h2>
-            <h2 className="account__balance">
-              Balance: $ {(this.state.cash + bookCost + changeTotal).toFixed(2)}
-            </h2>
-            <div className="account__title">
-              <h3 className="account__date">Trade Date</h3>
-              <h3 className="account__stock"> Stock </h3>
-              <h3 className="account__price"> Price </h3>
-              <h3 className="account__cost"> Cost </h3>
-              <h3 className="account__quantity"> Qty </h3>
-              <h3 className="account__net"> Net</h3>
-              <h3 className="account__gainLose"> Gain/Lose</h3>
-            </div>
-            <div className="account__financialInfo">{this.renderStocks()}</div>
-            <div className="account__total">
-              <h4
-                className="acccount__total-change"
-                style={changeTotal < 0 ? { color: "red" } : { color: "green" }}
-              >
-                Change: $ {changeTotal.toFixed(2)}
-              </h4>
-            </div>
-          </section>
-        )}
+        <section className="account">
+          <h2 className="account__holder">Account: {this.state.user}</h2>
+          <h2 className="account__balance">Cash: $ {this.state.cash}</h2>
+          <h2 className="account__balance">
+            Investment: $ {(bookCost + changeTotal).toFixed(2)}
+          </h2>
+          <h2 className="account__balance">
+            Balance: $ {(this.state.cash + bookCost + changeTotal).toFixed(2)}
+          </h2>
+          <div className="account__title">
+            <h3 className="account__date">Trade Date</h3>
+            <h3 className="account__stock"> Stock </h3>
+            <h3 className="account__price"> Price </h3>
+            <h3 className="account__cost"> Cost </h3>
+            <h3 className="account__quantity"> Qty </h3>
+            <h3 className="account__net"> Net</h3>
+            <h3 className="account__gainLose"> Gain/Lose</h3>
+          </div>
+          <div className="account__financialInfo">{this.renderStocks()}</div>
+          <div className="account__total">
+            <h4
+              className="acccount__total-change"
+              style={changeTotal < 0 ? { color: "red" } : { color: "green" }}
+            >
+              Change: $ {changeTotal.toFixed(2)}
+            </h4>
+          </div>
+        </section>
       </>
     );
   }

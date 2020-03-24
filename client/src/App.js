@@ -34,10 +34,8 @@ export default class App extends Component {
 
   logIn = username => {
     localStorage.setItem("userLogin", username);
-    this.setState(
-      { loggedIn: true, user: username },
-      this.getAccountInfo(username)
-    );
+    this.setState({ loggedIn: true, user: username });
+    this.getAccountInfo(username);
   };
 
   logOut = () => {
@@ -129,7 +127,12 @@ export default class App extends Component {
               render={() => {
                 return (
                   <>
-                    <Orders user={this.state.user} orders={this.state.orders} />
+                    <Orders
+                      getAccountInfo={this.getAccountInfo}
+                      user={this.state.user}
+                      orders={this.state.orders}
+                      stock={this.state.stock}
+                    />
                   </>
                 );
               }}
@@ -140,9 +143,12 @@ export default class App extends Component {
                 return (
                   <>
                     <Research
+                      cash={this.state.cash}
+                      getAccountInfo={this.getAccountInfo}
+                      orders={this.state.orders}
                       searchStock={this.searchStock}
-                      stock={JSON.parse(localStorage.getItem("stock"))}
-                      news={JSON.parse(localStorage.getItem("news"))}
+                      stock={this.state.stock}
+                      news={this.state.news}
                     />
                   </>
                 );
