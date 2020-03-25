@@ -15,6 +15,10 @@ exports.up = function(knex) {
       .notNullable()
       .defaultTo(true);
     table
+      .boolean("sell")
+      .notNullable()
+      .defaultTo(true);
+    table
       .string("holder")
       .notNullable()
       .references("username")

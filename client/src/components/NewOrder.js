@@ -4,11 +4,15 @@ export default class NewOrder extends Component {
   state = {
     price: 0,
     quantity: 0,
-    cash: 0
+    cash: 0,
+    tempCash: 0
   };
 
   componentDidMount() {
-    this.setState({ cash: Number(localStorage.getItem("cash")) });
+    this.setState({
+      cash: this.props.cash,
+      tempCash: this.getCashTemp()
+    });
   }
 
   isMarketOpen = () => {
@@ -35,11 +39,14 @@ export default class NewOrder extends Component {
 
   buyStock = event => {
     event.preventDefault();
-    if (this.state.cash < this.state.price * this.state.quantity) {
+    if (
+      this.state.tempCash <= this.state.price * this.state.quantity ||
+      this.state.tempCash === 0
+    ) {
       window.alert("not enough funds");
     } else {
       axios
-        .post("/orders/neworder", {
+        .post("/orders/buyOrder", {
           symbol: this.props.stock.symbol,
           price: this.state.price,
           quantity: this.state.quantity,
@@ -49,7 +56,16 @@ export default class NewOrder extends Component {
           this.props.getAccountInfo(localStorage.getItem("userLogin"));
         });
     }
+    this.props.getAccountInfo(localStorage.getItem("userLogin"));
     this.props.closeModal();
+  };
+
+  getCashTemp = () => {
+    let orderTotal = 0;
+    JSON.parse(localStorage.getItem("orders")).forEach(order => {
+      orderTotal += order.price * order.quantity;
+    });
+    return this.props.cash - orderTotal;
   };
 
   render() {

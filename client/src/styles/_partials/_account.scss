@@ -82,6 +82,15 @@
   &__financialInfo {
     padding: 1rem;
   }
+  &__processbtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__updateAccount {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 @include tablet {

@@ -3,7 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 
 export default class Account extends Component {
   state = {
+    open: false,
     stocks: [],
+    orders: [],
     user: "",
     cash: 0,
     months: [
@@ -29,7 +31,12 @@ export default class Account extends Component {
       cash: this.props.cash
     });
   }
-
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
   getDate = time => {
     const date = new Date(time);
     return `${
@@ -67,13 +74,24 @@ export default class Account extends Component {
           >
             $ {change.toFixed(2)}
           </h3>
+          <div className="account__sellbtn">
+            <button onClick={this.onOpenModal} className="btn btn-danger">
+              Sell
+            </button>
+          </div>
         </div>
       );
     });
     return stock;
   };
 
+  updateAccount = () => {
+    console.log("updateAccount ran");
+    this.props.getAccountInfo(this.state.user);
+  };
+
   render() {
+    const { open } = this.state;
     let changeTotal = 0;
     let bookCost = 0;
     this.state.stocks.forEach(stock => {
@@ -115,7 +133,23 @@ export default class Account extends Component {
               Change: $ {changeTotal.toFixed(2)}
             </h4>
           </div>
+          <div className="account__updateAccount">
+            <button
+              onClick={this.updateAccount}
+              className="btn btn-outline-success"
+            >
+              Update Account
+            </button>
+          </div>
         </section>
+        <Modal open={open} onClose={this.onCloseModal}>
+          <SellOrder
+            cash={this.state.cash}
+            closeModal={this.onCloseModal}
+            getAccountInfo={this.props.getAccountInfo}
+            stock={this.props.stock}
+          />
+        </Modal>
       </>
     );
   }

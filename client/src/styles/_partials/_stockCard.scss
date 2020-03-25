@@ -3,6 +3,7 @@
   height: 3rem;
   border-style: none;
   color: white;
+  border-radius: 0.5rem;
 }
 
 .scard {
@@ -98,7 +99,7 @@
   &__buttonWrap {
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
   }
   &__buybtn {
@@ -106,21 +107,12 @@
     background-color: green;
     flex: 0.5;
   }
-  &__sellbtn {
-    @include button;
-    background-color: red;
-    flex: 0.5;
-  }
+
   &__chart {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 15rem;
-    canvas {
-      width: 90% !important;
-      max-width: 1000px;
-      max-height: 20rem;
-    }
   }
 }
 

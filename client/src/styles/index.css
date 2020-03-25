@@ -60,7 +60,7 @@
 }
 
 .landing {
-  height: 100%;
+  height: 85vh;
   width: 100vw;
   padding: 1rem;
   background-image: url("/stockbg2.jpg");
@@ -245,6 +245,25 @@
 
 .account__financialInfo {
   padding: 1rem;
+}
+
+.account__processbtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.account__updateAccount {
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 @media only screen and (min-width: 993px) {
@@ -485,9 +504,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   text-align: center;
 }
 
@@ -496,18 +515,8 @@
   height: 3rem;
   border-style: none;
   color: white;
+  border-radius: 0.5rem;
   background-color: green;
-  -webkit-box-flex: 0.5;
-      -ms-flex: 0.5;
-          flex: 0.5;
-}
-
-.scard__sellbtn {
-  width: 100%;
-  height: 3rem;
-  border-style: none;
-  color: white;
-  background-color: red;
   -webkit-box-flex: 0.5;
       -ms-flex: 0.5;
           flex: 0.5;
@@ -522,12 +531,6 @@
           justify-content: center;
   width: 100%;
   height: 15rem;
-}
-
-.scard__chart canvas {
-  width: 90% !important;
-  max-width: 1000px;
-  max-height: 20rem;
 }
 
 @media only screen and (min-width: 993px) {

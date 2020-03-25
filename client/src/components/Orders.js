@@ -43,15 +43,47 @@ export default class Account extends Component {
       });
     });
   };
-  // processOrders = () =>{
-  //   const order = this.state.order.map(order =>{
-  //     if(order.)
-  //   })
-  // }
+
+  processOrders = () => {
+    console.log("processOrder ran");
+    this.state.orders.forEach(order => {
+      const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+      const iex_url = "https://cloud.iexapis.com/stable/stock/";
+      axios
+        .get(`${iex_url}${order.symbol}/quote${iex_token}`)
+        .then(response => {
+          if (
+            // response.data.isUSMarketOpen &&
+            Number(response.data.latestPrice) <= Number(order.price) &&
+            order.buy === 1
+          ) {
+            axios
+              .post("/stocks/buy", {
+                symbol: order.symbol,
+                quantity: order.quantity,
+                price: response.data.latestPrice,
+                holder: this.state.user
+              })
+              .then(response => {
+                axios.put(`/orders/settle/${order.id}`).then(response => {
+                  axios.get(`/orders/${this.state.user}`).then(response => {
+                    const activeOrder = response.data.filter(
+                      order => order.buy !== 0
+                    );
+                    this.setState({ orders: activeOrder });
+                  });
+                });
+              });
+          }
+        });
+    });
+    this.props.getAccountInfo(this.state.user);
+  };
+
   renderOrders = () => {
-    let net = 0;
     const order = this.state.orders.map(order => {
-      if (order.buy) {
+      let net = 0;
+      if (order.buy === 1) {
         net += order.price * order.quantity;
         return (
           <div className="account__single" key={uuidv4()}>
@@ -92,6 +124,14 @@ export default class Account extends Component {
             <h3 className="account__buttonPlace">{}</h3>
           </div>
           <div className="account__financialInfo">{this.renderOrders()}</div>
+          <div className="account__processbtn">
+            <button
+              onClick={this.processOrders}
+              className="btn btn-outline-success"
+            >
+              Process Order
+            </button>
+          </div>
         </section>
       </>
     );

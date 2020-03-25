@@ -10,13 +10,28 @@ router.get("/:holder", (req, res) => {
     });
 });
 
-router.post("/neworder", (req, res) => {
+router.post("/buyOrder", (req, res) => {
   new Order({
     symbol: req.body.symbol,
     quantity: req.body.quantity,
     price: req.body.price,
     holder: req.body.holder,
-    buy: true
+    buy: true,
+    sell: false
+  })
+    .save()
+    .then(newOrder => {
+      res.status(201).json({ newOrder });
+    });
+});
+router.post("/sellOrder", (req, res) => {
+  new Order({
+    symbol: req.body.symbol,
+    quantity: req.body.quantity,
+    price: req.body.price,
+    holder: req.body.holder,
+    buy: false,
+    sell: false
   })
     .save()
     .then(newOrder => {
