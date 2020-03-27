@@ -17,11 +17,12 @@ export default function SignUp(props) {
           })
           .then(response => {
             sessionStorage.authToken = response.data.token;
-            props.logIn(username);
           });
+        props.logIn(username);
         window.alert(
           "Thank you for siging up!  \n Please Log in to start trading!"
         );
+
         props.closeModal();
       }
     } else {

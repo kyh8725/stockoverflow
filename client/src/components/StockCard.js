@@ -13,7 +13,7 @@ export default class StockCard extends Component {
     open: false,
     labels: [],
     data: [],
-    dataLoad: false
+    load: false
   };
 
   chartRef = React.createRef();
@@ -29,6 +29,12 @@ export default class StockCard extends Component {
       },
       this.makeChart()
     );
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.data !== this.props.data) {
+      this.makeChart();
+    }
   }
 
   onOpenModal = () => {
@@ -130,7 +136,7 @@ export default class StockCard extends Component {
           </h3>
           <div className="scard__main">
             <div className="scard__chart">
-              <canvas id="myChart" ref={this.chartRef} />
+              {this.state.labels && <canvas id="myChart" ref={this.chartRef} />}
             </div>
             <div className="scard__prices">
               <div className="scard__pricewrap">

@@ -44,16 +44,16 @@ export default class App extends Component {
   };
 
   getOrders = username => {
-    console.log("getOrders ran");
     axios.get(`/orders/${username}`).then(response => {
-      const activeOrder = response.data.filter(order => order.buy !== 0);
+      const activeOrder = response.data.filter(
+        order => order.sell !== 0 || order.buy !== 0
+      );
       this.setState({ orders: activeOrder });
       localStorage.setItem("orders", JSON.stringify(activeOrder));
     });
   };
 
   getBalance = username => {
-    console.log("getBalance ran");
     axios.get(`/users/${username}`).then(response => {
       this.setState({ cash: response.data[0].cash });
       localStorage.setItem("cash", response.data[0].cash);
@@ -61,15 +61,20 @@ export default class App extends Component {
   };
 
   getStockOwned = username => {
-    console.log("getStockOwned ran");
     axios.get(`/stocks/${username}`).then(response => {
       this.setState({ stocks: response.data });
       response.data.forEach(stock => {
-        const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-        const iex_url = "https://cloud.iexapis.com/stable/stock/";
+        // const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+        //const iex_url = "https://cloud.iexapis.com/stable/stock/";
+        const iex_url = "https://sandbox.iexapis.com/stable/stock/";
+        const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
         axios
           .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
           .then(response => {
+            localStorage.setItem(
+              `currentStock${stock.symbol}`,
+              JSON.stringify(response.data)
+            );
             localStorage.setItem(
               `currentPrice${stock.symbol}`,
               response.data.latestPrice
@@ -81,14 +86,12 @@ export default class App extends Component {
   };
 
   getAccountInfo = username => {
-    console.log("getAccountInfo ran");
     this.getStockOwned(username);
     this.getBalance(username);
     this.getOrders(username);
   };
 
   render() {
-    console.log(this.state.orders);
     return (
       <>
         <Router>
@@ -135,6 +138,7 @@ export default class App extends Component {
                   <>
                     <Orders
                       getAccountInfo={this.getAccountInfo}
+                      stocks={this.state.stocks}
                       user={this.state.user}
                       orders={this.state.orders}
                     />

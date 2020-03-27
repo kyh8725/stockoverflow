@@ -42,7 +42,12 @@ export default class Landing extends Component {
                 Welcome {localStorage.getItem("userLogin")}
               </div>
               <article className="landing__text">
-                <a href="https://ncov2019.live/data">COVID-19 Status</a>
+                Refreshing the page will delete all the user data. Please
+                re-login if that happens. You might have to click Update Account
+                button twice to see the most updated page.
+                <a href="https://ncov2019.live/data" target="/blank">
+                  COVID-19 Status
+                </a>
               </article>
             </div>
           )}
@@ -51,14 +56,14 @@ export default class Landing extends Component {
               <>
                 <button
                   onClick={this.onOpenModal2}
-                  className="btn btn-primary"
+                  className="btn btn-primary btn-lg"
                   id="signupbtn"
                 >
                   Sign Up
                 </button>
                 <button
                   onClick={this.onOpenModal}
-                  className="btn btn-success"
+                  className="btn btn-success btn-lg"
                   id="loginbtn"
                 >
                   Log in

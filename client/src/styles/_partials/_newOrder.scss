@@ -23,5 +23,8 @@
   }
   &__estimate {
     display: flex;
+    input {
+      padding: 1rem;
+    }
   }
 }
