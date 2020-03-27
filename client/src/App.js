@@ -5,6 +5,7 @@ import Orders from "./components/Orders";
 import Landing from "./components/Landing";
 import Account from "./components/Account";
 import Research from "./components/Research";
+import Demo from "./components/Demo";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -164,6 +165,7 @@ export default class App extends Component {
                 }
               }}
             />
+            <Route path="/demo" component={Demo} />
           </Switch>
           <Footer />
         </Router>

@@ -818,4 +818,35 @@
   border-radius: 1rem;
   padding: 2rem;
 }
+
+.demo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 2rem;
+  height: 80vh;
+}
+
+.demo iframe {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-width: 993px) {
+  .demo {
+    margin: 4rem 8rem;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .demo {
+    margin: 4rem 12rem;
+  }
+}
 /*# sourceMappingURL=index.css.map */
