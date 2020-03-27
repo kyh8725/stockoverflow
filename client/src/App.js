@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import StockCard from "./components/StockCard";
-import NewsCard from "./components/NewsCard";
+import Orders from "./components/Orders";
 import Landing from "./components/Landing";
 import Account from "./components/Account";
+import Research from "./components/Research";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -15,8 +15,7 @@ export default class App extends Component {
     loggedIn: false,
     users: [],
     stocks: [],
-    news: [],
-    stock: {}
+    orders: []
   };
 
   componentDidMount() {
@@ -34,40 +33,27 @@ export default class App extends Component {
 
   logIn = username => {
     localStorage.setItem("userLogin", username);
-    this.setState(
-      { loggedIn: true, user: username },
-      this.getAccountInfo(username)
-    );
+    this.setState({ loggedIn: true, user: username });
+    this.getAccountInfo(username);
   };
 
   logOut = () => {
     this.setState({ loggedIn: false });
     sessionStorage.removeItem("authToken");
+    localStorage.clear();
   };
 
-  getNews = symbol => {
-    //const iex_token = process.env.iex_token;
-    //const iex_url = process.env.iex_rul;
-    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    const iex_url = "https://cloud.iexapis.com/stable/stock/";
-    axios.get(`${iex_url}${symbol}/news/last/1${iex_token}`).then(response => {
-      this.setState({ news: response.data });
-      localStorage.setItem("news", JSON.stringify(response.data));
-    });
-  };
-
-  getStock = symbol => {
-    //const iex_token = process.env.iex_token;
-    //const iex_url = process.env.iex_rul;
-    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    const iex_url = "https://cloud.iexapis.com/stable/stock/";
-    axios.get(`${iex_url}${symbol}/quote${iex_token}`).then(response => {
-      this.setState({ stock: response.data });
-      localStorage.setItem("stock", JSON.stringify(response.data));
+  getOrders = username => {
+    console.log("getOrders ran");
+    axios.get(`/orders/${username}`).then(response => {
+      const activeOrder = response.data.filter(order => order.buy !== 0);
+      this.setState({ orders: activeOrder });
+      localStorage.setItem("orders", JSON.stringify(activeOrder));
     });
   };
 
   getBalance = username => {
+    console.log("getBalance ran");
     axios.get(`/users/${username}`).then(response => {
       this.setState({ cash: response.data[0].cash });
       localStorage.setItem("cash", response.data[0].cash);
@@ -75,6 +61,7 @@ export default class App extends Component {
   };
 
   getStockOwned = username => {
+    console.log("getStockOwned ran");
     axios.get(`/stocks/${username}`).then(response => {
       this.setState({ stocks: response.data });
       response.data.forEach(stock => {
@@ -94,17 +81,19 @@ export default class App extends Component {
   };
 
   getAccountInfo = username => {
+    console.log("getAccountInfo ran");
     this.getStockOwned(username);
     this.getBalance(username);
+    this.getOrders(username);
   };
 
   render() {
+    console.log(this.state.orders);
     return (
       <>
         <Router>
           <Header
-            getStock={this.getStock}
-            getNews={this.getNews}
+            searchStock={this.searchStock}
             loggedIn={this.state.loggedIn}
             logOut={this.logOut}
           />
@@ -130,6 +119,7 @@ export default class App extends Component {
                 return (
                   <>
                     <Account
+                      getAccountInfo={this.getAccountInfo}
                       user={this.state.user}
                       cash={this.state.cash}
                       stocks={this.state.stocks}
@@ -138,20 +128,36 @@ export default class App extends Component {
                 );
               }}
             />
-            {/* <Route
-              path="/search"
+            <Route
+              path="/orders"
               render={() => {
                 return (
                   <>
-                    <StockCard
-                      stock={this.state.stock}
-                      getStock={this.getStock}
+                    <Orders
+                      getAccountInfo={this.getAccountInfo}
+                      user={this.state.user}
+                      orders={this.state.orders}
                     />
-                    <NewsCard news={this.state.news} />
                   </>
                 );
               }}
-            /> */}
+            />
+            <Route
+              path="/stocks"
+              render={() => {
+                if (this.state.cash !== 0) {
+                  return (
+                    <>
+                      <Research
+                        cash={this.state.cash}
+                        getAccountInfo={this.getAccountInfo}
+                        orders={this.state.orders}
+                      />
+                    </>
+                  );
+                }
+              }}
+            />
           </Switch>
           <Footer />
         </Router>

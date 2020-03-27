@@ -19,7 +19,6 @@
     background-color: rgba(233, 233, 233, 0.911);
     border-bottom: 1px solid silver;
     padding: 1rem;
-    margin-bottom: 1rem;
     * {
       margin: 0;
     }
@@ -44,36 +43,75 @@
     display: flex;
     flex: 1;
     justify-content: space-between;
-
+    padding-bottom: 1rem;
+    border-bottom: 1px solid silver;
+    margin-bottom: 1rem;
     &-stock,
     &-price,
     &-quantity {
+      margin: 0;
       flex: 0.25;
     }
     &-net {
+      margin: 0;
       text-align: right;
       flex: 0.25;
     }
     &-date,
     &-cost,
-    &-gainLose {
+    &-gainLose,
+    &__buttonPlace {
+      margin: 0;
       display: none;
     }
     * {
       font-size: 0.8rem;
     }
   }
+  &__total {
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: right;
+    &-change {
+      text-align: right;
+    }
+  }
+  .btn-danger {
+    display: none;
+  }
+  &__financialInfo {
+    padding: 1rem;
+  }
+  &__processbtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__updateAccount {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 @include tablet {
   .account {
     margin: 2rem 8rem;
+    &__holder {
+      font-size: 2.5rem;
+    }
+    &__balance {
+      font-size: 2rem;
+    }
     &__date,
     &__cost,
     &__gainLose {
       flex: 0.2;
       font-size: 1rem;
       display: initial;
+    }
+
+    &__buttonPlace {
+      width: 4rem;
     }
     &__stock,
     &__price,
@@ -84,24 +122,27 @@
       text-align: left;
     }
     &__single {
+      padding-bottom: 0.5rem;
       &-date,
       &-cost,
       &-gainLose {
-        font-size: 0.8rem;
+        font-size: 1rem;
         display: initial;
         flex: 0.2;
       }
       &-stock,
       &-price,
       &-quantity {
+        font-size: 1rem;
         flex: 0.2;
       }
       &-net {
+        font-size: 1rem;
         text-align: left;
       }
     }
-    &__financialInfo {
-      padding: 1rem;
+    .btn-danger {
+      display: initial;
     }
   }
 }

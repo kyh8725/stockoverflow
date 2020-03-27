@@ -1,5 +1,6 @@
 const userData = require("../seed_data/userSeed");
 const stockData = require("../seed_data/stockSeed");
+const orderData = require("../seed_data/orderSeed");
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex("user")
@@ -10,5 +11,8 @@ exports.seed = function(knex) {
     })
     .then(() => {
       return knex("stock").insert(stockData);
+    })
+    .then(() => {
+      return knex("order").insert(orderData);
     });
 };

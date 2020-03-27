@@ -7,21 +7,21 @@ import { Link } from "react-router-dom";
 export default class Landing extends Component {
   state = {
     open: false,
-    open2: false
+    openS: false
   };
 
   onOpenModal = () => {
     this.setState({ open: true });
   };
   onOpenModal2 = () => {
-    this.setState({ open2: true });
+    this.setState({ openS: true });
   };
   onCloseModal = () => {
-    this.setState({ open: false, open2: false });
+    this.setState({ open: false, openS: false });
   };
 
   render() {
-    const { open, open2 } = this.state;
+    const { open, openS } = this.state;
     return (
       <>
         <main className="landing">
@@ -84,7 +84,7 @@ export default class Landing extends Component {
             loggedIn={this.props.loggedIn}
           />
         </Modal>
-        <Modal open={open2} onClose={this.onCloseModal}>
+        <Modal open={openS} onClose={this.onCloseModal}>
           <SignUp
             closeModal={this.onCloseModal}
             logIn={this.props.logIn}

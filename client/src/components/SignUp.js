@@ -20,7 +20,7 @@ export default function SignUp(props) {
             props.logIn(username);
           });
         window.alert(
-          "congratulations! You just got $100,000. \n Happy trading!"
+          "Thank you for siging up!  \n Please Log in to start trading!"
         );
         props.closeModal();
       }

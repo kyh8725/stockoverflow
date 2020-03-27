@@ -2,7 +2,7 @@ module.exports = [
   {
     symbol: "aapl",
     quantity: 10,
-    price: 270,
+    price: 220,
     holder: "Daniel"
   },
   {

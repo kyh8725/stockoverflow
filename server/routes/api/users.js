@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
     res.status(200).json(user);
   });
 });
+
 router.get("/:username", (req, res) => {
   User.where({ username: req.params.username })
     .fetchAll()
@@ -48,6 +49,15 @@ router.post("/new", (req, res) => {
     .save()
     .then(newUser => {
       res.status(201).json({ newUser });
+    });
+});
+
+router.put("/trade/sell", (req, res) => {
+  new User()
+    .where({ username: req.body.username })
+    .save({ cash: Number(req.body.cash) }, { patch: true })
+    .then(user => {
+      res.status(200).json({ user });
     });
 });
 

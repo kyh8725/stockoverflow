@@ -5,25 +5,15 @@
 .navbar-brand {
   font-size: 2rem;
 }
-#nav-searchInput {
-  margin-right: 0rem;
-  height: 4rem;
-  width: 12rem;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-#nav-searchButton {
-  font-size: 1.3rem;
-  width: 6rem;
-  height: 4rem;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
 .dropdown-menu {
   font-size: 1.5rem;
   *:hover {
     width: 99%;
   }
+}
+.nav-link:hover,
+.nav-link:focus {
+  color: rgba(255, 166, 0, 0.89) !important;
 }
 
 @include tablet {

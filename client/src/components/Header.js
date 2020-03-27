@@ -1,94 +1,62 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
-export default function Header(props) {
-  const searchHandler = event => {
-    event.preventDefault();
-    if (event.target.stockSearch.value !== "") {
-      props.getStock(event.target.stockSearch.value);
-      props.getNews(event.target.stockSearch.value);
-    } else {
-      window.alert("please type stock symbol");
-    }
+
+export default class Header extends Component {
+  state = {
+    open: false,
+    news: [],
+    stock: {}
   };
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link to="/" className="navbar-brand">
-        StockOverflow
-      </Link>
-      {props.loggedIn && (
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-      )}
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          {props.loggedIn && (
-            <>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  to="/"
-                >
-                  Menu
-                </Link>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <Link className="dropdown-item" to="/account">
-                    Account
-                  </Link>
-                  <Link className="dropdown-item" to="/movers">
-                    Movers
-                  </Link>
-                  <Link className="dropdown-item" to="/search">
-                    Else
-                  </Link>
-                </div>
-              </li>
-            </>
-          )}
-          <li className="nav-item active">
-            <Link className="nav-link" to="/" onClick={props.logOut}>
-              {props.loggedIn && "Logout"}
-              <span className="sr-only">(current)</span>
-            </Link>
-          </li>
-        </ul>
-
-        {props.loggedIn && (
-          <form className="form-inline my-2 my-lg-0" onSubmit={searchHandler}>
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              id="nav-searchInput"
-              name="stockSearch"
-            />
-
+  render() {
+    return (
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <Link to="/" className="navbar-brand">
+          StockOverflow
+        </Link>
+        {this.props.loggedIn && (
+          <>
             <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-              id="nav-searchButton"
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
-              Search
+              <span className="navbar-toggler-icon"></span>
             </button>
-          </form>
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/account">
+                    Account<span className="sr-only">(current)</span>
+                  </Link>
+                </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/orders">
+                    Orders
+                  </Link>
+                </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/stocks">
+                    Research
+                  </Link>
+                </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/" onClick={this.props.logOut}>
+                    {this.props.loggedIn && "Logout"}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </>
         )}
-      </div>
-    </nav>
-  );
+      </nav>
+    );
+  }
 }
