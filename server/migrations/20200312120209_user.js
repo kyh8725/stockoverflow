@@ -1,15 +1,12 @@
 exports.up = knex => {
   return knex.schema.createTable("user", table => {
+    table.string("username").primary();
     table
-      .string("username")
+      .string("password")
       .notNullable()
-      .primary();
-    table.string("password").notNullable();
+      .defaultTo("1234");
     table.timestamp("signedUp").defaultTo(knex.fn.now());
-    table
-      .integer("cash")
-      .unsigned()
-      .defaultTo(100000);
+    table.integer("cash").defaultTo(100000);
   });
 };
 

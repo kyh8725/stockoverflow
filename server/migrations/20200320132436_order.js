@@ -19,6 +19,10 @@ exports.up = function(knex) {
       .notNullable()
       .defaultTo(true);
     table
+      .integer("stockId")
+      .notNullable()
+      .defaultTo(0);
+    table
       .string("holder")
       .notNullable()
       .references("username")

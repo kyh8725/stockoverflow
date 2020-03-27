@@ -17,6 +17,10 @@ exports.up = function(knex) {
       .inTable("user")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
+    table
+      .integer("orderId")
+      .notNullable()
+      .defaultTo(0);
     table.timestamp("tradeDate").defaultTo(knex.fn.now());
   });
 };

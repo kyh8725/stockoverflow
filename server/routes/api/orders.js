@@ -30,8 +30,9 @@ router.post("/sellOrder", (req, res) => {
     quantity: req.body.quantity,
     price: req.body.price,
     holder: req.body.holder,
+    stockId: req.body.stockId,
     buy: false,
-    sell: false
+    sell: true
   })
     .save()
     .then(newOrder => {
@@ -50,7 +51,8 @@ router.put("/settle/:id", (req, res) => {
         price: order.price,
         quantity: order.quantity,
         holder: order.holder,
-        buy: false
+        buy: false,
+        sell: false
       });
       res.status(200).json({ order });
     });

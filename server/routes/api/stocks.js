@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Stock = require("../../models/stock");
 
-router.get("/", (req, res) => {
+router.get("/allStocks", (req, res) => {
   Stock.fetchAll().then(stock => {
     res.status(200).json(stock);
   });
@@ -16,12 +16,21 @@ router.get("/:holder", (req, res) => {
     });
 });
 
+router.get("/:holder/:id", (req, res) => {
+  Stock.where({ id: Number(req.params.id), holder: req.params.holder })
+    .fetchAll()
+    .then(stock => {
+      res.status(200).json(stock);
+    });
+});
+
 router.post("/buy", (req, res) => {
   new Stock({
     symbol: req.body.symbol,
     quantity: req.body.quantity,
     price: req.body.price,
-    holder: req.body.holder
+    holder: req.body.holder,
+    orderId: req.body.orderId
   })
     .save()
     .then(newStock => {
@@ -29,8 +38,10 @@ router.post("/buy", (req, res) => {
     });
 });
 
-router.delete("/sell", (req, res) => {
-  Stock.where({ symbol: req.body.symbol, holder: req.body.holder })
+router.delete("/sell/:id", (req, res) => {
+  Stock.where({
+    id: req.params.id
+  })
     .destroy()
     .then(soldStock => {
       res.status(200).json({ soldStock });
