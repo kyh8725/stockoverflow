@@ -8,23 +8,18 @@
     align-items: center;
     flex-direction: column;
   }
-  &__username {
-    width: 83%;
-    padding: 1rem;
-    height: 3rem;
-    border: 1px solid silver;
-    border-radius: 0.3rem;
-    margin-bottom: 1rem;
-  }
+  &__username,
   &__password {
     width: 83%;
     padding: 1rem;
     height: 3rem;
-    border-radius: 0.3rem;
+    margin: 1rem;
     border: 1px solid silver;
+    border-radius: 0.5rem;
     margin-bottom: 1rem;
   }
   &__btnWrap {
+    margin-top: 2rem;
     display: flex;
     justify-content: space-evenly;
   }
@@ -32,9 +27,18 @@
 
 @include tablet {
   .login {
+    width: 40rem;
     padding: 2rem;
+    &__inputWrap {
+      width: 100%;
+    }
+    &__username,
+    &__password {
+      height: 4rem;
+    }
   }
 }
 .styles_modal__gNwvD {
   border-radius: 1rem;
+  padding: 2rem;
 }

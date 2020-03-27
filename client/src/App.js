@@ -64,10 +64,12 @@ export default class App extends Component {
     axios.get(`/stocks/${username}`).then(response => {
       this.setState({ stocks: response.data });
       response.data.forEach(stock => {
-        // const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-        //const iex_url = "https://cloud.iexapis.com/stable/stock/";
-        const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-        const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+        const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+        const iex_url = "https://cloud.iexapis.com/stable/stock/";
+
+        // for testing sandbox api
+        // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
+        //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
         axios
           .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
           .then(response => {

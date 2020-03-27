@@ -99,7 +99,9 @@ export default class StockCard extends Component {
         datasets: [
           {
             label: "price",
-            data: this.props.data
+            data: this.props.data,
+            borderColor: "#c45850",
+            fill: false
           }
         ]
       },
@@ -140,7 +142,7 @@ export default class StockCard extends Component {
             </div>
             <div className="scard__prices">
               <div className="scard__pricewrap">
-                <p>Price: &nbsp;</p>
+                <p>Price:$ &nbsp;&nbsp;</p>
                 <p
                   className="scard__priceCurrent"
                   style={{ color: this.colorChange() }}
@@ -154,7 +156,9 @@ export default class StockCard extends Component {
                   className="scard__priceChange-value"
                   style={{ color: this.colorChange() }}
                 >
-                  <span> {this.props.stock.changePercent.toFixed(2)} %</span>
+                  <span>
+                    {this.props.stock.changePercent.toFixed(2)}%&nbsp;&nbsp;
+                  </span>
                   <span> {this.props.stock.change.toFixed(2)}</span>
                 </p>
               </div>

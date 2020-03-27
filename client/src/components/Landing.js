@@ -33,6 +33,10 @@ export default class Landing extends Component {
                 with other traders, and put your trading skills to the test. We
                 provide near real-time stock quotes to simulate real-world stock
                 market. All stocks in NYSE and NASDAQ are available for trading.
+                <br />
+                <br />
+                Tech used: HTML5, SASS, React.js, Node.js, Express.js,
+                Bootstrap, MySQL, Knex, Bookshelf.
               </article>
             </div>
           )}
@@ -42,11 +46,39 @@ export default class Landing extends Component {
                 Welcome {localStorage.getItem("userLogin")}
               </div>
               <article className="landing__text">
-                Refreshing the page will delete all the user data. Please
-                re-login if that happens. You might have to click Update Account
-                button twice to see the most updated page.
-                <a href="https://ncov2019.live/data" target="/blank">
-                  COVID-19 Status
+                Some bugs need to be fixed:
+                <br />
+                <br />
+                -Refreshing the page will reset the user data to empty.Please
+                re-login if that happens.
+                <br />
+                <br />
+                - Clicking Process Order button too quickly multiple times
+                before the process is done makes duplicate stocks.
+                <br />
+                <br />
+                - You might have to click Update Account button twice to see the
+                most updated page.
+                <br />
+                <br />
+                Comments
+                <br />
+                <br /> Orders are processed only when the market is open. For
+                testing purposes, the condition is commented out for now in
+                Orders.js -processOrders function. If the price is right orders
+                will get processed. JWT is not sent to verify the user at the
+                moment. If there was no limit on the number of API calls I can
+                make /month - more graph options intraday,weekly,monthly,1-10
+                years. can also display volumes, add some tickers for various
+                market index and etc.
+                <br />
+                <br />
+                Overall, It was a great project to practice everything I learned
+                in the past 3 months from HTML to MYSQL.
+                <br />
+                <br />
+                <a href="https://ncov2019.live/data" target="_blank">
+                  CHECK GLOBAL COVID-19 STATUS
                 </a>
               </article>
             </div>
@@ -73,8 +105,13 @@ export default class Landing extends Component {
             {this.props.loggedIn && (
               <>
                 <Link to="/account">
-                  <button className="btn btn-primary">
+                  <button className="btn btn-secondary btn-lg" id="accountBtn">
                     Go to your Account
+                  </button>
+                </Link>
+                <Link to="/orders">
+                  <button className="btn btn-secondary btn-lg" id="orderBtn">
+                    Check Orders
                   </button>
                 </Link>
               </>

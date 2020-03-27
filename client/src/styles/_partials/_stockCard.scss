@@ -128,11 +128,39 @@
     &__chart {
       height: 20rem;
     }
+    &__highlow-title {
+      font-size: 1.5rem;
+    }
+    &__52Wk {
+      font-size: 1.5rem;
+      &-barwrap {
+        height: 1rem;
+      }
+    }
+    &__marketOpen {
+      font-size: 2rem;
+    }
+    &__pricewrap {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 2rem;
+    }
+    &__priceChange {
+      &-value {
+        margin-left: 1rem;
+        font-size: 2rem;
+      }
+    }
+    &__priceCurrent {
+      span {
+        margin-left: 2rem;
+      }
+    }
   }
 }
 
 @include desk {
   .scard {
-    margin: 2rem 12rem;
+    margin: 2rem 18rem;
   }
 }

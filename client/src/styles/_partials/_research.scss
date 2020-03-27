@@ -9,7 +9,7 @@
 #nav-searchInput {
   width: 50vw;
   height: 3rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 #nav-searchButton {
   flex: 0.3;
@@ -17,5 +17,16 @@
   font-size: 1.3rem;
 }
 
-@include tablet {
+@include desk {
+  #nav-searchInput {
+    font-size: 2rem;
+    width: 50vw;
+    height: 5rem;
+  }
+  #nav-searchButton {
+    flex: 0.3;
+    height: 5rem;
+    padding: 0 3rem;
+    font-size: 1.3rem;
+  }
 }

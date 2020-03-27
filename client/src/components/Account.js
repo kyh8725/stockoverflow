@@ -37,6 +37,13 @@ export default class Account extends Component {
       cash: this.props.cash
     });
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.stocks !== this.props.stocks) {
+      this.renderStocks();
+    }
+  }
+
   onOpenModal = event => {
     this.setState(
       { id: event.target.id, symbol: event.target.value },
@@ -64,10 +71,12 @@ export default class Account extends Component {
     axios.get(`/stocks/${username}`).then(response => {
       this.setState({ stocks: response.data });
       response.data.forEach(stock => {
-        // const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-        //const iex_url = "https://cloud.iexapis.com/stable/stock/";
-        const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-        const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+        const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+        const iex_url = "https://cloud.iexapis.com/stable/stock/";
+
+        // for testing sandbox api
+        // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
+        //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
         axios
           .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
           .then(response => {
@@ -84,6 +93,7 @@ export default class Account extends Component {
       localStorage.setItem("stocks", JSON.stringify(response.data));
     });
   };
+
   renderStocks = () => {
     const stock = this.state.stocks.map(stock => {
       const change =
@@ -165,6 +175,7 @@ export default class Account extends Component {
             <h3 className="account__quantity"> Qty </h3>
             <h3 className="account__net"> Net</h3>
             <h3 className="account__gainLose"> Gain/Lose</h3>
+            <h3 className="account__sellbtn"> {}</h3>
           </div>
           <div className="account__financialInfo">{this.renderStocks()}</div>
           <div className="account__total">

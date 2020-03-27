@@ -6,6 +6,7 @@ export default class Account extends Component {
   state = {
     orders: [],
     user: "",
+    processing: false,
     months: [
       "Jan",
       "Feb",
@@ -46,10 +47,12 @@ export default class Account extends Component {
 
   processOrders = () => {
     this.state.orders.forEach(orderF => {
-      //const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-      //const iex_url = "https://cloud.iexapis.com/stable/stock/";
-      const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-      const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+      const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+      const iex_url = "https://cloud.iexapis.com/stable/stock/";
+
+      // for testing sandbox api
+      // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
+      // const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
       axios
         .get(`${iex_url}${orderF.symbol}/quote${iex_token}`)
         .then(response => {
@@ -113,7 +116,6 @@ export default class Account extends Component {
                 );
                 this.setState({ orders: activeOrder });
                 // delete the stock sold from db
-                console.log("out of delete stock");
                 axios
                   .delete(`/stocks/sell/${orderF.stockId}`)
                   .then(response => {
@@ -150,10 +152,12 @@ export default class Account extends Component {
             <h3 className="account__single-stock">
               {order.symbol.toLowerCase()}
             </h3>
-            <h3 className="account__single-price">${order.price.toFixed(2)}</h3>
+            <h3 className="account__single-price">${order.price}</h3>
             <h3 className="account__single-quantity">{order.quantity}</h3>
-            <h3 className="account__single-status">{order.buy ? "B" : "S"}</h3>
-            <h3 className="account__single-net">${net.toFixed(2)}</h3>
+            <h3 className="account__single-status">
+              {order.buy ? "Buy" : "Sell"}
+            </h3>
+            <h3 className="account__single-net">${net}</h3>
             <button
               className="btn btn-danger"
               id={order.id}

@@ -25,31 +25,29 @@ export default class Research extends Component {
   getNews = symbol => {
     //const iex_token = process.env.iex_token;
     //const iex_url = process.env.iex_rul;
-    // const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    //const iex_url = "https://cloud.iexapis.com/stable/stock/";
-    const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-    const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
-    axios.get(`${iex_url}${symbol}/news/last/1${iex_token}`).then(response => {
-      this.setState(
-        { news: response.data }
-        // localStorage.setItem("news", JSON.stringify(response.data))
-      );
+    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+    const iex_url = "https://cloud.iexapis.com/stable/stock/";
+
+    // for testing sandbox api
+    //const iex_url = "https://sandbox.iexapis.com/stable/stock/";
+    //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+    axios.get(`${iex_url}${symbol}/news/last/5${iex_token}`).then(response => {
+      this.setState({ news: response.data });
     });
   };
 
   getStock = symbol => {
     //const iex_token = process.env.iex_token;
     //const iex_url = process.env.iex_rul;
-    //const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    //const iex_url = "https://cloud.iexapis.com/stable/stock/";
-    const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-    const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+    const iex_url = "https://cloud.iexapis.com/stable/stock/";
+
+    // for testing sandbox api
+    // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
+    //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
 
     axios.get(`${iex_url}${symbol}/quote${iex_token}`).then(response => {
-      this.setState(
-        { stock: response.data }
-        // localStorage.setItem("stock", JSON.stringify(response.data))
-      );
+      this.setState({ stock: response.data });
     });
   };
 
@@ -63,10 +61,12 @@ export default class Research extends Component {
   };
 
   processChartData = symbol => {
-    // const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    // const iex_url = "https://cloud.iexapis.com/stable/stock/";
-    const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-    const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
+    const iex_url = "https://cloud.iexapis.com/stable/stock/";
+
+    // for testing sandbox api
+    // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
+    //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
     axios.get(`${iex_url}${symbol}/chart/5d${iex_token}`).then(response => {
       const chartLabels = [];
       const chartData = [];
@@ -141,21 +141,3 @@ export default class Research extends Component {
     );
   }
 }
-
-// {Object.keys(this.state.stock).length !== 0 &&
-//   this.state.news.length !== 0 &&
-//   this.state.data.length !== 0 &&
-//   this.state.labels.length !== 0 && (
-//     <>
-//       <StockCard
-//         symbol={this.state.symbol}
-//         data={this.state.data}
-//         labels={this.state.labels}
-//         cash={this.state.cash}
-//         orders={this.state.orders}
-//         stock={this.state.stock}
-//         getAccountInfo={this.props.getAccountInfo}
-//       />
-//       <NewsCard news={this.state.news} />
-//     </>
-//   )}

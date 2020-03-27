@@ -4,7 +4,6 @@
   border-radius: 1rem;
   border: 1px solid silver;
   box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
-
   &__holder {
     margin-bottom: 2rem;
   }
@@ -111,10 +110,6 @@
       font-size: 1rem;
       display: initial;
     }
-
-    &__buttonPlace {
-      width: 4rem;
-    }
     &__stock,
     &__price,
     &__quantity {
@@ -122,6 +117,12 @@
     }
     &__net {
       text-align: left;
+    }
+    &__sellbtn {
+      width: 3rem;
+    }
+    &__buttonPlace {
+      width: 4rem;
     }
     &__single {
       padding-bottom: 0.5rem;
@@ -152,5 +153,28 @@
 @include desk {
   .account {
     margin: 2rem 11rem;
+    &__single {
+      &-date,
+      &-cost,
+      &-gainLose,
+      &-status,
+      &-stock,
+      &-price,
+      &-quantity,
+      &-net {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__date,
+    &__cost,
+    &__gainLose,
+    &__status,
+    &__stock,
+    &__price,
+    &__quantity,
+    &__net {
+      font-size: 1.5rem;
+    }
   }
 }
