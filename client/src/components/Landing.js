@@ -77,7 +77,11 @@ export default class Landing extends Component {
                 in the past 3 months from HTML to MYSQL.
                 <br />
                 <br />
-                <a href="https://ncov2019.live/data" target="_blank">
+                <a
+                  href="https://ncov2019.live/data"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   CHECK GLOBAL COVID-19 STATUS
                 </a>
               </article>

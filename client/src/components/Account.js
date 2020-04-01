@@ -71,12 +71,11 @@ export default class Account extends Component {
     axios.get(`/stocks/${username}`).then(response => {
       this.setState({ stocks: response.data });
       response.data.forEach(stock => {
-        const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-        const iex_url = "https://cloud.iexapis.com/stable/stock/";
-
+        const iex_url = process.env.REACT_APP_iex_url;
+        const iex_token = process.env.REACT_APP_iex_token;
         // for testing sandbox api
-        // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-        //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+        //const iex_url = process.env.REACT_APP_iex_sandbox_url;
+        //const iex_token =process.env.REACT_APP_iex_sandbox_token;
         axios
           .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
           .then(response => {

@@ -23,29 +23,22 @@ export default class Research extends Component {
   }
 
   getNews = symbol => {
-    //const iex_token = process.env.iex_token;
-    //const iex_url = process.env.iex_rul;
-    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    const iex_url = "https://cloud.iexapis.com/stable/stock/";
-
+    const iex_url = process.env.REACT_APP_iex_url;
+    const iex_token = process.env.REACT_APP_iex_token;
     // for testing sandbox api
-    //const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-    //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+    //const iex_url = process.env.REACT_APP_iex_sandbox_url;
+    //const iex_token =process.env.REACT_APP_iex_sandbox_token;
     axios.get(`${iex_url}${symbol}/news/last/5${iex_token}`).then(response => {
       this.setState({ news: response.data });
     });
   };
 
   getStock = symbol => {
-    //const iex_token = process.env.iex_token;
-    //const iex_url = process.env.iex_rul;
-    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    const iex_url = "https://cloud.iexapis.com/stable/stock/";
-
+    const iex_url = process.env.REACT_APP_iex_url;
+    const iex_token = process.env.REACT_APP_iex_token;
     // for testing sandbox api
-    // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-    //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
-
+    //const iex_url = process.env.REACT_APP_iex_sandbox_url;
+    //const iex_token =process.env.REACT_APP_iex_sandbox_token;
     axios.get(`${iex_url}${symbol}/quote${iex_token}`).then(response => {
       this.setState({ stock: response.data });
     });
@@ -61,12 +54,11 @@ export default class Research extends Component {
   };
 
   processChartData = symbol => {
-    const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-    const iex_url = "https://cloud.iexapis.com/stable/stock/";
-
+    const iex_url = process.env.REACT_APP_iex_url;
+    const iex_token = process.env.REACT_APP_iex_token;
     // for testing sandbox api
-    // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-    //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
+    //const iex_url = process.env.REACT_APP_iex_sandbox_url;
+    //const iex_token =process.env.REACT_APP_iex_sandbox_token;
     axios.get(`${iex_url}${symbol}/chart/5d${iex_token}`).then(response => {
       const chartLabels = [];
       const chartData = [];
@@ -91,8 +83,6 @@ export default class Research extends Component {
   };
 
   render() {
-    console.log(this.state.data);
-
     return (
       <>
         <div className="research">

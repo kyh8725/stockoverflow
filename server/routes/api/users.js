@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 router.get("/", (req, res) => {
   User.fetchAll().then(user => {
@@ -18,7 +19,7 @@ router.get("/:username", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  JWT_SECRET_KEY = "StockOverflow";
+  const JWT_SECRET_KEY = process.env.REACT_APP_JWT_SECRET_KEY;
   const username = req.body.username;
   const password = req.body.password;
   User.fetchAll().then(user => {

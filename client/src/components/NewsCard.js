@@ -4,7 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 export default function NewsCard(props) {
   const renderNews = props.news.map(news => {
     return (
-      <a href={news.url} key={uuidv4()} target="_blank">
+      <a
+        href={news.url}
+        key={uuidv4()}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <div className="card">
           <img src={news.image} className="card-img-top" alt="newsImg" />
           <div className="card-body">

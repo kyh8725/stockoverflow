@@ -65,24 +65,22 @@ export default class App extends Component {
     axios.get(`/stocks/${username}`).then(response => {
       this.setState({ stocks: response.data });
       response.data.forEach(stock => {
-        const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-        const iex_url = "https://cloud.iexapis.com/stable/stock/";
-
+        const iex_url = process.env.REACT_APP_iex_url;
+        const iex_token = process.env.REACT_APP_iex_token;
+        const URL = `${iex_url}${stock.symbol}/quote${iex_token}`;
         // for testing sandbox api
-        // const iex_url = "https://sandbox.iexapis.com/stable/stock/";
-        //const iex_token = "?token=Tsk_cbf0ed0fd04041a3906c8317da2bfe12";
-        axios
-          .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
-          .then(response => {
-            localStorage.setItem(
-              `currentStock${stock.symbol}`,
-              JSON.stringify(response.data)
-            );
-            localStorage.setItem(
-              `currentPrice${stock.symbol}`,
-              response.data.latestPrice
-            );
-          });
+        //const iex_url = process.env.REACT_APP_iex_sandbox_url;
+        //const iex_token =process.env.REACT_APP_iex_sandbox_token;
+        axios.get(URL).then(response => {
+          localStorage.setItem(
+            `currentStock${stock.symbol}`,
+            JSON.stringify(response.data)
+          );
+          localStorage.setItem(
+            `currentPrice${stock.symbol}`,
+            response.data.latestPrice
+          );
+        });
       });
       localStorage.setItem("stocks", JSON.stringify(response.data));
     });
@@ -98,11 +96,7 @@ export default class App extends Component {
     return (
       <>
         <Router>
-          <Header
-            searchStock={this.searchStock}
-            loggedIn={this.state.loggedIn}
-            logOut={this.logOut}
-          />
+          <Header loggedIn={this.state.loggedIn} logOut={this.logOut} />
           <Switch>
             <Route
               path="/"
