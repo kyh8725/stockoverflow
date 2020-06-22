@@ -24,6 +24,7 @@ router.post("/buyOrder", (req, res) => {
       res.status(201).json({ newOrder });
     });
 });
+
 router.post("/sellOrder", (req, res) => {
   new Order({
     symbol: req.body.symbol,

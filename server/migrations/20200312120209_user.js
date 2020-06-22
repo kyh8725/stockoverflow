@@ -6,7 +6,7 @@ exports.up = knex => {
       .notNullable()
       .defaultTo("1234");
     table.timestamp("signedUp").defaultTo(knex.fn.now());
-    table.integer("cash").defaultTo(100000);
+    table.decimal("cash", 10, 2).defaultTo(100000.0);
   });
 };
 

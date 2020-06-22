@@ -5,6 +5,7 @@ import Orders from "./components/Orders";
 import Landing from "./components/Landing";
 import Account from "./components/Account";
 import Research from "./components/Research";
+import Demo from "./components/Demo";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -15,23 +16,23 @@ export default class App extends Component {
     loggedIn: false,
     users: [],
     stocks: [],
-    orders: []
+    orders: [],
   };
 
   componentDidMount() {
-    axios.get("/users").then(response => {
-      this.setState({ users: response.data.map(user => user.username) });
+    axios.get("/users").then((response) => {
+      this.setState({ users: response.data.map((user) => user.username) });
     });
     sessionStorage.getItem("authToken")
       ? this.setState({
-          loggedIn: true
+          loggedIn: true,
         })
       : this.setState({
-          loggedIn: false
+          loggedIn: false,
         });
   }
 
-  logIn = username => {
+  logIn = (username) => {
     localStorage.setItem("userLogin", username);
     this.setState({ loggedIn: true, user: username });
     this.getAccountInfo(username);
@@ -43,60 +44,56 @@ export default class App extends Component {
     localStorage.clear();
   };
 
-  getOrders = username => {
-    console.log("getOrders ran");
-    axios.get(`/orders/${username}`).then(response => {
-      const activeOrder = response.data.filter(order => order.buy !== 0);
+  getOrders = (username) => {
+    axios.get(`/orders/${username}`).then((response) => {
+      const activeOrder = response.data.filter(
+        (order) => order.sell !== 0 || order.buy !== 0
+      );
       this.setState({ orders: activeOrder });
       localStorage.setItem("orders", JSON.stringify(activeOrder));
     });
   };
 
-  getBalance = username => {
-    console.log("getBalance ran");
-    axios.get(`/users/${username}`).then(response => {
+  getBalance = (username) => {
+    axios.get(`/users/${username}`).then((response) => {
       this.setState({ cash: response.data[0].cash });
       localStorage.setItem("cash", response.data[0].cash);
     });
   };
 
-  getStockOwned = username => {
-    console.log("getStockOwned ran");
-    axios.get(`/stocks/${username}`).then(response => {
+  getStockOwned = (username) => {
+    axios.get(`/stocks/${username}`).then((response) => {
       this.setState({ stocks: response.data });
-      response.data.forEach(stock => {
-        const iex_token = "?token=pk_64c9963c8e65443b9d72928be93b8178";
-        const iex_url = "https://cloud.iexapis.com/stable/stock/";
-        axios
-          .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
-          .then(response => {
-            localStorage.setItem(
-              `currentPrice${stock.symbol}`,
-              response.data.latestPrice
-            );
-          });
+      response.data.forEach((stock) => {
+        const iex_url = process.env.REACT_APP_iex_url;
+        const iex_token = process.env.REACT_APP_iex_token;
+        const URL = `${iex_url}${stock.symbol}/quote${iex_token}`;
+        axios.get(URL).then((response) => {
+          localStorage.setItem(
+            `currentStock${stock.symbol}`,
+            JSON.stringify(response.data)
+          );
+          localStorage.setItem(
+            `currentPrice${stock.symbol}`,
+            response.data.latestPrice
+          );
+        });
       });
       localStorage.setItem("stocks", JSON.stringify(response.data));
     });
   };
 
-  getAccountInfo = username => {
-    console.log("getAccountInfo ran");
+  getAccountInfo = (username) => {
     this.getStockOwned(username);
     this.getBalance(username);
     this.getOrders(username);
   };
 
   render() {
-    console.log(this.state.orders);
     return (
       <>
         <Router>
-          <Header
-            searchStock={this.searchStock}
-            loggedIn={this.state.loggedIn}
-            logOut={this.logOut}
-          />
+          <Header loggedIn={this.state.loggedIn} logOut={this.logOut} />
           <Switch>
             <Route
               path="/"
@@ -135,6 +132,7 @@ export default class App extends Component {
                   <>
                     <Orders
                       getAccountInfo={this.getAccountInfo}
+                      stocks={this.state.stocks}
                       user={this.state.user}
                       orders={this.state.orders}
                     />
@@ -158,6 +156,7 @@ export default class App extends Component {
                 }
               }}
             />
+            <Route path="/demo" component={Demo} />
           </Switch>
           <Footer />
         </Router>

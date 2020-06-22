@@ -1,0 +1,853 @@
+/* media query for tablet */
+/* media query for high pixel density desktops */
+.navbar {
+  min-height: 5rem;
+  font-size: 1.5rem;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+}
+
+.dropdown-menu {
+  font-size: 1.5rem;
+}
+
+.dropdown-menu *:hover {
+  width: 99%;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: rgba(255, 166, 0, 0.89) !important;
+}
+
+@media only screen and (min-width: 993px) {
+  .navbar {
+    padding: 0 8rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .navbar {
+    padding: 0 12rem;
+  }
+}
+
+.footer {
+  height: 5rem;
+  background-color: #343a40;
+  color: white;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media only screen and (min-width: 993px) {
+  .footer {
+    padding: 1rem 8rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .footer {
+    padding: 1rem 12rem;
+  }
+}
+
+.landing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: 100%;
+  padding: 2rem 1rem;
+  background-image: url("/stockbg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.landing__content {
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.landing__header {
+  padding: 1rem;
+  font-size: 2rem;
+  color: white;
+}
+
+.landing__text {
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.landing__text a {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.landing__text a:hover {
+  color: orange;
+}
+
+.landing__btnWrap {
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.landing #signupbtn,
+.landing #loginbtn,
+.landing #accountBtn,
+.landing #orderBtn {
+  width: 40vw;
+}
+
+@media only screen and (min-width: 993px) {
+  .landing {
+    padding: 5rem 8rem;
+  }
+  .landing__header {
+    font-size: 3rem;
+  }
+  .landing__text {
+    font-size: 1rem;
+  }
+  .landing__content {
+    padding: 2rem;
+  }
+  .landing__btnWrap * {
+    font-size: 1.5rem;
+  }
+  .landing #signupbtn,
+  .landing #loginbtn,
+  .landing #accountBtn,
+  .landing #orderBtn {
+    width: 40vw;
+    height: 4rem;
+    margin: 0.5rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .landing {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    padding: 5rem 12rem;
+  }
+  .landing__content {
+    padding-bottom: 0;
+    -webkit-box-flex: 0.6;
+        -ms-flex: 0.6;
+            flex: 0.6;
+  }
+  .landing__btnWrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    padding-bottom: 10rem;
+    -webkit-box-flex: 0.4;
+        -ms-flex: 0.4;
+            flex: 0.4;
+  }
+  .landing__btnWrap * {
+    font-size: 2rem;
+  }
+  .landing #signupbtn,
+  .landing #loginbtn,
+  .landing #accountBtn,
+  .landing #orderBtn {
+    width: 30vw;
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    height: 5rem;
+  }
+}
+
+.account {
+  margin: 2rem 1rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid silver;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+          box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+}
+
+.account__holder {
+  margin-bottom: 2rem;
+}
+
+.account__balance {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.account__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: rgba(233, 233, 233, 0.911);
+  border-bottom: 1px solid silver;
+  padding: 1rem;
+}
+
+.account__title * {
+  margin: 0;
+}
+
+.account__stock, .account__price, .account__quantity {
+  font-size: 1rem;
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__net {
+  text-align: right;
+  font-size: 1rem;
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__date, .account__cost, .account__gainLose, .account__status {
+  display: none;
+}
+
+.account__single {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid silver;
+  margin-bottom: 1rem;
+}
+
+.account__single-stock, .account__single-price, .account__single-quantity {
+  margin: 0;
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__single-net {
+  margin: 0;
+  text-align: right;
+  -webkit-box-flex: 0.25;
+      -ms-flex: 0.25;
+          flex: 0.25;
+}
+
+.account__single-date, .account__single-cost, .account__single-gainLose, .account__single-status {
+  margin: 0;
+  display: none;
+}
+
+.account__single * {
+  font-size: 0.8rem;
+}
+
+.account__total {
+  font-size: 1rem;
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.account__total-change {
+  text-align: right;
+}
+
+.account .btn-danger {
+  display: none;
+}
+
+.account__financialInfo {
+  padding: 1rem;
+}
+
+.account__processbtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.account__updateAccount {
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+@media only screen and (min-width: 993px) {
+  .account {
+    margin: 2rem 8rem;
+  }
+  .account__holder {
+    font-size: 2.5rem;
+  }
+  .account__balance {
+    font-size: 2rem;
+  }
+  .account__date, .account__cost, .account__gainLose, .account__status {
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+    font-size: 1rem;
+    display: initial;
+  }
+  .account__stock, .account__price, .account__quantity {
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+  }
+  .account__net {
+    text-align: left;
+  }
+  .account__sellbtn {
+    width: 3rem;
+  }
+  .account__buttonPlace {
+    width: 4rem;
+  }
+  .account__single {
+    padding-bottom: 0.5rem;
+  }
+  .account__single-date, .account__single-cost, .account__single-gainLose, .account__single-status {
+    font-size: 1rem;
+    display: initial;
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+  }
+  .account__single-stock, .account__single-price, .account__single-quantity {
+    font-size: 1rem;
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
+  }
+  .account__single-net {
+    font-size: 1rem;
+    text-align: left;
+  }
+  .account .btn-danger {
+    display: initial;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .account {
+    margin: 2rem 11rem;
+  }
+  .account__single-date, .account__single-cost, .account__single-gainLose, .account__single-status, .account__single-stock, .account__single-price, .account__single-quantity, .account__single-net {
+    font-size: 1.5rem;
+  }
+  .account__date, .account__cost, .account__gainLose, .account__status, .account__stock, .account__price, .account__quantity, .account__net {
+    font-size: 1.5rem;
+  }
+}
+
+.research__form-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1rem 0;
+}
+
+#nav-searchInput {
+  width: 50vw;
+  height: 3rem;
+  margin-right: 2rem;
+}
+
+#nav-searchButton {
+  -webkit-box-flex: 0.3;
+      -ms-flex: 0.3;
+          flex: 0.3;
+  height: 3rem;
+  font-size: 1.3rem;
+}
+
+@media only screen and (min-width: 1440px) {
+  #nav-searchInput {
+    font-size: 2rem;
+    width: 50vw;
+    height: 5rem;
+  }
+  #nav-searchButton {
+    -webkit-box-flex: 0.3;
+        -ms-flex: 0.3;
+            flex: 0.3;
+    height: 5rem;
+    padding: 0 3rem;
+    font-size: 1.3rem;
+  }
+}
+
+.scard {
+  margin: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #cccbcb;
+  border-radius: 0.2rem;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+          box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+}
+
+.scard__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.scard__top-stock {
+  -webkit-box-flex: 0.7;
+      -ms-flex: 0.7;
+          flex: 0.7;
+}
+
+.scard__top-name {
+  font-size: 1.5rem;
+}
+
+.scard__top-symbol {
+  display: block;
+  color: silver;
+  font-size: 1rem;
+}
+
+.scard__top-imgwrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.scard__top-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0.3;
+      -ms-flex: 0.3;
+          flex: 0.3;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.scard__top-img img {
+  width: 3rem;
+  height: 2rem;
+}
+
+.scard__pricewrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  font-size: 1.3rem;
+}
+
+.scard__priceChange-value {
+  font-size: 1rem;
+}
+
+.scard__priceCurrent span {
+  margin-left: 1rem;
+}
+
+.scard__highlow-title, .scard__highlow-value {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.scard__52Wk {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.scard__52Wk p {
+  margin-bottom: 0;
+}
+
+.scard__52Wk-barwrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.scard__52Wk-bar1 {
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5;
+          flex: 0.5;
+  border: 1px solid silver;
+  border-right-style: none;
+}
+
+.scard__52Wk-bar2 {
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5;
+          flex: 0.5;
+  border: 1px solid silver;
+  border-left-style: none;
+}
+
+.scard__marketOpen {
+  font-size: 1.3rem;
+  text-align: right;
+}
+
+.scard__graph {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 3rem;
+}
+
+.scard__buttonWrap {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.scard__buybtn {
+  width: 100%;
+  height: 3rem;
+  border-style: none;
+  color: white;
+  border-radius: 0.5rem;
+  background-color: green;
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5;
+          flex: 0.5;
+}
+
+.scard__chart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 15rem;
+}
+
+@media only screen and (min-width: 993px) {
+  .scard {
+    padding: 5rem;
+    margin: 2rem 8rem;
+  }
+  .scard__priceChange-value {
+    font-size: 1.3rem;
+  }
+  .scard__chart {
+    height: 20rem;
+  }
+  .scard__highlow-title {
+    font-size: 1.5rem;
+  }
+  .scard__52Wk {
+    font-size: 1.5rem;
+  }
+  .scard__52Wk-barwrap {
+    height: 1rem;
+  }
+  .scard__marketOpen {
+    font-size: 2rem;
+  }
+  .scard__pricewrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    font-size: 2rem;
+  }
+  .scard__priceChange-value {
+    margin-left: 1rem;
+    font-size: 2rem;
+  }
+  .scard__priceCurrent span {
+    margin-left: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .scard {
+    margin: 2rem 18rem;
+  }
+}
+
+.news {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.card {
+  max-width: 20rem;
+  margin: 1rem 1.5rem;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+          box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+}
+
+.card-img-top {
+  height: 10rem;
+}
+
+.card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 993px) {
+  .news {
+    margin: 0 8rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .news {
+    margin: 0 12rem;
+  }
+}
+
+.trade__title {
+  border-bottom: 1px solid silver;
+  margin-bottom: 1rem;
+}
+
+.trade__inputs {
+  margin: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.trade__inputs-price, .trade__inputs-quantity {
+  font-size: 2rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid silver;
+  height: 3rem;
+  width: 80%;
+}
+
+.trade__btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.trade__estimate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 80%;
+}
+
+.trade__estimate input {
+  text-align: center;
+  width: 100%;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.login {
+  padding: 2rem;
+  background-color: #f3f3f3;
+  border-radius: 1rem;
+}
+
+.login__inputWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.login__username, .login__password {
+  width: 83%;
+  padding: 1rem;
+  height: 3rem;
+  margin: 1rem;
+  border: 1px solid silver;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.login__btnWrap {
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+@media only screen and (min-width: 993px) {
+  .login {
+    width: 40rem;
+    padding: 2rem;
+  }
+  .login__inputWrap {
+    width: 100%;
+  }
+  .login__username, .login__password {
+    height: 4rem;
+  }
+}
+
+.styles_modal__gNwvD {
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.demo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 2rem;
+  height: 80vh;
+}
+
+.demo iframe {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-width: 993px) {
+  .demo {
+    margin: 4rem 8rem;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .demo {
+    margin: 4rem 12rem;
+  }
+}
+/*# sourceMappingURL=index.css.map */

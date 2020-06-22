@@ -17,11 +17,9 @@ export default function SignUp(props) {
           })
           .then(response => {
             sessionStorage.authToken = response.data.token;
-            props.logIn(username);
           });
-        window.alert(
-          "Thank you for siging up!  \n Please Log in to start trading!"
-        );
+        props.logIn(username);
+        window.alert("Thank you for siging up!  \n You can start trading now!");
         props.closeModal();
       }
     } else {

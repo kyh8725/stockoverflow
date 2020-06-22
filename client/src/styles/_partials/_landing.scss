@@ -1,26 +1,25 @@
 .landing {
-  height: 85vh;
-  width: 100vw;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  padding: 2rem 1rem;
   background-image: url("/stockbg2.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  &__content {
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+  }
   &__header {
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
     font-size: 2rem;
     color: white;
   }
   &__text {
-    padding: 0 1.5rem 1.5rem 1.5rem;
-    border-radius: 0.5rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
     color: white;
     font-size: 1rem;
     a {
@@ -37,27 +36,66 @@
     justify-content: space-evenly;
   }
   #signupbtn,
-  #loginbtn {
+  #loginbtn,
+  #accountBtn,
+  #orderBtn {
     width: 40vw;
   }
 }
 @include tablet {
   .landing {
-    padding: 2rem 8rem;
+    padding: 5rem 8rem;
     &__header {
-      font-size: 4rem;
+      font-size: 3rem;
     }
     &__text {
-      font-size: 2rem;
+      font-size: 1rem;
+    }
+    &__content {
+      padding: 2rem;
+    }
+    &__btnWrap {
+      * {
+        font-size: 1.5rem;
+      }
+    }
+    #signupbtn,
+    #loginbtn,
+    #accountBtn,
+    #orderBtn {
+      width: 40vw;
+      height: 4rem;
+      margin: 0.5rem;
     }
   }
 }
 @include desk {
   .landing {
-    padding: 4rem 12rem;
+    flex-direction: row;
+    padding: 5rem 12rem;
 
     &__content {
-      margin-right: 40%;
+      padding-bottom: 0;
+      flex: 0.6;
+    }
+    &__btnWrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-bottom: 10rem;
+      flex: 0.4;
+      * {
+        font-size: 2rem;
+      }
+    }
+    #signupbtn,
+    #loginbtn,
+    #accountBtn,
+    #orderBtn {
+      width: 30vw;
+      margin-bottom: 2rem;
+      margin-left: 3rem;
+      height: 5rem;
     }
   }
 }

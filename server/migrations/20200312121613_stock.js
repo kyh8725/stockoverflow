@@ -7,7 +7,7 @@ exports.up = function(knex) {
       .unsigned()
       .notNullable();
     table
-      .integer("price")
+      .decimal("price", 10, 2)
       .unsigned()
       .notNullable();
     table

@@ -13,7 +13,7 @@ export default class StockCard extends Component {
     open: false,
     labels: [],
     data: [],
-    dataLoad: false
+    load: false
   };
 
   chartRef = React.createRef();
@@ -29,6 +29,12 @@ export default class StockCard extends Component {
       },
       this.makeChart()
     );
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.data !== this.props.data) {
+      this.makeChart();
+    }
   }
 
   onOpenModal = () => {
@@ -93,7 +99,9 @@ export default class StockCard extends Component {
         datasets: [
           {
             label: "price",
-            data: this.props.data
+            data: this.props.data,
+            borderColor: "#c45850",
+            fill: false
           }
         ]
       },
@@ -130,11 +138,11 @@ export default class StockCard extends Component {
           </h3>
           <div className="scard__main">
             <div className="scard__chart">
-              <canvas id="myChart" ref={this.chartRef} />
+              {this.state.labels && <canvas id="myChart" ref={this.chartRef} />}
             </div>
             <div className="scard__prices">
               <div className="scard__pricewrap">
-                <p>Price: &nbsp;</p>
+                <p>Price:$ &nbsp;&nbsp;</p>
                 <p
                   className="scard__priceCurrent"
                   style={{ color: this.colorChange() }}
@@ -148,7 +156,9 @@ export default class StockCard extends Component {
                   className="scard__priceChange-value"
                   style={{ color: this.colorChange() }}
                 >
-                  <span> {this.props.stock.changePercent.toFixed(2)} %</span>
+                  <span>
+                    {this.props.stock.changePercent.toFixed(2)}%&nbsp;&nbsp;
+                  </span>
                   <span> {this.props.stock.change.toFixed(2)}</span>
                 </p>
               </div>

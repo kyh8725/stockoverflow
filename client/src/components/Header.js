@@ -14,6 +14,14 @@ export default class Header extends Component {
         <Link to="/" className="navbar-brand">
           StockOverflow
         </Link>
+
+        {!this.props.loggedIn && (
+          <div className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <Link to="/demo" className="navbar-brand">
+              demo
+            </Link>
+          </div>
+        )}
         {this.props.loggedIn && (
           <>
             <button
@@ -47,6 +55,7 @@ export default class Header extends Component {
                     Research
                   </Link>
                 </li>
+
                 <li className="nav-item active">
                   <Link className="nav-link" to="/" onClick={this.props.logOut}>
                     {this.props.loggedIn && "Logout"}

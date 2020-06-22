@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import Modal from "react-responsive-modal";
+import SellOrder from "./SellOrder";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 export default class Account extends Component {
   state = {
+    update: false,
+    symbol: "",
     open: false,
+    id: "",
     stocks: [],
     orders: [],
     user: "",
@@ -31,17 +37,57 @@ export default class Account extends Component {
       cash: this.props.cash
     });
   }
-  onOpenModal = () => {
-    this.setState({ open: true });
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.stocks !== this.props.stocks) {
+      this.renderStocks();
+    }
+  }
+
+  onOpenModal = event => {
+    this.setState(
+      { id: event.target.id, symbol: event.target.value },
+      this.setState({ open: true })
+    );
   };
+
   onCloseModal = () => {
     this.setState({ open: false });
   };
+
   getDate = time => {
     const date = new Date(time);
     return `${
       this.state.months[date.getMonth()]
     } ${date.getDate()} ${date.getFullYear()}`;
+  };
+
+  updateAccount = () => {
+    this.props.getAccountInfo(this.state.user);
+    this.setState({ stocks: this.props.stocks, cash: this.props.cash });
+  };
+
+  getStockOwned = username => {
+    axios.get(`/stocks/${username}`).then(response => {
+      this.setState({ stocks: response.data });
+      response.data.forEach(stock => {
+        const iex_url = process.env.REACT_APP_iex_url;
+        const iex_token = process.env.REACT_APP_iex_token;
+        axios
+          .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
+          .then(response => {
+            localStorage.setItem(
+              `currentStock${stock.symbol}`,
+              JSON.stringify(response.data)
+            );
+            localStorage.setItem(
+              `currentPrice${stock.symbol}`,
+              response.data.latestPrice
+            );
+          });
+      });
+      localStorage.setItem("stocks", JSON.stringify(response.data));
+    });
   };
 
   renderStocks = () => {
@@ -55,7 +101,9 @@ export default class Account extends Component {
           <h3 className="account__single-date">
             {this.getDate(stock.tradeDate)}
           </h3>
-          <h3 className="account__single-stock">{stock.symbol}</h3>
+          <h3 className="account__single-stock">
+            {stock.symbol.toLowerCase()}
+          </h3>
           <h3 className="account__single-price">
             ${JSON.parse(localStorage.getItem(`currentPrice${stock.symbol}`))}
           </h3>
@@ -75,7 +123,12 @@ export default class Account extends Component {
             $ {change.toFixed(2)}
           </h3>
           <div className="account__sellbtn">
-            <button onClick={this.onOpenModal} className="btn btn-danger">
+            <button
+              onClick={this.onOpenModal}
+              className="btn btn-danger"
+              id={stock.id}
+              value={stock.symbol}
+            >
               Sell
             </button>
           </div>
@@ -83,11 +136,6 @@ export default class Account extends Component {
       );
     });
     return stock;
-  };
-
-  updateAccount = () => {
-    console.log("updateAccount ran");
-    this.props.getAccountInfo(this.state.user);
   };
 
   render() {
@@ -123,6 +171,7 @@ export default class Account extends Component {
             <h3 className="account__quantity"> Qty </h3>
             <h3 className="account__net"> Net</h3>
             <h3 className="account__gainLose"> Gain/Lose</h3>
+            <h3 className="account__sellbtn"> {}</h3>
           </div>
           <div className="account__financialInfo">{this.renderStocks()}</div>
           <div className="account__total">
@@ -142,14 +191,19 @@ export default class Account extends Component {
             </button>
           </div>
         </section>
-        <Modal open={open} onClose={this.onCloseModal}>
-          <SellOrder
-            cash={this.state.cash}
-            closeModal={this.onCloseModal}
-            getAccountInfo={this.props.getAccountInfo}
-            stock={this.props.stock}
-          />
-        </Modal>
+        {this.state.id !== "" && this.state.symbol !== "" && (
+          <Modal open={open} onClose={this.onCloseModal}>
+            <SellOrder
+              symbol={this.state.symbol}
+              user={this.state.user}
+              stocks={this.state.stocks}
+              id={this.state.id}
+              cash={this.state.cash}
+              closeModal={this.onCloseModal}
+              getAccountInfo={this.props.getAccountInfo}
+            />
+          </Modal>
+        )}
       </>
     );
   }

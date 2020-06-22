@@ -5,7 +5,8 @@ export default class NewOrder extends Component {
     price: 0,
     quantity: 0,
     cash: 0,
-    tempCash: 0
+    tempCash: 0,
+    user: localStorage.getItem("userLogin")
   };
 
   componentDidMount() {
@@ -40,23 +41,25 @@ export default class NewOrder extends Component {
   buyStock = event => {
     event.preventDefault();
     if (
+      // --------- tempCash is cash balance - total amount of unsettled orders
       this.state.tempCash <= this.state.price * this.state.quantity ||
       this.state.tempCash === 0
     ) {
       window.alert("not enough funds");
     } else {
+      // -------------------- BUY ORDER -------------------------
       axios
         .post("/orders/buyOrder", {
           symbol: this.props.stock.symbol,
           price: this.state.price,
           quantity: this.state.quantity,
-          holder: localStorage.getItem("userLogin")
+          holder: this.state.user
         })
         .then(response => {
-          this.props.getAccountInfo(localStorage.getItem("userLogin"));
+          this.props.getAccountInfo(this.state.user);
         });
     }
-    this.props.getAccountInfo(localStorage.getItem("userLogin"));
+    this.props.getAccountInfo(this.state.user);
     this.props.closeModal();
   };
 
@@ -71,7 +74,7 @@ export default class NewOrder extends Component {
   render() {
     return (
       <>
-        <h2 className="trade__title"> Order </h2>
+        <h2 className="trade__title"> Buy Stock </h2>
         <h4 style={{ color: this.isMarketOpenColor() }}>
           {this.isMarketOpen()}
         </h4>
@@ -97,6 +100,7 @@ export default class NewOrder extends Component {
                 value={`Estimate: $${(
                   this.state.price * this.state.quantity
                 ).toFixed(2)}`}
+                readOnly
               />
             </div>
           </div>
