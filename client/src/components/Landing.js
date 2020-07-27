@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default class Landing extends Component {
   state = {
     open: false,
-    openS: false
+    openS: false,
   };
 
   onOpenModal = () => {
@@ -35,7 +35,7 @@ export default class Landing extends Component {
                 market. All stocks in NYSE and NASDAQ are available for trading.
                 <br />
                 <br />
-                Tech used: HTML5, SASS, React.js, Node.js, Express.js,
+                Tech used: HTML5, CSS3, SASS, React.js, Node.js, Express.js,
                 Bootstrap, MySQL, Knex, Bookshelf.
               </article>
             </div>
