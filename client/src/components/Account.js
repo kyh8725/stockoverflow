@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import Modal from "react-responsive-modal";
 import SellOrder from "./SellOrder";
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getBalance } from "../actions/balanceActions";
+import { getStocksOwned } from "../actions/stockActions";
 import axios from "axios";
 
-export default class Account extends Component {
+class Account extends Component {
   state = {
     update: false,
     symbol: "",
     open: false,
     id: "",
-    stocks: [],
     orders: [],
     user: "",
-    cash: 0,
     months: [
       "Jan",
       "Feb",
@@ -26,25 +28,19 @@ export default class Account extends Component {
       "Sep",
       "Oct",
       "Nov",
-      "Dec"
-    ]
+      "Dec",
+    ],
   };
 
   componentDidMount() {
     this.setState({
       user: this.props.user,
-      stocks: this.props.stocks,
-      cash: this.props.cash
     });
+    this.props.getStocksOwned(this.props.user);
+    this.props.getBalance(this.props.user);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.stocks !== this.props.stocks) {
-      this.renderStocks();
-    }
-  }
-
-  onOpenModal = event => {
+  onOpenModal = (event) => {
     this.setState(
       { id: event.target.id, symbol: event.target.value },
       this.setState({ open: true })
@@ -55,47 +51,26 @@ export default class Account extends Component {
     this.setState({ open: false });
   };
 
-  getDate = time => {
+  getDate = (time) => {
     const date = new Date(time);
     return `${
       this.state.months[date.getMonth()]
     } ${date.getDate()} ${date.getFullYear()}`;
   };
 
-  updateAccount = () => {
-    this.props.getAccountInfo(this.state.user);
-    this.setState({ stocks: this.props.stocks, cash: this.props.cash });
-  };
-
-  getStockOwned = username => {
-    axios.get(`/stocks/${username}`).then(response => {
-      this.setState({ stocks: response.data });
-      response.data.forEach(stock => {
-        const iex_url = process.env.REACT_APP_iex_url;
-        const iex_token = process.env.REACT_APP_iex_token;
-        axios
-          .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
-          .then(response => {
-            localStorage.setItem(
-              `currentStock${stock.symbol}`,
-              JSON.stringify(response.data)
-            );
-            localStorage.setItem(
-              `currentPrice${stock.symbol}`,
-              response.data.latestPrice
-            );
-          });
-      });
-      localStorage.setItem("stocks", JSON.stringify(response.data));
-    });
-  };
-
   renderStocks = () => {
-    const stock = this.state.stocks.map(stock => {
-      const change =
-        (Number(localStorage.getItem(`currentPrice${stock.symbol}`)) -
-          stock.price) *
-        stock.quantity;
+    const iex_url = process.env.REACT_APP_iex_url;
+    const iex_token = process.env.REACT_APP_iex_token;
+    let stockArray = [];
+    const stock = this.props.stocks.map((stock) => {
+      axios
+        .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
+        .then((response) => {
+          let obj = { [stock.symbol]: response.data.latestPrice };
+          stockArray.push(obj);
+        });
+      const change = stock.price * stock.quantity;
+
       return (
         <div className="account__single" key={uuidv4()}>
           <h3 className="account__single-date">
@@ -142,26 +117,17 @@ export default class Account extends Component {
     const { open } = this.state;
     let changeTotal = 0;
     let bookCost = 0;
-    this.state.stocks.forEach(stock => {
-      const change =
-        (Number(localStorage.getItem(`currentPrice${stock.symbol}`)) -
-          stock.price) *
-        stock.quantity;
-      const cost = stock.price * stock.quantity;
-      changeTotal += change;
-      bookCost += cost;
-    });
 
     return (
       <>
         <section className="account">
           <h2 className="account__holder">Account: {this.state.user}</h2>
-          <h2 className="account__balance">Cash: $ {this.state.cash}</h2>
+          <h2 className="account__balance">Cash: $ {this.props.cash}</h2>
           <h2 className="account__balance">
             Investment: $ {(bookCost + changeTotal).toFixed(2)}
           </h2>
           <h2 className="account__balance">
-            Balance: $ {(this.state.cash + bookCost + changeTotal).toFixed(2)}
+            Balance: $ {(this.props.cash + bookCost + changeTotal).toFixed(2)}
           </h2>
           <div className="account__title">
             <h3 className="account__date">Trade Date</h3>
@@ -196,9 +162,9 @@ export default class Account extends Component {
             <SellOrder
               symbol={this.state.symbol}
               user={this.state.user}
-              stocks={this.state.stocks}
+              stocks={this.props.stocks}
               id={this.state.id}
-              cash={this.state.cash}
+              cash={this.props.cash}
               closeModal={this.onCloseModal}
               getAccountInfo={this.props.getAccountInfo}
             />
@@ -208,3 +174,16 @@ export default class Account extends Component {
     );
   }
 }
+
+Account.propTypes = {
+  getStocksOwned: PropTypes.func.isRequired,
+  stocks: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  cash: state.cash.cash,
+  stocks: state.stocks.stocks,
+});
+export default connect(mapStateToProps, { getBalance, getStocksOwned })(
+  Account
+);
