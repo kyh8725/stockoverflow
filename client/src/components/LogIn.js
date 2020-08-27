@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 export default function LogIn(props) {
-  const loginHandler = event => {
+  const loginHandler = (event) => {
     const username = event.target.username.value;
     const password = event.target.password.value;
     event.preventDefault();
@@ -10,16 +10,21 @@ export default function LogIn(props) {
       if (!props.users.includes(username)) {
         window.alert("user does not exist please sign up");
       } else {
-        axios
-          .post("/users/login", {
-            username: username,
-            password: password
-          })
-          .then(response => {
-            sessionStorage.authToken = response.data.token;
-            props.logIn(username);
-            props.closeModal();
-          });
+        try {
+          axios
+            .post("/users/login", {
+              username: username,
+              password: password,
+            })
+            .then((response) => {
+              sessionStorage.authToken = response.data.token;
+              props.logIn(username);
+              props.closeModal();
+            });
+        } catch (err) {
+          window.alert("wrong password");
+          console.log(err.response.data);
+        }
       }
     } else {
       window.alert("please fill both username and password");

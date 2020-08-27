@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBalance } from "../actions/balanceActions";
 import { getStocksOwned } from "../actions/stockActions";
-import axios from "axios";
 
 class Account extends Component {
   state = {
@@ -59,17 +58,8 @@ class Account extends Component {
   };
 
   renderStocks = () => {
-    const iex_url = process.env.REACT_APP_iex_url;
-    const iex_token = process.env.REACT_APP_iex_token;
-    let stockArray = [];
-    const stock = this.props.stocks.map((stock) => {
-      axios
-        .get(`${iex_url}${stock.symbol}/quote${iex_token}`)
-        .then((response) => {
-          let obj = { [stock.symbol]: response.data.latestPrice };
-          stockArray.push(obj);
-        });
-      const change = stock.price * stock.quantity;
+    this.props.stocks.forEach((stock) => {
+      const change = -stock.price * stock.quantity;
 
       return (
         <div className="account__single" key={uuidv4()}>
@@ -110,14 +100,12 @@ class Account extends Component {
         </div>
       );
     });
-    return stock;
   };
 
   render() {
     const { open } = this.state;
     let changeTotal = 0;
     let bookCost = 0;
-
     return (
       <>
         <section className="account">

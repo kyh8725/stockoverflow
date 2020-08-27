@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 export default function SignUp(props) {
-  const signUpHandler = event => {
+  const signUpHandler = (event) => {
     const username = event.target.username.value;
     const password = event.target.password.value;
     event.preventDefault();
@@ -13,9 +13,9 @@ export default function SignUp(props) {
         axios
           .post("/users/new", {
             username: username,
-            password: password
+            password: password,
           })
-          .then(response => {
+          .then((response) => {
             sessionStorage.authToken = response.data.token;
           });
         props.logIn(username);

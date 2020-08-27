@@ -16,6 +16,7 @@
   "author": "Daniel Kim",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "bookshelf": "^1.1.1",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
