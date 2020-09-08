@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default class Account extends Component {
   state = {
+    cash: 0,
     orders: [],
     user: "",
     processing: false,
@@ -23,11 +24,15 @@ export default class Account extends Component {
     ],
   };
 
-  componentDidMount() {
-    this.setState({
-      user: this.props.user,
-      orders: this.props.orders,
+  async componentDidMount() {
+    await this.setState({ user: sessionStorage.getItem("user") });
+    await axios.get(`/orders/${this.state.user}`).then((response) => {
+      const activeOrder = response.data.filter(
+        (order) => order.sell !== 0 || order.buy !== 0
+      );
+      this.setState({ orders: activeOrder });
     });
+    this.getCash(this.state.user);
   }
 
   getDate = (time) => {
@@ -35,6 +40,14 @@ export default class Account extends Component {
     return `${
       this.state.months[date.getMonth()]
     } ${date.getDate()} ${date.getFullYear()}`;
+  };
+
+  getCash = (username) => {
+    axios.get(`/users/${username}`).then((response) => {
+      if (username === response.data[0].username) {
+        this.setState({ cash: response.data[0].cash });
+      }
+    });
   };
 
   cancelHandler = (event) => {
@@ -85,14 +98,9 @@ export default class Account extends Component {
                     axios
                       .put("/users/trade/sell", {
                         username: this.state.user,
-                        cash:
-                          Number(localStorage.getItem("cash")) -
-                          orderF.quantity * currentPrice,
+                        cash: this.state.cash - orderF.quantity * currentPrice,
                       })
-                      .then((response) => {
-                        // update the user information from the App.js
-                        this.props.getAccountInfo(this.state.user);
-                      });
+                      .then((response) => {});
                   });
                 });
               });
@@ -119,13 +127,9 @@ export default class Account extends Component {
                     axios
                       .put(`/users/trade/sell`, {
                         username: this.state.user,
-                        cash:
-                          Number(localStorage.getItem("cash")) +
-                          orderF.quantity * currentPrice,
+                        cash: this.state.cash + orderF.quantity * currentPrice,
                       })
-                      .then((response) => {
-                        this.props.getAccountInfo(this.state.user);
-                      });
+                      .then((response) => {});
                   });
               });
             });

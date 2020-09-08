@@ -7,13 +7,13 @@ import axios from "axios";
 class Account extends Component {
   state = {
     cash: 0,
+    marketOpen: false,
     currentPrices: [],
     stocks: [],
     changes: [],
     symbols: "",
     open: false,
     id: "",
-    orders: [],
     user: "",
     months: [
       "Jan",
@@ -62,6 +62,7 @@ class Account extends Component {
     const iex_token = process.env.REACT_APP_iex_token;
     axios.get(`${iex_url}${symbol}/quote${iex_token}`).then((response) => {
       tempPrices.push(response.data);
+      this.setState({ marketOpen: response.data.isUSMarketOpen });
       this.setState({ currentPrices: tempPrices });
     });
   };
@@ -70,16 +71,6 @@ class Account extends Component {
     return this.state.currentPrices.filter(
       (stock) => stock.symbol.toLowerCase() === symbol.toLowerCase()
     );
-  };
-
-  getOrders = (username) => {
-    axios.get(`/orders/${username}`).then((response) => {
-      const activeOrder = response.data.filter(
-        (order) => order.sell !== 0 || order.buy !== 0
-      );
-      this.setState({ orders: activeOrder });
-      localStorage.setItem("orders", JSON.stringify(activeOrder));
-    });
   };
 
   onOpenModal = (event) => {
@@ -208,6 +199,7 @@ class Account extends Component {
               stocks={this.state.stocks}
               id={this.state.id}
               cash={this.state.cash}
+              marketOpen={this.state.marketOpen}
               closeModal={this.onCloseModal}
             />
           </Modal>

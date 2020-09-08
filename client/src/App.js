@@ -70,11 +70,7 @@ export default class App extends Component {
               render={() => {
                 return (
                   <>
-                    <Orders
-                      getAccountInfo={this.getAccountInfo}
-                      user={this.state.user}
-                      orders={this.state.orders}
-                    />
+                    <Orders user={this.state.user} />
                   </>
                 );
               }}
@@ -82,16 +78,11 @@ export default class App extends Component {
             <Route
               path="/stocks"
               render={() => {
-                if (this.state.cash !== 0) {
-                  return (
-                    <>
-                      <Research
-                        getAccountInfo={this.getAccountInfo}
-                        orders={this.state.orders}
-                      />
-                    </>
-                  );
-                }
+                return (
+                  <>
+                    <Research />
+                  </>
+                );
               }}
             />
             <Route path="/demo" component={Demo} />

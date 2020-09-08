@@ -5,6 +5,7 @@ export default class SellOrder extends Component {
   state = {
     price: 0,
     stock: {},
+    stockCurrent: [],
   };
 
   async componentDidMount() {
@@ -13,11 +14,17 @@ export default class SellOrder extends Component {
       .then((response) => {
         this.setState({ stock: response.data[0] });
       });
+    const iex_url = process.env.REACT_APP_iex_url;
+    const iex_token = process.env.REACT_APP_iex_token;
+    await axios
+      .get(`${iex_url}${this.state.stock.symbol}/quote${iex_token}`)
+      .then((response) => {
+        this.setState({ stockCurrent: response.data });
+      });
   }
 
   isMarketOpen = () => {
-    console.log(this.state.stock);
-    if (this.state.stock.isUSMarketOpen) {
+    if (this.props.marketOpen) {
       return "Market is open";
     } else {
       return "Market is closed";
@@ -25,7 +32,7 @@ export default class SellOrder extends Component {
   };
 
   isMarketOpenColor = () => {
-    if (this.state.stock.isUSMarketOpen) {
+    if (this.props.marketOpen) {
       return "green";
     } else {
       return "red";
@@ -39,9 +46,8 @@ export default class SellOrder extends Component {
   sellStock = (event) => {
     event.preventDefault();
     axios
-      .get(`/stocks/${this.state.user}/${this.state.id}`)
+      .get(`/stocks/${this.props.user}/${this.props.id}`)
       .then((response) => {
-        this.setState({ stock: response.data[0] });
         const stock = response.data[0];
         // -------------------- SELL ORDER -------------------------
         axios
@@ -49,10 +55,12 @@ export default class SellOrder extends Component {
             symbol: stock.symbol,
             quantity: stock.quantity,
             price: this.state.price,
-            holder: this.state.user,
-            stockId: this.state.id,
+            holder: this.props.user,
+            stockId: this.props.id,
           })
-          .then((response) => {});
+          .then((response) => {
+            return response.data;
+          });
       });
     this.props.closeModal();
   };
@@ -67,7 +75,10 @@ export default class SellOrder extends Component {
               {this.isMarketOpen()}
             </h4>
             <h4> Stock: {this.state.stock.symbol}</h4>
-            <h4>Current Price: ${}</h4>
+            <h4>
+              Current Price: $
+              {Number(this.state.stockCurrent.latestPrice).toFixed(2)}
+            </h4>
             <form className="trade__form" onSubmit={this.sellStock}>
               <div className="trade__inputs">
                 <input

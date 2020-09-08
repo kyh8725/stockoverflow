@@ -13,19 +13,18 @@ export default class StockCard extends Component {
     open: false,
     labels: [],
     data: [],
-    load: false
+    load: false,
   };
 
   chartRef = React.createRef();
 
-  componentDidMount() {
-    this.setState(
+  async componentDidMount() {
+    await this.setState(
       {
         labels: this.props.labels,
         data: this.props.data,
         stock: this.props.stock,
         cash: this.props.cash,
-        orders: this.props.orders
       },
       this.makeChart()
     );
@@ -101,14 +100,14 @@ export default class StockCard extends Component {
             label: "price",
             data: this.props.data,
             borderColor: "#c45850",
-            fill: false
-          }
-        ]
+            fill: false,
+          },
+        ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
-      }
+        maintainAspectRatio: false,
+      },
     });
   };
 
@@ -184,7 +183,7 @@ export default class StockCard extends Component {
                 className="scard__52Wk-bar1"
                 style={{
                   backgroundColor: this.wkColor(),
-                  flex: this.wkRange()
+                  flex: this.wkRange(),
                 }}
               ></span>
               <span
@@ -207,9 +206,8 @@ export default class StockCard extends Component {
         </section>
         <Modal open={open} onClose={this.onCloseModal}>
           <NewOrder
-            cash={this.state.cash}
+            cash={this.props.cash}
             closeModal={this.onCloseModal}
-            getAccountInfo={this.props.getAccountInfo}
             stock={this.props.stock}
           />
         </Modal>

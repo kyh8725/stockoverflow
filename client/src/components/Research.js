@@ -7,19 +7,16 @@ export default class Research extends Component {
   state = {
     stock: {},
     news: [],
-    orders: [],
     cash: 0,
     labels: [],
     data: [],
     symbol: "",
   };
 
-  componentDidMount() {
-    this.setState({
-      cash: this.props.cash,
-      orders: this.props.orders,
-    });
-    this.searchStock("googl");
+  async componentDidMount() {
+    await this.searchStock("googl");
+    await this.setState({ user: sessionStorage.getItem("user") });
+    this.getCash(this.state.user);
   }
 
   getNews = (symbol) => {
@@ -37,6 +34,14 @@ export default class Research extends Component {
     const iex_token = process.env.REACT_APP_iex_token;
     axios.get(`${iex_url}${symbol}/quote${iex_token}`).then((response) => {
       this.setState({ stock: response.data });
+    });
+  };
+
+  getCash = (username) => {
+    axios.get(`/users/${username}`).then((response) => {
+      if (username === response.data[0].username) {
+        this.setState({ cash: response.data[0].cash });
+      }
     });
   };
 
@@ -60,8 +65,6 @@ export default class Research extends Component {
         chartData.push(data.close);
       });
       this.setState({ labels: chartLabels, data: chartData });
-      localStorage.setItem("labels", JSON.stringify(chartLabels));
-      localStorage.setItem("data", JSON.stringify(chartData));
     });
   };
 
@@ -113,9 +116,7 @@ export default class Research extends Component {
                 data={this.state.data}
                 labels={this.state.labels}
                 cash={this.state.cash}
-                orders={this.state.orders}
                 stock={this.state.stock}
-                getAccountInfo={this.props.getAccountInfo}
               />
               <NewsCard news={this.state.news} />
             </>
