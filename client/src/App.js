@@ -14,46 +14,24 @@ export default class App extends Component {
     user: "",
     loggedIn: false,
     users: [],
-    orders: [],
   };
 
   componentDidMount() {
     axios.get("/users").then((response) => {
       this.setState({ users: response.data.map((user) => user.username) });
     });
-    sessionStorage.getItem("authToken")
-      ? this.setState({
-          loggedIn: true,
-        })
-      : this.setState({
-          loggedIn: false,
-        });
+    this.setState(
+      { user: sessionStorage.getItem("user") },
+      this.setState({ loggedIn: true })
+    );
   }
 
   logIn = (username) => {
-    localStorage.setItem("userLogin", username);
     this.setState({ loggedIn: true, user: username });
-    this.getAccountInfo(username);
   };
 
   logOut = () => {
     this.setState({ loggedIn: false });
-    sessionStorage.removeItem("authToken");
-    localStorage.clear();
-  };
-
-  getOrders = (username) => {
-    axios.get(`/orders/${username}`).then((response) => {
-      const activeOrder = response.data.filter(
-        (order) => order.sell !== 0 || order.buy !== 0
-      );
-      this.setState({ orders: activeOrder });
-      localStorage.setItem("orders", JSON.stringify(activeOrder));
-    });
-  };
-
-  getAccountInfo = (username) => {
-    this.getOrders(username);
   };
 
   render() {
@@ -82,10 +60,7 @@ export default class App extends Component {
               render={() => {
                 return (
                   <>
-                    <Account
-                      getAccountInfo={this.getAccountInfo}
-                      user={this.state.user}
-                    />
+                    <Account user={this.state.user} />
                   </>
                 );
               }}

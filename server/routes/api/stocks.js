@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Stock = require("../../models/stock");
+const verify = require("./verifyToken");
 
 router.get("/allStocks", (req, res) => {
-  Stock.fetchAll().then(stock => {
+  Stock.fetchAll().then((stock) => {
     res.status(200).json(stock);
   });
 });
@@ -11,7 +12,7 @@ router.get("/allStocks", (req, res) => {
 router.get("/:holder", (req, res) => {
   Stock.where({ holder: req.params.holder })
     .fetchAll()
-    .then(stock => {
+    .then((stock) => {
       res.status(200).json(stock);
     });
 });
@@ -19,31 +20,31 @@ router.get("/:holder", (req, res) => {
 router.get("/:holder/:id", (req, res) => {
   Stock.where({ id: Number(req.params.id), holder: req.params.holder })
     .fetchAll()
-    .then(stock => {
+    .then((stock) => {
       res.status(200).json(stock);
     });
 });
 
 router.post("/buy", (req, res) => {
   new Stock({
-    symbol: req.body.symbol,
+    symbol: req.body.symbol.toUpperCase(),
     quantity: req.body.quantity,
     price: req.body.price,
     holder: req.body.holder,
-    orderId: req.body.orderId
+    orderId: req.body.orderId,
   })
     .save()
-    .then(newStock => {
+    .then((newStock) => {
       res.status(201).json({ newStock });
     });
 });
 
 router.delete("/sell/:id", (req, res) => {
   Stock.where({
-    id: req.params.id
+    id: req.params.id,
   })
     .destroy()
-    .then(soldStock => {
+    .then((soldStock) => {
       res.status(200).json({ soldStock });
     });
 });

@@ -10,21 +10,16 @@ export default function LogIn(props) {
       if (!props.users.includes(username)) {
         window.alert("user does not exist please sign up");
       } else {
-        try {
-          axios
-            .post("/users/login", {
-              username: username,
-              password: password,
-            })
-            .then((response) => {
-              sessionStorage.authToken = response.data.token;
-              props.logIn(username);
-              props.closeModal();
-            });
-        } catch (err) {
-          window.alert("wrong password");
-          console.log(err.response.data);
-        }
+        axios
+          .post("/users/login", {
+            username: username,
+            password: password,
+          })
+          .then((response) => {
+            sessionStorage.setItem("user", username);
+            props.logIn(username);
+            props.closeModal();
+          });
       }
     } else {
       window.alert("please fill both username and password");

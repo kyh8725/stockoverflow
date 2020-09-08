@@ -11,34 +11,36 @@ export default class Research extends Component {
     cash: 0,
     labels: [],
     data: [],
-    symbol: ""
+    symbol: "",
   };
 
   componentDidMount() {
     this.setState({
       cash: this.props.cash,
-      orders: this.props.orders
+      orders: this.props.orders,
     });
     this.searchStock("googl");
   }
 
-  getNews = symbol => {
+  getNews = (symbol) => {
     const iex_url = process.env.REACT_APP_iex_url;
     const iex_token = process.env.REACT_APP_iex_token;
-    axios.get(`${iex_url}${symbol}/news/last/5${iex_token}`).then(response => {
-      this.setState({ news: response.data });
-    });
+    axios
+      .get(`${iex_url}${symbol}/news/last/1${iex_token}`)
+      .then((response) => {
+        this.setState({ news: response.data });
+      });
   };
 
-  getStock = symbol => {
+  getStock = (symbol) => {
     const iex_url = process.env.REACT_APP_iex_url;
     const iex_token = process.env.REACT_APP_iex_token;
-    axios.get(`${iex_url}${symbol}/quote${iex_token}`).then(response => {
+    axios.get(`${iex_url}${symbol}/quote${iex_token}`).then((response) => {
       this.setState({ stock: response.data });
     });
   };
 
-  searchHandler = event => {
+  searchHandler = (event) => {
     event.preventDefault();
     if (event.target.stockSearch.value !== "") {
       this.searchStock(event.target.stockSearch.value);
@@ -47,13 +49,13 @@ export default class Research extends Component {
     }
   };
 
-  processChartData = symbol => {
+  processChartData = (symbol) => {
     const iex_url = process.env.REACT_APP_iex_url;
     const iex_token = process.env.REACT_APP_iex_token;
-    axios.get(`${iex_url}${symbol}/chart/5d${iex_token}`).then(response => {
+    axios.get(`${iex_url}${symbol}/chart/5d${iex_token}`).then((response) => {
       const chartLabels = [];
       const chartData = [];
-      response.data.forEach(data => {
+      response.data.forEach((data) => {
         chartLabels.push(data.label);
         chartData.push(data.close);
       });
@@ -63,13 +65,13 @@ export default class Research extends Component {
     });
   };
 
-  searchStock = symbol => {
+  searchStock = (symbol) => {
     this.getStock(symbol);
     this.getNews(symbol);
     this.processChartData(symbol);
   };
 
-  setSymbol = event => {
+  setSymbol = (event) => {
     this.setState({ symbol: event.target.value });
   };
 

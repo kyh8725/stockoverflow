@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../../models/order");
+const verify = require("./verifyToken");
 
 router.get("/:holder", (req, res) => {
   Order.where({ holder: req.params.holder })
     .fetchAll()
-    .then(order => {
+    .then((order) => {
       res.status(200).json(order);
     });
 });
@@ -17,10 +18,10 @@ router.post("/buyOrder", (req, res) => {
     price: req.body.price,
     holder: req.body.holder,
     buy: true,
-    sell: false
+    sell: false,
   })
     .save()
-    .then(newOrder => {
+    .then((newOrder) => {
       res.status(201).json({ newOrder });
     });
 });
@@ -33,30 +34,34 @@ router.post("/sellOrder", (req, res) => {
     holder: req.body.holder,
     stockId: req.body.stockId,
     buy: false,
-    sell: true
+    sell: true,
   })
     .save()
-    .then(newOrder => {
+    .then((newOrder) => {
       res.status(201).json({ newOrder });
     });
 });
 
 router.put("/settle/:id", (req, res) => {
-  Order.where({
-    id: req.params.id
-  })
-    .fetch()
-    .then(order => {
-      order.save({
-        id: order.id,
-        price: order.price,
-        quantity: order.quantity,
-        holder: order.holder,
-        buy: false,
-        sell: false
+  try {
+    Order.where({
+      id: req.params.id,
+    })
+      .fetch()
+      .then((order) => {
+        order.save({
+          id: order.id,
+          price: order.price,
+          quantity: order.quantity,
+          holder: order.holder,
+          buy: false,
+          sell: false,
+        });
+        res.status(200).json({ order });
       });
-      res.status(200).json({ order });
-    });
+  } catch (err) {
+    res.status(401).send(err);
+  }
 });
 
 module.exports = router;

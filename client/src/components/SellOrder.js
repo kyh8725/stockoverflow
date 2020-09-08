@@ -3,27 +3,20 @@ import axios from "axios";
 
 export default class SellOrder extends Component {
   state = {
-    symbol: "",
     price: 0,
     stock: {},
-    id: "",
-    stocks: [],
-    user: ""
   };
 
-  componentDidMount() {
-    this.setState({
-      symbol: this.props.symbol,
-      user: this.props.user,
-      stocks: this.props.stocks,
-      id: this.props.id
-    });
-    axios.get(`/stocks/${this.props.user}/${this.props.id}`).then(response => {
-      this.setState({ stock: response.data[0] });
-    });
+  async componentDidMount() {
+    await axios
+      .get(`/stocks/${this.props.user}/${this.props.id}`)
+      .then((response) => {
+        this.setState({ stock: response.data[0] });
+      });
   }
 
   isMarketOpen = () => {
+    console.log(this.state.stock);
     if (this.state.stock.isUSMarketOpen) {
       return "Market is open";
     } else {
@@ -39,46 +32,42 @@ export default class SellOrder extends Component {
     }
   };
 
-  setPrice = event => {
+  setPrice = (event) => {
     this.setState({ price: event.target.value });
   };
 
-  sellStock = event => {
+  sellStock = (event) => {
     event.preventDefault();
-    axios.get(`/stocks/${this.state.user}/${this.state.id}`).then(response => {
-      this.setState({ stock: response.data[0] });
-      const stock = response.data[0];
-      // -------------------- SELL ORDER -------------------------
-      axios
-        .post("/orders/sellOrder", {
-          symbol: stock.symbol,
-          quantity: stock.quantity,
-          price: this.state.price,
-          holder: this.state.user,
-          stockId: this.state.id
-        })
-        .then(response => {
-          this.props.getAccountInfo(this.state.user);
-        });
-    });
+    axios
+      .get(`/stocks/${this.state.user}/${this.state.id}`)
+      .then((response) => {
+        this.setState({ stock: response.data[0] });
+        const stock = response.data[0];
+        // -------------------- SELL ORDER -------------------------
+        axios
+          .post("/orders/sellOrder", {
+            symbol: stock.symbol,
+            quantity: stock.quantity,
+            price: this.state.price,
+            holder: this.state.user,
+            stockId: this.state.id,
+          })
+          .then((response) => {});
+      });
     this.props.closeModal();
   };
 
   render() {
-    const stock = JSON.parse(
-      localStorage.getItem(`currentStock${this.props.symbol}`)
-    );
-
     return (
       <>
-        {Object.keys(this.state.stock).length !== 0 && (
+        {this.state.stock !== undefined && (
           <>
             <h2 className="trade__title"> Sell Stock</h2>
             <h4 style={{ color: this.isMarketOpenColor() }}>
               {this.isMarketOpen()}
             </h4>
-            <h4> Stock: {stock.symbol.toLowerCase()}</h4>
-            <h4> Current Price: $ {stock.latestPrice}</h4>
+            <h4> Stock: {this.state.stock.symbol}</h4>
+            <h4>Current Price: ${}</h4>
             <form className="trade__form" onSubmit={this.sellStock}>
               <div className="trade__inputs">
                 <input

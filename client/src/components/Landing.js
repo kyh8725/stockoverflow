@@ -46,31 +46,12 @@ export default class Landing extends Component {
                 Welcome {localStorage.getItem("userLogin")}
               </div>
               <article className="landing__text">
-                Some bugs need to be fixed:
-                <br />
-                <br />
-                -Refreshing the page will reset the user data to empty.Please
-                re-login if that happens.
-                <br />
-                <br />
-                - Clicking Process Order button too quickly multiple times
-                before the process is done makes duplicate stocks.
-                <br />
-                <br />
-                - You might have to click Update Account button twice to see the
-                most updated page.
-                <br />
-                <br />
                 Comments
                 <br />
                 <br /> Orders are processed only when the market is open. For
                 testing purposes, the condition is commented out for now in
                 Orders.js -processOrders function. If the price is right orders
-                will get processed. JWT is not sent to verify the user at the
-                moment. If there was no limit on the number of API calls I can
-                make /month - more graph options intraday,weekly,monthly,1-10
-                years. can also display volumes, add some tickers for various
-                market index and etc.
+                will get processed.
                 <br />
                 <br />
                 Overall, It was a great project to practice everything I learned

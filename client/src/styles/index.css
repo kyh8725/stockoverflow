@@ -2,7 +2,7 @@
 /* media query for high pixel density desktops */
 .navbar {
   min-height: 5rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .navbar-brand {
@@ -333,7 +333,7 @@
     font-size: 2.5rem;
   }
   .account__balance {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .account__date, .account__cost, .account__gainLose, .account__status {
     -webkit-box-flex: 0.2;
@@ -360,20 +360,20 @@
     padding-bottom: 0.5rem;
   }
   .account__single-date, .account__single-cost, .account__single-gainLose, .account__single-status {
-    font-size: 1rem;
+    font-size: 0.8rem;
     display: initial;
     -webkit-box-flex: 0.2;
         -ms-flex: 0.2;
             flex: 0.2;
   }
   .account__single-stock, .account__single-price, .account__single-quantity {
-    font-size: 1rem;
+    font-size: 0.8rem;
     -webkit-box-flex: 0.2;
         -ms-flex: 0.2;
             flex: 0.2;
   }
   .account__single-net {
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: left;
   }
   .account .btn-danger {
@@ -386,7 +386,7 @@
     margin: 2rem 11rem;
   }
   .account__single-date, .account__single-cost, .account__single-gainLose, .account__single-status, .account__single-stock, .account__single-price, .account__single-quantity, .account__single-net {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .account__date, .account__cost, .account__gainLose, .account__status, .account__stock, .account__price, .account__quantity, .account__net {
     font-size: 1.5rem;

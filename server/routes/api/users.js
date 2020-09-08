@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const verify = require("./verifyToken");
 require("dotenv").config();
 
 router.get("/", (req, res) => {
@@ -22,7 +23,6 @@ router.get("/:username", async (req, res) => {
 router.post("/login", async (req, res) => {
   const JWT_SECRET_KEY = process.env.REACT_APP_JWT_SECRET_KEY;
   const username = req.body.username;
-  const password = req.body.password;
 
   await User.fetchAll().then(async (user) => {
     const userObj = JSON.parse(JSON.stringify(user));
@@ -32,15 +32,13 @@ router.post("/login", async (req, res) => {
       userFound[0].password
     );
     if (validPass) {
-      jwt.sign(
+      const token = jwt.sign(
         {
-          name: userFound[0].username,
+          user: userFound[0].username,
         },
-        JWT_SECRET_KEY,
-        (err, token) => {
-          res.json({ token: token });
-        }
+        JWT_SECRET_KEY
       );
+      res.header("auth-token", token).send(userFound[0].username);
     } else {
       res.status(401).send("incorrect password");
     }

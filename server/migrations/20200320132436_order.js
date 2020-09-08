@@ -1,27 +1,12 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("order", table => {
+exports.up = function (knex) {
+  return knex.schema.createTable("order", (table) => {
     table.increments("id").primary();
     table.string("symbol").notNullable();
-    table
-      .integer("quantity")
-      .unsigned()
-      .notNullable();
-    table
-      .decimal("price", 10, 2)
-      .unsigned()
-      .notNullable();
-    table
-      .boolean("buy")
-      .notNullable()
-      .defaultTo(true);
-    table
-      .boolean("sell")
-      .notNullable()
-      .defaultTo(true);
-    table
-      .integer("stockId")
-      .notNullable()
-      .defaultTo(0);
+    table.integer("quantity").unsigned().notNullable();
+    table.decimal("price", 10, 2).unsigned().notNullable();
+    table.boolean("buy").notNullable().defaultTo(true);
+    table.boolean("sell").notNullable().defaultTo(true);
+    table.integer("stockId").notNullable().defaultTo(0);
     table
       .string("holder")
       .notNullable()
@@ -33,6 +18,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("order");
 };
