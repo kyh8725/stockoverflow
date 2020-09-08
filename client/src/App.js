@@ -20,10 +20,15 @@ export default class App extends Component {
     axios.get("/users").then((response) => {
       this.setState({ users: response.data.map((user) => user.username) });
     });
-    this.setState(
-      { user: sessionStorage.getItem("user") },
-      this.setState({ loggedIn: true })
-    );
+    if (
+      sessionStorage.getItem("user") !== null &&
+      sessionStorage.getItem("user").length !== 0
+    ) {
+      this.setState(
+        { user: sessionStorage.getItem("user") },
+        this.setState({ loggedIn: true })
+      );
+    }
   }
 
   logIn = (username) => {
@@ -32,6 +37,7 @@ export default class App extends Component {
 
   logOut = () => {
     this.setState({ loggedIn: false });
+    sessionStorage.clear();
   };
 
   render() {

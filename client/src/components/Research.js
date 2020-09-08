@@ -23,7 +23,7 @@ export default class Research extends Component {
     const iex_url = process.env.REACT_APP_iex_url;
     const iex_token = process.env.REACT_APP_iex_token;
     axios
-      .get(`${iex_url}${symbol}/news/last/1${iex_token}`)
+      .get(`${iex_url}${symbol}/news/last/6${iex_token}`)
       .then((response) => {
         this.setState({ news: response.data });
       });

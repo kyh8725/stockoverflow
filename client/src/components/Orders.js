@@ -70,7 +70,7 @@ export default class Account extends Component {
           //-------------------------------PROCESSING BUY STOCK ------------------------------
 
           if (
-            //response.data.isUSMarketOpen &&
+            response.data.isUSMarketOpen &&
             response.data.latestPrice <= orderF.price &&
             orderF.buy &&
             !orderF.sell
@@ -106,7 +106,7 @@ export default class Account extends Component {
               });
             //-------------------------------PROCESSING SELL STOCK ------------------------------
           } else if (
-            //response.data.isUSMarketOpen &&
+            response.data.isUSMarketOpen &&
             response.data.latestPrice >= orderF.price &&
             !orderF.buy &&
             orderF.sell
