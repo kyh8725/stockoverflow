@@ -1,5 +1,5 @@
 const express = require("express");
-const path = reqire("path");
+const path = require("path");
 const mysql = require("mysql");
 const knex = require("./knexfile");
 const app = express();
