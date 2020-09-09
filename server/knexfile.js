@@ -5,6 +5,10 @@ module.exports = {
     user: "root",
     password: "1234",
     database: "stockoverflow",
-    charset: "utf8"
-  }
+    charset: "utf8",
+  },
+  production: {
+    client: "mysql",
+    connection: process.env.JAWSDB_URL,
+  },
 };
