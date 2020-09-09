@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../../models/order");
+require("dotenv").config();
 const verify = require("./verifyToken");
 
 router.get("/:holder", (req, res) => {

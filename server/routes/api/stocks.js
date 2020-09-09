@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Stock = require("../../models/stock");
+require("dotenv").config();
 const verify = require("./verifyToken");
 
 router.get("/allStocks", (req, res) => {

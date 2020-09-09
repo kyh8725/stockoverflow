@@ -1,3 +1,4 @@
+require("dotenv").config();
 const knex =
   process.env.NODE_ENV === "production"
     ? require("knex")(require("./knexfile").production)

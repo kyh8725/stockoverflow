@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+require("dotenv").config();
 
 const stockRoute = require("./routes/api/stocks");
 app.use("/stocks", stockRoute);
