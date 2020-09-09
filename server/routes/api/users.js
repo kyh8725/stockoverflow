@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const verify = require("./verifyToken");
 require("dotenv").config();
 
 router.get("/", (req, res) => {

@@ -1,5 +1,5 @@
 {
-  "proxy": "https://stockover.herokuapp.com/",
+  "proxy": "https://stockover.herokuapp.com:5000",
   "name": "stockoverflow",
   "version": "0.1.0",
   "private": true,
