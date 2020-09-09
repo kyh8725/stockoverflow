@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "npm start --prefix client",
-    "start": "npm start --prefix server",
+    "start": "serve -s build",
     "server": "nodemon server --prefix server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "migrate": "knex migrate:latest --prefix server",
