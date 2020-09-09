@@ -8,7 +8,7 @@
     "start": "npm start --prefix server",
     "server": "nodemon server --prefix server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "migrate": "knex migrate:latest --prefix servert",
+    "migrate": "knex migrate:latest --prefix server",
     "migrate:down": "knex migrate:down --prefix server",
     "migrate:rollback": "knex migrate:rollback --prefix server",
     "seed": "knex seed:run --prefix server",
