@@ -2,8 +2,8 @@ const express = require("express");
 const path = require("path");
 const mysql = require("mysql");
 const knex = require("./knexfile");
-const app = express();
 const cors = require("cors");
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +36,10 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}.`);
+});
+
+connection.connect((err) => {
+  console.log("connected as id " + connection.threadId);
 });
 
 module.exports = connection;

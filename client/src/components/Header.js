@@ -5,7 +5,7 @@ export default class Header extends Component {
   state = {
     open: false,
     news: [],
-    stock: {}
+    stock: {},
   };
 
   render() {
@@ -18,7 +18,7 @@ export default class Header extends Component {
         {!this.props.loggedIn && (
           <div className="navbar navbar-expand-lg navbar-dark bg-dark">
             <Link to="/demo" className="navbar-brand">
-              demo
+              Demo
             </Link>
           </div>
         )}
