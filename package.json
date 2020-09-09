@@ -6,8 +6,12 @@
   "scripts": {
     "client": "npm start --prefix client",
     "start": "npm start --prefix server",
-    "server": "nodemon index --prefix server",
+    "server": "nodemon server --prefix server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "migrate": "knex migrate:lates --prefix servert",
+    "migrate:down": "knex migrate:down --prefix server",
+    "migrate:rollback": "knex migrate:rollback --prefix server",
+    "seed": "knex seed:run --prefix server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm install --prefix server && npm run build --prefix client"
   },
   "repository": {
