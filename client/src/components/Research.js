@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import StockCard from "./StockCard";
 import NewsCard from "./NewsCard";
 import axios from "axios";
+require("dotenv").config();
 
 export default class Research extends Component {
   state = {

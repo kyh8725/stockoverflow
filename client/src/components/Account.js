@@ -3,6 +3,7 @@ import Modal from "react-responsive-modal";
 import SellOrder from "./SellOrder";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+require("dotenv").config();
 
 class Account extends Component {
   state = {
