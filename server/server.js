@@ -34,6 +34,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}.`);
+});
+
 connection.connect((err) => {
   console.log("connected as id " + connection.threadId);
 });
