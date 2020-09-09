@@ -16,6 +16,8 @@ app.use("/users", userRoute);
 const orderRoute = require("./routes/api/orders");
 app.use("/orders", orderRoute);
 
+const PORT = process.env.PORT || 5000;
+
 let connection;
 // make connection
 if (process.env.JAWSDB_URL) {
