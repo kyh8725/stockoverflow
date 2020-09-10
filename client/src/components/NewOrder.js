@@ -64,12 +64,12 @@ export default class NewOrder extends Component {
           holder: this.state.user,
         })
         .then((response) => {});
+      window.alert(
+        `Order successfully placed. 
+           You can go to Orders to process your orders`
+      );
     }
     this.props.closeModal();
-    window.alert(
-      `Order successfully placed. 
-       You can go to Orders to process your orders`
-    );
   };
 
   getCashTemp = () => {
