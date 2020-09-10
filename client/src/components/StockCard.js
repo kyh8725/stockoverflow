@@ -9,7 +9,6 @@ export default class StockCard extends Component {
   state = {
     cash: 0,
     stock: {},
-    orders: [],
     open: false,
     labels: [],
     data: [],

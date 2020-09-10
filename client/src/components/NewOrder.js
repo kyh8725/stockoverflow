@@ -5,25 +5,23 @@ export default class NewOrder extends Component {
     price: 0,
     quantity: 0,
     cash: 0,
-    tempCash: 0,
     user: "",
     orders: [],
   };
 
   async componentDidMount() {
     await this.setState({ user: sessionStorage.getItem("user") });
-    await this.getOrders(this.state.user);
+    await axios.get(`/orders/${this.state.user}`).then((response) => {
+      const activeOrder = response.data.filter(
+        (order) => order.sell !== 0 || order.buy !== 0
+      );
+      this.setState({ orders: activeOrder });
+    });
     this.setState({
       cash: this.props.cash,
-      tempCash: this.getCashTemp(),
     });
   }
 
-  getOrders = (username) => {
-    axios.get(`/orders/${username}`).then((response) => {
-      this.setState({ orders: response.data });
-    });
-  };
   isMarketOpen = () => {
     if (this.props.stock.isUSMarketOpen) {
       return "Market is open";
@@ -48,11 +46,13 @@ export default class NewOrder extends Component {
 
   buyStock = (event) => {
     event.preventDefault();
-    if (
-      // --------- tempCash is cash balance - total amount of unsettled orders
-      this.state.tempCash <= this.state.price * this.state.quantity ||
-      this.state.tempCash === 0
-    ) {
+    let orderTotal = 0;
+    this.state.orders.forEach((order) => {
+      orderTotal += order.price * order.quantity;
+    });
+    let tempCash = this.props.cash - orderTotal;
+    // --------- tempCash is cash balance - total amount of unsettled orders
+    if (tempCash < this.state.price * this.state.quantity) {
       window.alert("not enough funds");
     } else {
       // -------------------- BUY ORDER -------------------------
@@ -70,14 +70,6 @@ export default class NewOrder extends Component {
       );
     }
     this.props.closeModal();
-  };
-
-  getCashTemp = () => {
-    let orderTotal = 0;
-    this.state.orders.forEach((order) => {
-      orderTotal += order.price * order.quantity;
-    });
-    return this.props.cash - orderTotal;
   };
 
   render() {
