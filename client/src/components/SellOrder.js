@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-require("dotenv").config();
 
 export default class SellOrder extends Component {
   state = {

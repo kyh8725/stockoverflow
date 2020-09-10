@@ -3,11 +3,11 @@ import Modal from "react-responsive-modal";
 import SellOrder from "./SellOrder";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-require("dotenv").config();
 
 class Account extends Component {
   state = {
     cash: 0,
+    orders: [],
     marketOpen: false,
     currentPrices: [],
     stocks: [],
@@ -35,6 +35,12 @@ class Account extends Component {
   async componentDidMount() {
     await this.setState({ user: sessionStorage.getItem("user") });
     await this.getStocksOwned(this.state.user);
+    await axios.get(`/orders/${this.state.user}`).then((response) => {
+      const activeOrder = response.data.filter(
+        (order) => order.sell !== 0 || order.buy !== 0
+      );
+      this.setState({ orders: activeOrder });
+    });
     this.getCash(this.state.user);
   }
 
@@ -148,12 +154,16 @@ class Account extends Component {
       }
       changeTotal += change;
     });
+    let orderTotal = 0;
+    this.state.orders.forEach((order) => {
+      orderTotal += order.price * order.quantity;
+    });
     return (
       <>
         <section className="account">
           <h2 className="account__holder">Account: {this.state.user}</h2>
           <h2 className="account__balance">
-            Cash: $ {this.state.cash.toFixed(2)}
+            Cash: $ {(this.state.cash - orderTotal).toFixed(2)}
           </h2>
           <h2 className="account__balance">
             Investment: $ {investment.toFixed(2)}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-require("dotenv").config();
 
 export default class Account extends Component {
   state = {
