@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { connect } from "react-redux";
+import { getOrders } from "../actions/getOrders";
 import axios from "axios";
 
-export default class Account extends Component {
+class Orders extends Component {
   state = {
     cash: 0,
     orders: [],
@@ -26,12 +28,7 @@ export default class Account extends Component {
 
   async componentDidMount() {
     await this.setState({ user: sessionStorage.getItem("user") });
-    await axios.get(`/orders/${this.state.user}`).then((response) => {
-      const activeOrder = response.data.filter(
-        (order) => order.sell !== 0 || order.buy !== 0
-      );
-      this.setState({ orders: activeOrder });
-    });
+    await this.props.getOrders();
     this.getCash(this.state.user);
   }
 
@@ -52,14 +49,12 @@ export default class Account extends Component {
 
   cancelHandler = (event) => {
     axios.put(`/orders/settle/${event.target.id}`).then((response) => {
-      axios.get(`/orders/${this.state.user}`).then((response) => {
-        this.setState({ orders: response.data });
-      });
+      this.props.getOrders();
     });
   };
 
   processOrders = () => {
-    this.state.orders.forEach((orderF) => {
+    this.props.orders.forEach((orderF) => {
       const iex_url = process.env.REACT_APP_iex_url;
       const iex_token = process.env.REACT_APP_iex_token;
       axios
@@ -89,19 +84,14 @@ export default class Account extends Component {
                 // set the status buy = false.
                 axios.put(`/orders/settle/${orderF.id}`).then((response) => {
                   // update the order db after buy stock compeletion
-                  axios.get(`/orders/${this.state.user}`).then((response) => {
-                    const activeOrder = response.data.filter(
-                      (orderF) => orderF.buy !== 0 || orderF.sell !== 0
-                    );
-                    this.setState({ orders: activeOrder });
-                    // update the cash balance of the user
-                    axios
-                      .put("/users/trade/sell", {
-                        username: this.state.user,
-                        cash: this.state.cash - orderF.quantity * currentPrice,
-                      })
-                      .then((response) => {});
-                  });
+                  this.props.getOrder();
+                  // update the cash balance of the user
+                  axios
+                    .put("/users/trade/sell", {
+                      username: this.state.user,
+                      cash: this.state.cash - orderF.quantity * currentPrice,
+                    })
+                    .then((response) => {});
                 });
               });
             //-------------------------------PROCESSING SELL STOCK ------------------------------
@@ -114,24 +104,19 @@ export default class Account extends Component {
             // settle order
             axios.put(`/orders/settle/${orderF.id}`).then((response) => {
               //get updated order from db
-              axios.get(`/orders/${this.state.user}`).then((response) => {
-                const activeOrder = response.data.filter(
-                  (orderF) => orderF.buy !== 0 || orderF.sell !== 0
-                );
-                this.setState({ orders: activeOrder });
-                // delete the stock sold from db
-                axios
-                  .delete(`/stocks/sell/${orderF.stockId}`)
-                  .then((response) => {
-                    // update cash balance
-                    axios
-                      .put(`/users/trade/sell`, {
-                        username: this.state.user,
-                        cash: this.state.cash + orderF.quantity * currentPrice,
-                      })
-                      .then((response) => {});
-                  });
-              });
+              this.props.getOrders();
+              // delete the stock sold from db
+              axios
+                .delete(`/stocks/sell/${orderF.stockId}`)
+                .then((response) => {
+                  // update cash balance
+                  axios
+                    .put(`/users/trade/sell`, {
+                      username: this.state.user,
+                      cash: this.state.cash + orderF.quantity * currentPrice,
+                    })
+                    .then((response) => {});
+                });
             });
           }
         });
@@ -140,7 +125,7 @@ export default class Account extends Component {
 
   renderOrders = () => {
     // eslint-disable-next-line
-    const order = this.state.orders.map((order) => {
+    const order = this.props.orders.map((order) => {
       let net = 0;
       if (order.buy === 1 || order.sell === 1) {
         net += order.price * order.quantity;
@@ -200,3 +185,7 @@ export default class Account extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  orders: state.orders.orders,
+});
+export default connect(mapStateToProps, { getOrders })(Orders);

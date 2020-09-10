@@ -4,6 +4,7 @@
   "description": "stock overflow server",
   "main": "server.js",
   "scripts": {
+    "client": "npm run client --prefix ../client",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",

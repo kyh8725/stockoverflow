@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getOrders } from "../actions/getOrders";
 import axios from "axios";
-export default class NewOrder extends Component {
+
+class NewOrder extends Component {
   state = {
     price: 0,
     quantity: 0,
@@ -11,12 +14,7 @@ export default class NewOrder extends Component {
 
   async componentDidMount() {
     await this.setState({ user: sessionStorage.getItem("user") });
-    await axios.get(`/orders/${this.state.user}`).then((response) => {
-      const activeOrder = response.data.filter(
-        (order) => order.sell !== 0 || order.buy !== 0
-      );
-      this.setState({ orders: activeOrder });
-    });
+    await this.props.getOrders();
     this.setState({
       cash: this.props.cash,
     });
@@ -47,7 +45,7 @@ export default class NewOrder extends Component {
   buyStock = (event) => {
     event.preventDefault();
     let orderTotal = 0;
-    this.state.orders.forEach((order) => {
+    this.props.orders.forEach((order) => {
       orderTotal += order.price * order.quantity;
     });
     let tempCash = this.props.cash - orderTotal;
@@ -116,3 +114,7 @@ export default class NewOrder extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  orders: state.orders.orders,
+});
+export default connect(mapStateToProps, { getOrders })(NewOrder);

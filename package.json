@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/kyh8725/stockoverflow/issues"
   },
-  "homepage": "https://github.com/kyh8725/stockoverflow#readme"
+  "homepage": "https://github.com/kyh8725/stockoverflow#readme",
+  "dependencies": {
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
+  }
 }

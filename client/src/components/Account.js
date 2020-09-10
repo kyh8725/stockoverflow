@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Modal from "react-responsive-modal";
 import SellOrder from "./SellOrder";
 import { v4 as uuidv4 } from "uuid";
+import { connect } from "react-redux";
+import { getOrders } from "../actions/getOrders";
 import axios from "axios";
 
 class Account extends Component {
@@ -35,12 +37,7 @@ class Account extends Component {
   async componentDidMount() {
     await this.setState({ user: sessionStorage.getItem("user") });
     await this.getStocksOwned(this.state.user);
-    await axios.get(`/orders/${this.state.user}`).then((response) => {
-      const activeOrder = response.data.filter(
-        (order) => order.sell !== 0 || order.buy !== 0
-      );
-      this.setState({ orders: activeOrder });
-    });
+    await this.props.getOrders();
     this.getCash(this.state.user);
   }
 
@@ -155,7 +152,7 @@ class Account extends Component {
       changeTotal += change;
     });
     let orderTotal = 0;
-    this.state.orders.forEach((order) => {
+    this.props.orders.forEach((order) => {
       orderTotal += order.price * order.quantity;
     });
     return (
@@ -211,4 +208,8 @@ class Account extends Component {
     );
   }
 }
-export default Account;
+
+const mapStateToProps = (state) => ({
+  orders: state.orders.orders,
+});
+export default connect(mapStateToProps, { getOrders })(Account);
