@@ -66,6 +66,10 @@ export default class NewOrder extends Component {
         .then((response) => {});
     }
     this.props.closeModal();
+    window.alert(
+      `Order successfully placed. 
+       You can go to Orders to process your orders`
+    );
   };
 
   getCashTemp = () => {

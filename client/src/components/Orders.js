@@ -193,7 +193,7 @@ export default class Account extends Component {
               onClick={this.processOrders}
               className="btn btn-outline-success"
             >
-              Process Order
+              Process Orders
             </button>
           </div>
         </section>

@@ -35,36 +35,41 @@ export default class Landing extends Component {
                 market. All stocks in NYSE and NASDAQ are available for trading.
                 <br />
                 <br />
-                Tech used: HTML5, CSS3, SASS, React.js, Node.js, Express.js,
-                Bootstrap, MySQL, Knex, Bookshelf.
+                After signing up, you can check your balance and holding in
+                Account, you can also make sell order by clicking on Sell
+                button. You can search for stocks (by symbols) in Research, and
+                place buy order by clicking on BUY button. After making buy/sell
+                orders, you can process the order in Orders by clicking on
+                Process Orders button.
               </article>
             </div>
           )}
           {this.props.loggedIn && (
             <div className="landing__content">
               <div className="landing__header">
-                Welcome {localStorage.getItem("userLogin")}
+                Welcome {sessionStorage.getItem("user")}
               </div>
               <article className="landing__text">
                 Comments
                 <br />
-                <br /> Orders are processed only when the market is open. For
-                testing purposes, the condition is commented out for now in
-                Orders.js -processOrders function. If the price is right orders
-                will get processed.
+                <br />
+                This app was built in 3 weeks initially for the final project
+                for BrainStation Web development program 2020.
                 <br />
                 <br />
-                Overall, It was a great project to practice everything I learned
-                in the past 3 months from HTML to MYSQL.
+                Due to Covid-19, it was built at home with minimal help of the
+                educators.
                 <br />
                 <br />
-                <a
-                  href="https://ncov2019.live/data"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  CHECK GLOBAL COVID-19 STATUS
-                </a>
+                Tech used: HTML5, CSS3, SASS, React.js, Node.js, Express.js,
+                JWT, Bootstrap, MySQL, Knex, Bookshelf.
+                <br />
+                <br />
+                Deployed on Heroku using JAWSDB.
+                <br />
+                <br />
+                It was a great project to practice everything I learned in the
+                past 3 months from HTML to MYSQL.
               </article>
             </div>
           )}
@@ -91,12 +96,12 @@ export default class Landing extends Component {
               <>
                 <Link to="/account">
                   <button className="btn btn-secondary btn-lg" id="accountBtn">
-                    Go to your Account
+                    Account
                   </button>
                 </Link>
                 <Link to="/orders">
                   <button className="btn btn-secondary btn-lg" id="orderBtn">
-                    Check Orders
+                    Orders
                   </button>
                 </Link>
               </>
