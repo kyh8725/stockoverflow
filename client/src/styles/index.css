@@ -1,12 +1,26 @@
 /* media query for tablet */
 /* media query for high pixel density desktops */
 .navbar {
-  min-height: 5rem;
+  min-height: 3rem;
   font-size: 1rem;
 }
 
+.navbar .navbar-nav > li > a {
+  color: white;
+  margin-left: 1rem;
+}
+
+.navbar .navbar-nav > li > a:hover {
+  text-decoration: none;
+  color: rgba(255, 166, 0, 0.89) !important;
+}
+
+.navbar .navbar-nav .active {
+  color: rgba(255, 166, 0, 0.89) !important;
+}
+
 .navbar-brand {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .dropdown-menu {
@@ -15,11 +29,6 @@
 
 .dropdown-menu *:hover {
   width: 99%;
-}
-
-.nav-link:hover,
-.nav-link:focus {
-  color: rgba(255, 166, 0, 0.89) !important;
 }
 
 @media only screen and (min-width: 993px) {
@@ -34,8 +43,13 @@
   }
 }
 
+#root {
+  position: relative;
+  min-height: 100vh;
+}
+
 .footer {
-  height: 5rem;
+  height: 3rem;
   background-color: #343a40;
   color: white;
   padding: 1rem;
@@ -45,6 +59,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 @media only screen and (min-width: 993px) {
@@ -196,6 +213,7 @@
 .account {
   margin: 2rem 1rem;
   padding: 2rem 1rem;
+  padding-bottom: 3rem;
   border-radius: 1rem;
   border: 1px solid silver;
   -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
@@ -422,15 +440,14 @@
 
 @media only screen and (min-width: 1440px) {
   #nav-searchInput {
-    font-size: 2rem;
     width: 50vw;
-    height: 5rem;
+    height: 3rem;
   }
   #nav-searchButton {
     -webkit-box-flex: 0.3;
         -ms-flex: 0.3;
             flex: 0.3;
-    height: 5rem;
+    height: 3rem;
     padding: 0 3rem;
     font-size: 1.3rem;
   }
@@ -508,7 +525,14 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 1.3rem;
+}
+
+.scard__priceChange {
+  margin-right: 1rem;
 }
 
 .scard__priceChange-value {
@@ -526,6 +550,10 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.scard__highlow-title *, .scard__highlow-value * {
+  margin: 0;
 }
 
 .scard__52Wk {
@@ -628,11 +656,11 @@
   .scard__chart {
     height: 20rem;
   }
-  .scard__highlow-title {
+  .scard__highlow-title, .scard__highlow-value {
     font-size: 1.5rem;
   }
   .scard__52Wk {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .scard__52Wk-barwrap {
     height: 1rem;
@@ -673,11 +701,14 @@
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  padding-bottom: 3rem;
 }
 
 .card {
+  height: 90%;
   max-width: 20rem;
   margin: 1rem 1.5rem;
+  padding: 0.3rem;
   -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
           box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
 }

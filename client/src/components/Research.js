@@ -91,7 +91,7 @@ export default class Research extends Component {
               <input
                 className="form-control mr-sm-2"
                 type="search"
-                placeholder="Search"
+                placeholder="Type in stock symbol"
                 aria-label="Search"
                 id="nav-searchInput"
                 name="stockSearch"

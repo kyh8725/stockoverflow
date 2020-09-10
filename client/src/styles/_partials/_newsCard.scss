@@ -2,10 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding-bottom: 3rem;
 }
 .card {
+  height: 90%;
   max-width: 20rem;
   margin: 1rem 1.5rem;
+  padding: 0.3rem;
   box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
 }
 .card-img-top {
@@ -14,7 +17,7 @@
 .card-title {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:2;
+  -webkit-line-clamp: 2;
   overflow: hidden;
 }
 .card-text {

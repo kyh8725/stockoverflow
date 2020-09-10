@@ -141,7 +141,7 @@ export default class StockCard extends Component {
             </div>
             <div className="scard__prices">
               <div className="scard__pricewrap">
-                <p>Price:$ &nbsp;&nbsp;</p>
+                <p>Price: $</p>
                 <p
                   className="scard__priceCurrent"
                   style={{ color: this.colorChange() }}

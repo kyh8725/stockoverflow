@@ -1,19 +1,28 @@
 .navbar {
-  min-height: 5rem;
+  min-height: 3rem;
   font-size: 1rem;
 }
+
+.navbar .navbar-nav > li > a {
+  color: white;
+  margin-left: 1rem;
+}
+.navbar .navbar-nav > li > a:hover {
+  text-decoration: none;
+  color: rgba(255, 166, 0, 0.89) !important;
+}
+.navbar .navbar-nav .active {
+  color: rgba(255, 166, 0, 0.89) !important;
+}
+
 .navbar-brand {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 .dropdown-menu {
   font-size: 1.5rem;
   *:hover {
     width: 99%;
   }
-}
-.nav-link:hover,
-.nav-link:focus {
-  color: rgba(255, 166, 0, 0.89) !important;
 }
 
 @include tablet {

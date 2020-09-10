@@ -184,14 +184,6 @@ class Account extends Component {
               Change: $ {changeTotal.toFixed(2)}
             </h4>
           </div>
-          <div className="account__updateAccount">
-            <button
-              onClick={this.updateAccount}
-              className="btn btn-outline-success"
-            >
-              Update Account
-            </button>
-          </div>
         </section>
         {this.state.id !== "" && this.state.symbol !== "" && (
           <Modal open={open} onClose={this.onCloseModal}>

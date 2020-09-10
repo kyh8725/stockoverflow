@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default class Header extends Component {
   state = {
@@ -11,15 +11,19 @@ export default class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link to="/" className="navbar-brand">
+        <NavLink to="/" className="navbar-brand">
           StockOverflow
-        </Link>
+        </NavLink>
 
         {!this.props.loggedIn && (
           <div className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link to="/demo" className="navbar-brand">
+            <NavLink
+              to="/demo"
+              className="navbar-brand"
+              activeClassName="active"
+            >
               Demo
-            </Link>
+            </NavLink>
           </div>
         )}
         {this.props.loggedIn && (
@@ -40,24 +44,24 @@ export default class Header extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
-                  <Link className="nav-link" to="/account">
-                    Account<span className="sr-only">(current)</span>
-                  </Link>
+                <li>
+                  <NavLink to="/account" activeClassName="active">
+                    Account
+                  </NavLink>
                 </li>
-                <li className="nav-item active">
-                  <Link className="nav-link" to="/orders">
+                <li>
+                  <NavLink to="/orders" activeClassName="active">
                     Orders
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="nav-item active">
-                  <Link className="nav-link" to="/stocks">
+                <li>
+                  <NavLink to="/stocks" activeClassName="active">
                     Research
-                  </Link>
+                  </NavLink>
                 </li>
 
-                <li className="nav-item active">
-                  <Link className="nav-link" to="/" onClick={this.props.logOut}>
+                <li>
+                  <Link to="/" onClick={this.props.logOut}>
                     {this.props.loggedIn && "Logout"}
                   </Link>
                 </li>
