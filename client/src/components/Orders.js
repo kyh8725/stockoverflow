@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { getOrders } from "../actions/getOrders";
+import { getOrders, getCash } from "../actions/getOrders";
+import PropTypes from "prop-types";
 import axios from "axios";
 
 class Orders extends Component {
@@ -29,7 +30,7 @@ class Orders extends Component {
   async componentDidMount() {
     await this.setState({ user: sessionStorage.getItem("user") });
     await this.props.getOrders();
-    this.getCash(this.state.user);
+    await this.props.getCash();
   }
 
   getDate = (time) => {
@@ -142,7 +143,7 @@ class Orders extends Component {
             <h3 className="account__single-status">
               {order.buy ? "Buy" : "Sell"}
             </h3>
-            <h3 className="account__single-net">${net}</h3>
+            <h3 className="account__single-net">${net.toFixed(2)}</h3>
             <button
               className="btn btn-danger"
               id={order.id}
@@ -185,7 +186,26 @@ class Orders extends Component {
     );
   }
 }
+
+Orders.propTypes = {
+  getOrders: PropTypes.func.isRequired,
+  getStocks: PropTypes.func.isRequired,
+  getCash: PropTypes.func.isRequired,
+  orders: PropTypes.array.isRequired,
+  stocks: PropTypes.array.isRequired,
+  cash: PropTypes.number.isRequired,
+};
+
+Orders.propTypes = {
+  getOrders: PropTypes.func.isRequired,
+  getCash: PropTypes.func.isRequired,
+  orders: PropTypes.array.isRequired,
+  cash: PropTypes.number.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   orders: state.orders.orders,
+  cash: state.cash.cash,
 });
-export default connect(mapStateToProps, { getOrders })(Orders);
+
+export default connect(mapStateToProps, { getOrders, getCash })(Orders);

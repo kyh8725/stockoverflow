@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 export default function SignUp(props) {
+  console.log(props);
   const signUpHandler = (event) => {
     const username = event.target.username.value;
     const password = event.target.password.value;
@@ -10,6 +11,7 @@ export default function SignUp(props) {
       if (props.users.includes(username)) {
         window.alert("username already exists");
       } else {
+        sessionStorage.setItem("user", username);
         axios
           .post("/users/new", {
             username: username,

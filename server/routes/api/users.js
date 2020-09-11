@@ -77,7 +77,7 @@ router.delete("/delete/:username", async (req, res) => {
   await User.where({ username: req.params.username })
     .destroy()
     .then(() => {
-      res.status(200).json(req.body.username);
+      res.status(200).json(`${req.params.username} deleted`);
     });
 });
 

@@ -7,19 +7,19 @@ import Account from "./components/Account";
 import Research from "./components/Research";
 import Demo from "./components/Demo";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import axios from "axios";
+import { connect } from "react-redux";
+import { getUsers } from "./actions/getOrders";
+import PropTypes from "prop-types";
 
-export default class App extends Component {
+class App extends Component {
   state = {
     user: "",
     loggedIn: false,
-    users: [],
   };
 
-  componentDidMount() {
-    axios.get("/users").then((response) => {
-      this.setState({ users: response.data.map((user) => user.username) });
-    });
+  async componentDidMount() {
+    await this.props.getUsers();
+
     if (
       sessionStorage.getItem("user") !== null &&
       sessionStorage.getItem("user").length !== 0
@@ -54,7 +54,7 @@ export default class App extends Component {
                   <>
                     <Landing
                       logIn={this.logIn}
-                      users={this.state.users}
+                      users={this.props.users}
                       loggedIn={this.state.loggedIn}
                     />
                   </>
@@ -99,3 +99,14 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  getUsers: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  users: state.users.users,
+});
+
+export default connect(mapStateToProps, { getUsers })(App);

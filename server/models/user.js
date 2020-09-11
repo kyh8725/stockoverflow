@@ -7,7 +7,7 @@ const User = bookshelf.model("User", {
   },
   orders: () => {
     return this.hasMany("order");
-  }
+  },
 });
 
 module.exports = User;

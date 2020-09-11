@@ -3,12 +3,19 @@ import Modal from "react-responsive-modal";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getUsers } from "../actions/getOrders";
+import PropTypes from "prop-types";
 
-export default class Landing extends Component {
+class Landing extends Component {
   state = {
     open: false,
     openS: false,
   };
+
+  async componentDidMount() {
+    await this.props.getUsers();
+  }
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -110,17 +117,17 @@ export default class Landing extends Component {
         </main>
         <Modal open={open} onClose={this.onCloseModal}>
           <LogIn
+            users={this.props.users}
             closeModal={this.onCloseModal}
             logIn={this.props.logIn}
-            users={this.props.users}
             loggedIn={this.props.loggedIn}
           />
         </Modal>
         <Modal open={openS} onClose={this.onCloseModal}>
           <SignUp
+            users={this.props.users}
             closeModal={this.onCloseModal}
             logIn={this.props.logIn}
-            users={this.props.users}
             loggedIn={this.props.loggedIn}
           />
         </Modal>
@@ -128,3 +135,14 @@ export default class Landing extends Component {
     );
   }
 }
+
+Landing.propTypes = {
+  getUsers: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  users: state.users.users,
+});
+
+export default connect(mapStateToProps, { getUsers })(Landing);

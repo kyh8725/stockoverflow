@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Stock = require("../../models/stock");
-const verify = require("./verifyToken");
 
 router.get("/allStocks", (req, res) => {
   Stock.fetchAll().then((stock) => {

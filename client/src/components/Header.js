@@ -3,9 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 
 export default class Header extends Component {
   state = {
-    open: false,
-    news: [],
-    stock: {},
+    users: [],
   };
 
   render() {

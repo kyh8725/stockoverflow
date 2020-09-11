@@ -3,4 +3,7 @@ import orderReducer from "./orderReducer";
 
 export default combineReducers({
   orders: orderReducer,
+  stocks: orderReducer,
+  cash: orderReducer,
+  users: orderReducer,
 });
