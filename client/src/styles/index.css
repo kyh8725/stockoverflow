@@ -59,8 +59,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }
 
@@ -670,11 +668,27 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   max-width: 50rem;
+  height: 100%;
+  padding-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+.news__card-wrapper {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .card {
+  border-radius: 0;
   max-width: 15rem;
   padding: 0.3rem;
+  margin: 0.3rem;
 }
 
 .card-img-top {
@@ -694,6 +708,12 @@
   -webkit-line-clamp: 4;
   overflow: hidden;
   color: grey;
+}
+
+@media only screen and (min-width: 993px) {
+  .news {
+    margin-top: 0;
+  }
 }
 
 .trade__title {

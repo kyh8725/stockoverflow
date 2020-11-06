@@ -4,10 +4,20 @@
   align-items: flex-start;
   flex-wrap: wrap;
   max-width: 50rem;
+  height: 100%;
+  padding-bottom: 3rem;
+  margin-top: 1rem;
+  &__card-wrapper {
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 }
 .card {
+  border-radius: 0;
   max-width: 15rem;
   padding: 0.3rem;
+  margin: 0.3rem;
 }
 .card-img-top {
   height: 10rem;
@@ -24,4 +34,9 @@
   -webkit-line-clamp: 4;
   overflow: hidden;
   color: grey;
+}
+@include tablet {
+  .news {
+    margin-top: 0;
+  }
 }
