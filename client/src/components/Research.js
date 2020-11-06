@@ -106,21 +106,23 @@ export default class Research extends Component {
             </form>
           </div>
         </div>
-        {Object.keys(this.state.stock).length !== 0 &&
-          this.state.news.length !== 0 &&
-          this.state.data.length !== 0 &&
-          this.state.labels.length !== 0 && (
-            <>
-              <StockCard
-                symbol={this.state.symbol}
-                data={this.state.data}
-                labels={this.state.labels}
-                cash={this.state.cash}
-                stock={this.state.stock}
-              />
-              <NewsCard news={this.state.news} />
-            </>
-          )}
+        <div className="research__stock-news">
+          {Object.keys(this.state.stock).length !== 0 &&
+            this.state.news.length !== 0 &&
+            this.state.data.length !== 0 &&
+            this.state.labels.length !== 0 && (
+              <>
+                <StockCard
+                  symbol={this.state.symbol}
+                  data={this.state.data}
+                  labels={this.state.labels}
+                  cash={this.state.cash}
+                  stock={this.state.stock}
+                />
+                <NewsCard news={this.state.news} />
+              </>
+            )}
+        </div>
       </>
     );
   }

@@ -161,27 +161,29 @@ class Orders extends Component {
   render() {
     return (
       <>
-        <section className="account">
-          <h2>Orders</h2>
-          <div className="account__title">
-            <h3 className="account__date">Order Date</h3>
-            <h3 className="account__stock"> Stock </h3>
-            <h3 className="account__price"> Price </h3>
-            <h3 className="account__quantity"> Qty </h3>
-            <h3 className="account__status">B/S</h3>
-            <h3 className="account__net"> Net</h3>
-            <h3 className="account__buttonPlace">{}</h3>
+        <div className="account__wrapper">
+          <div className="account">
+            <h2>Orders</h2>
+            <div className="account__title">
+              <h3 className="account__date">Order Date</h3>
+              <h3 className="account__stock"> Stock </h3>
+              <h3 className="account__price"> Price </h3>
+              <h3 className="account__quantity"> Qty </h3>
+              <h3 className="account__status">B/S</h3>
+              <h3 className="account__net"> Net</h3>
+              <h3 className="account__buttonPlace">{}</h3>
+            </div>
+            <div className="account__financialInfo">{this.renderOrders()}</div>
+            <div className="account__processbtn">
+              <button
+                onClick={this.processOrders}
+                className="btn btn-outline-success"
+              >
+                Process Orders
+              </button>
+            </div>
           </div>
-          <div className="account__financialInfo">{this.renderOrders()}</div>
-          <div className="account__processbtn">
-            <button
-              onClick={this.processOrders}
-              className="btn btn-outline-success"
-            >
-              Process Orders
-            </button>
-          </div>
-        </section>
+        </div>
       </>
     );
   }

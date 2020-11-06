@@ -214,22 +214,31 @@
 }
 
 .account {
-  margin: 2rem 1rem;
-  padding: 2rem 1rem;
-  padding-bottom: 3rem;
-  border-radius: 1rem;
+  margin: 1rem 1rem;
+  padding: 1rem 1rem;
+  padding-bottom: 1.5rem;
   border: 1px solid silver;
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
-          box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+  width: 100%;
+  max-width: 60rem;
+}
+
+.account__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
 }
 
 .account__holder {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .account__balance {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
 .account__title {
@@ -346,10 +355,7 @@
           justify-content: flex-end;
 }
 
-@media only screen and (min-width: 993px) {
-  .account {
-    margin: 2rem 8rem;
-  }
+@media only screen and (min-width: 700px) {
   .account__holder {
     font-size: 2.5rem;
   }
@@ -402,18 +408,6 @@
   }
 }
 
-@media only screen and (min-width: 1440px) {
-  .account {
-    margin: 2rem 11rem;
-  }
-  .account__single-date, .account__single-cost, .account__single-gainLose, .account__single-status, .account__single-stock, .account__single-price, .account__single-quantity, .account__single-net {
-    font-size: 1rem;
-  }
-  .account__date, .account__cost, .account__gainLose, .account__status, .account__stock, .account__price, .account__quantity, .account__net {
-    font-size: 1.5rem;
-  }
-}
-
 .research__form-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -424,7 +418,24 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   margin: 1rem 0;
+}
+
+.research__stock-news {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 #nav-searchInput {
@@ -457,12 +468,10 @@
 }
 
 .scard {
-  margin: 1.5rem;
   padding: 1rem;
   border: 1px solid #cccbcb;
-  border-radius: 0.2rem;
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
-          box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+  width: 80%;
+  max-width: 35rem;
 }
 
 .scard__top {
@@ -648,72 +657,24 @@
   height: 15rem;
 }
 
-@media only screen and (min-width: 993px) {
-  .scard {
-    padding: 5rem;
-    margin: 2rem 8rem;
-  }
-  .scard__priceChange-value {
-    font-size: 1.3rem;
-  }
-  .scard__chart {
-    height: 20rem;
-  }
-  .scard__highlow-title, .scard__highlow-value {
-    font-size: 1.5rem;
-  }
-  .scard__52Wk {
-    font-size: 1rem;
-  }
-  .scard__52Wk-barwrap {
-    height: 1rem;
-  }
-  .scard__marketOpen {
-    font-size: 2rem;
-  }
-  .scard__pricewrap {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-    font-size: 2rem;
-  }
-  .scard__priceChange-value {
-    margin-left: 1rem;
-    font-size: 2rem;
-  }
-  .scard__priceCurrent span {
-    margin-left: 2rem;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .scard {
-    margin: 2rem 18rem;
-  }
-}
-
 .news {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  padding-bottom: 3rem;
+  max-width: 50rem;
 }
 
 .card {
-  height: 90%;
-  max-width: 20rem;
-  margin: 1rem 1.5rem;
+  max-width: 15rem;
   padding: 0.3rem;
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
-          box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
 }
 
 .card-img-top {
@@ -732,18 +693,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
-}
-
-@media only screen and (min-width: 993px) {
-  .news {
-    margin: 0 8rem;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .news {
-    margin: 0 12rem;
-  }
+  color: grey;
 }
 
 .trade__title {

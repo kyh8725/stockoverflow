@@ -7,12 +7,10 @@
 }
 
 .scard {
-  margin: 1.5rem;
   padding: 1rem;
   border: 1px solid #cccbcb;
-  border-radius: 0.2rem;
-  box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
-
+  width: 80%;
+  max-width: 35rem;
   &__top {
     display: flex;
     flex-wrap: wrap;
@@ -118,55 +116,5 @@
     justify-content: center;
     width: 100%;
     height: 15rem;
-  }
-}
-
-@include tablet {
-  .scard {
-    padding: 5rem;
-    margin: 2rem 8rem;
-    &__priceChange {
-      &-value {
-        font-size: 1.3rem;
-      }
-    }
-    &__chart {
-      height: 20rem;
-    }
-    &__highlow-title,
-    &__highlow-value {
-      font-size: 1.5rem;
-    }
-    &__52Wk {
-      font-size: 1rem;
-      &-barwrap {
-        height: 1rem;
-      }
-    }
-    &__marketOpen {
-      font-size: 2rem;
-    }
-    &__pricewrap {
-      display: flex;
-      justify-content: flex-end;
-      font-size: 2rem;
-    }
-    &__priceChange {
-      &-value {
-        margin-left: 1rem;
-        font-size: 2rem;
-      }
-    }
-    &__priceCurrent {
-      span {
-        margin-left: 2rem;
-      }
-    }
-  }
-}
-
-@include desk {
-  .scard {
-    margin: 2rem 18rem;
   }
 }

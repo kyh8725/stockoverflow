@@ -145,41 +145,44 @@ class Account extends Component {
     });
     return (
       <>
-        <section className="account">
-          <h2 className="account__holder">Account: {this.state.user}</h2>
-          <h2 className="account__balance">
-            Cash: $ {(this.props.cash - orderTotal).toFixed(2)}
-          </h2>
-          <h2 className="account__balance">
-            Investment: $ {investment.toFixed(2)}
-          </h2>
-          <h2 className="account__balance">
-            Balance: $ {(this.props.cash + investment).toFixed(2)}
-          </h2>
-          <div className="account__title">
-            <h3 className="account__date">Trade Date</h3>
-            <h3 className="account__stock"> Stock </h3>
-            <h3 className="account__price"> Price </h3>
-            <h3 className="account__cost"> Cost </h3>
-            <h3 className="account__quantity"> Qty </h3>
-            <h3 className="account__net"> Net</h3>
-            <h3 className="account__gainLose"> Gain/Lose</h3>
-            <h3 className="account__sellbtn">{}</h3>
+        <div className="account__wrapper">
+          <div className="account">
+            <h2 className="account__holder">Account: {this.state.user}</h2>
+            <h2 className="account__balance">
+              Cash: $ {(this.props.cash - orderTotal).toFixed(2)}
+            </h2>
+            <h2 className="account__balance">
+              Investment: $ {investment.toFixed(2)}
+            </h2>
+            <h2 className="account__balance">
+              Balance: $ {(this.props.cash + investment).toFixed(2)}
+            </h2>
+            <div className="account__title">
+              <h3 className="account__date">Trade Date</h3>
+              <h3 className="account__stock"> Stock </h3>
+              <h3 className="account__price"> Price </h3>
+              <h3 className="account__cost"> Cost </h3>
+              <h3 className="account__quantity"> Qty </h3>
+              <h3 className="account__net"> Net</h3>
+              <h3 className="account__gainLose"> Gain/Lose</h3>
+              <h3 className="account__sellbtn">{}</h3>
+            </div>
+            <div className="account__financialInfo">
+              {this.props.stocks.map((stock) => {
+                return this.renderStocks(stock);
+              })}
+            </div>
+            <div className="account__total">
+              <h4
+                className="acccount__total-change"
+                style={changeTotal < 0 ? { color: "red" } : { color: "green" }}
+              >
+                Change: $ {changeTotal.toFixed(2)}
+              </h4>
+            </div>
           </div>
-          <div className="account__financialInfo">
-            {this.props.stocks.map((stock) => {
-              return this.renderStocks(stock);
-            })}
-          </div>
-          <div className="account__total">
-            <h4
-              className="acccount__total-change"
-              style={changeTotal < 0 ? { color: "red" } : { color: "green" }}
-            >
-              Change: $ {changeTotal.toFixed(2)}
-            </h4>
-          </div>
-        </section>
+        </div>
+
         {this.state.id !== "" && this.state.symbol !== "" && (
           <Modal open={open} onClose={this.onCloseModal}>
             <SellOrder

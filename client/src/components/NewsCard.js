@@ -2,7 +2,7 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function NewsCard(props) {
-  const renderNews = props.news.map(news => {
+  const renderNews = props.news.map((news) => {
     return (
       <a
         href={news.url}

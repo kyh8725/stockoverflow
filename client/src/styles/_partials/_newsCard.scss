@@ -1,15 +1,13 @@
 .news {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding-bottom: 3rem;
+  max-width: 50rem;
 }
 .card {
-  height: 90%;
-  max-width: 20rem;
-  margin: 1rem 1.5rem;
+  max-width: 15rem;
   padding: 0.3rem;
-  box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
 }
 .card-img-top {
   height: 10rem;
@@ -25,16 +23,5 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
-}
-
-@include tablet {
-  .news {
-    margin: 0 8rem;
-  }
-}
-
-@include desk {
-  .news {
-    margin: 0 12rem;
-  }
+  color: grey;
 }

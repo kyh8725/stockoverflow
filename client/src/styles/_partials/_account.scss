@@ -1,16 +1,23 @@
 .account {
-  margin: 2rem 1rem;
-  padding: 2rem 1rem;
-  padding-bottom: 3rem;
-  border-radius: 1rem;
+  margin: 1rem 1rem;
+  padding: 1rem 1rem;
+  padding-bottom: 1.5rem;
   border: 1px solid silver;
-  box-shadow: 0.1rem 0.1rem 0.1rem #cccbcb;
+  width: 100%;
+  max-width: 60rem;
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
   &__holder {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   &__balance {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
   }
   &__title {
     display: flex;
@@ -94,9 +101,8 @@
   }
 }
 
-@include tablet {
+@media only screen and (min-width: 700px) {
   .account {
-    margin: 2rem 8rem;
     &__holder {
       font-size: 2.5rem;
     }
@@ -148,34 +154,6 @@
     }
     .btn-danger {
       display: initial;
-    }
-  }
-}
-@include desk {
-  .account {
-    margin: 2rem 11rem;
-    &__single {
-      &-date,
-      &-cost,
-      &-gainLose,
-      &-status,
-      &-stock,
-      &-price,
-      &-quantity,
-      &-net {
-        font-size: 1rem;
-      }
-    }
-
-    &__date,
-    &__cost,
-    &__gainLose,
-    &__status,
-    &__stock,
-    &__price,
-    &__quantity,
-    &__net {
-      font-size: 1.5rem;
     }
   }
 }

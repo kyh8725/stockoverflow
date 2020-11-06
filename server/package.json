@@ -8,13 +8,7 @@
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "knex migrate:latest",
-    "migrate:down": "knex migrate:down",
-    "migrate:rollback": "knex migrate:rollback",
-    "seed": "knex seed:run",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm install --prefix server && npm run build --prefix client"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Daniel Kim",
   "license": "ISC",

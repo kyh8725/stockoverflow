@@ -114,7 +114,7 @@ export default class StockCard extends Component {
     const { open } = this.state;
     return (
       <>
-        <section className="scard">
+        <div className="scard">
           <div className="scard__top">
             <div className="scard__top-stock">
               <h3 className="scard__top-name">
@@ -202,7 +202,7 @@ export default class StockCard extends Component {
               BUY
             </button>
           </div>
-        </section>
+        </div>
         <Modal open={open} onClose={this.onCloseModal}>
           <NewOrder
             cash={this.props.cash}
