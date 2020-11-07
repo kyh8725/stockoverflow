@@ -41,13 +41,6 @@ class Landing extends Component {
                 provide near real-time stock quotes to simulate real-world stock
                 market. All stocks in NYSE and NASDAQ are available for trading.
                 <br />
-                <br />
-                After signing up, you can check your balance and holding in
-                Account, you can also make sell order by clicking on Sell
-                button. You can search for stocks (by symbols) in Research, and
-                place buy order by clicking on BUY button. After making buy/sell
-                orders, you can process the order in Orders by clicking on
-                Process Orders button.
               </article>
             </div>
           )}
