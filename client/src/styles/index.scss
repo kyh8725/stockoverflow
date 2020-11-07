@@ -9,3 +9,8 @@
 @import "./_partials/newOrder";
 @import "./_partials/login";
 @import "./_partials/demo";
+
+#root {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}

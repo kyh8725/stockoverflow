@@ -855,4 +855,9 @@
     margin: 4rem 12rem;
   }
 }
+
+#root {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
 /*# sourceMappingURL=index.css.map */
