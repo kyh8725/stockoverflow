@@ -11,6 +11,7 @@
 @import "./_partials/demo";
 
 #root {
+  position: relative;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 }

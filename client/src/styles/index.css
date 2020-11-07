@@ -43,22 +43,12 @@
   }
 }
 
-#root {
-  position: relative;
-  min-height: 100vh;
-}
-
 .footer {
+  position: relative;
   height: 3rem;
   background-color: #343a40;
   color: white;
   padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   width: 100%;
 }
 
@@ -82,13 +72,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  position: fixed;
-  left: 0;
+  position: relative;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 80vh;
   padding: 4rem 1rem;
   background-image: url("/stockbg2.jpg");
   background-repeat: no-repeat;
@@ -104,7 +90,7 @@
 
 .landing__header {
   padding: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: white;
 }
 
@@ -145,12 +131,13 @@
     padding: 5rem 8rem;
   }
   .landing__header {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
   .landing__text {
     font-size: 1rem;
   }
   .landing__content {
+    max-height: 20vw;
     padding: 2rem;
   }
   .landing__btnWrap * {
@@ -160,8 +147,7 @@
   .landing #loginbtn,
   .landing #accountBtn,
   .landing #orderBtn {
-    width: 40vw;
-    height: 4rem;
+    width: 20vw;
     margin: 0.5rem;
   }
 }
@@ -172,14 +158,13 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    padding: 5rem 12rem;
+    padding: 5rem 20rem;
   }
   .landing__content {
     padding-bottom: 0;
-    -webkit-box-flex: 0.6;
-        -ms-flex: 0.6;
-            flex: 0.6;
-    height: 70vh;
+    -webkit-box-flex: 0.8;
+        -ms-flex: 0.8;
+            flex: 0.8;
   }
   .landing__btnWrap {
     display: -webkit-box;
@@ -192,22 +177,16 @@
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
-    padding-bottom: 10rem;
-    -webkit-box-flex: 0.4;
-        -ms-flex: 0.4;
-            flex: 0.4;
-  }
-  .landing__btnWrap * {
-    font-size: 2rem;
+    -webkit-box-flex: 0.2;
+        -ms-flex: 0.2;
+            flex: 0.2;
   }
   .landing #signupbtn,
   .landing #loginbtn,
   .landing #accountBtn,
   .landing #orderBtn {
-    width: 30vw;
     margin-bottom: 2rem;
     margin-left: 3rem;
-    height: 5rem;
   }
 }
 
@@ -857,6 +836,7 @@
 }
 
 #root {
+  position: relative;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 }
