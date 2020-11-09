@@ -44,17 +44,20 @@
 }
 
 .footer {
-  position: relative;
-  height: 3rem;
+  position: -webkit-sticky;
+  position: sticky;
+  height: auto;
   background-color: #343a40;
   color: white;
   padding: 1rem;
   width: 100%;
+  font-size: 0.8rem;
 }
 
 @media only screen and (min-width: 993px) {
   .footer {
     padding: 1rem 8rem;
+    font-size: 1rem;
   }
 }
 
@@ -72,9 +75,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  position: relative;
-  min-width: 100%;
-  min-height: 80vh;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding: 4rem 1rem;
   background-image: url("/stockbg2.jpg");
   background-repeat: no-repeat;
@@ -137,7 +140,6 @@
     font-size: 1rem;
   }
   .landing__content {
-    max-height: 20vw;
     padding: 2rem;
   }
   .landing__btnWrap * {
@@ -158,13 +160,13 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     padding: 5rem 20rem;
   }
   .landing__content {
     padding-bottom: 0;
-    -webkit-box-flex: 0.8;
-        -ms-flex: 0.8;
-            flex: 0.8;
   }
   .landing__btnWrap {
     display: -webkit-box;
@@ -177,9 +179,6 @@
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
-    -webkit-box-flex: 0.2;
-        -ms-flex: 0.2;
-            flex: 0.2;
   }
   .landing #signupbtn,
   .landing #loginbtn,
@@ -192,8 +191,7 @@
 
 .account {
   margin: 1rem 1rem;
-  padding: 1rem 1rem;
-  padding-bottom: 1.5rem;
+  padding: 1rem 1rem 1.5rem 1rem;
   border: 1px solid silver;
   width: 100%;
   max-width: 60rem;
@@ -206,7 +204,9 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .account__holder {
@@ -413,6 +413,9 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 #nav-searchInput {
@@ -836,8 +839,14 @@
 }
 
 #root {
-  position: relative;
-  overflow: scroll;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
   -webkit-overflow-scrolling: touch;
 }
 /*# sourceMappingURL=index.css.map */

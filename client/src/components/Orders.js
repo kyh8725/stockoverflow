@@ -40,14 +40,6 @@ class Orders extends Component {
     } ${date.getDate()} ${date.getFullYear()}`;
   };
 
-  getCash = (username) => {
-    axios.get(`/users/${username}`).then((response) => {
-      if (username === response.data[0].username) {
-        this.setState({ cash: response.data[0].cash });
-      }
-    });
-  };
-
   cancelHandler = (event) => {
     axios.put(`/orders/settle/${event.target.id}`).then((response) => {
       this.props.getOrders();
@@ -66,7 +58,7 @@ class Orders extends Component {
           //-------------------------------PROCESSING BUY STOCK ------------------------------
 
           if (
-            response.data.isUSMarketOpen &&
+            // response.data.isUSMarketOpen &&
             response.data.latestPrice <= orderF.price &&
             orderF.buy &&
             !orderF.sell
@@ -85,19 +77,19 @@ class Orders extends Component {
                 // set the status buy = false.
                 axios.put(`/orders/settle/${orderF.id}`).then((response) => {
                   // update the order db after buy stock compeletion
-                  this.props.getOrder();
+                  this.props.getOrders();
                   // update the cash balance of the user
                   axios
                     .put("/users/trade/sell", {
                       username: this.state.user,
-                      cash: this.state.cash - orderF.quantity * currentPrice,
+                      cash: this.props.cash - orderF.quantity * currentPrice,
                     })
                     .then((response) => {});
                 });
               });
             //-------------------------------PROCESSING SELL STOCK ------------------------------
           } else if (
-            response.data.isUSMarketOpen &&
+            // response.data.isUSMarketOpen &&
             response.data.latestPrice >= orderF.price &&
             !orderF.buy &&
             orderF.sell
@@ -114,7 +106,7 @@ class Orders extends Component {
                   axios
                     .put(`/users/trade/sell`, {
                       username: this.state.user,
-                      cash: this.state.cash + orderF.quantity * currentPrice,
+                      cash: this.props.cash + orderF.quantity * currentPrice,
                     })
                     .then((response) => {});
                 });
@@ -159,6 +151,8 @@ class Orders extends Component {
   };
 
   render() {
+    console.log(this.props.cash);
+    console.log(this.props.orders);
     return (
       <>
         <div className="account__wrapper">

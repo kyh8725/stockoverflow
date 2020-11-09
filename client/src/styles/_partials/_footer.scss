@@ -1,14 +1,16 @@
 .footer {
-  position: relative;
-  height: 3rem;
+  position: sticky;
+  height: auto;
   background-color: #343a40;
   color: white;
   padding: 1rem;
   width: 100%;
+  font-size: 0.8rem;
 }
 @include tablet {
   .footer {
     padding: 1rem 8rem;
+    font-size: 1rem;
   }
 }
 @include desk {

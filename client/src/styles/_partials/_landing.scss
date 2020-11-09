@@ -1,9 +1,7 @@
 .landing {
   display: flex;
   flex-direction: column;
-  position: relative;
-  min-width: 100%;
-  min-height: 80vh;
+  flex: 1;
   padding: 4rem 1rem;
   background-image: url("/stockbg2.jpg");
   background-repeat: no-repeat;
@@ -53,7 +51,6 @@
       font-size: 1rem;
     }
     &__content {
-      max-height: 20vw;
       padding: 2rem;
     }
     &__btnWrap {
@@ -73,16 +70,15 @@
 @include desk {
   .landing {
     flex-direction: row;
+    justify-content: center;
     padding: 5rem 20rem;
     &__content {
       padding-bottom: 0;
-      flex: 0.8;
     }
     &__btnWrap {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      flex: 0.2;
     }
     #signupbtn,
     #loginbtn,

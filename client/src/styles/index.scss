@@ -11,7 +11,8 @@
 @import "./_partials/demo";
 
 #root {
-  position: relative;
-  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   -webkit-overflow-scrolling: touch;
 }
