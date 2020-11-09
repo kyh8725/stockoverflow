@@ -166,6 +166,7 @@
     padding: 5rem 20rem;
   }
   .landing__content {
+    height: 50%;
     padding-bottom: 0;
   }
   .landing__btnWrap {
@@ -194,6 +195,7 @@
   padding: 1rem 1rem 1.5rem 1rem;
   border: 1px solid silver;
   width: 100%;
+  height: 100%;
   max-width: 60rem;
 }
 
