@@ -41,6 +41,17 @@ class Landing extends Component {
                 provide near real-time stock quotes to simulate real-world stock
                 market. All stocks in NYSE and NASDAQ are available for trading.
                 <br />
+                <br />
+                <p>
+                  FOR DEMO PURPOSES USE username:{" "}
+                  <strong style={{ color: "Green", backgroundColor: "white" }}>
+                    Daniel
+                  </strong>{" "}
+                  Password:{" "}
+                  <strong style={{ color: "Green", backgroundColor: "white" }}>
+                    1234
+                  </strong>
+                </p>
               </article>
             </div>
           )}
